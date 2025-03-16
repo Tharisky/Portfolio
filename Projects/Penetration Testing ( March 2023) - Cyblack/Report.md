@@ -22,17 +22,17 @@ The scope of the tasks includes:
 ` 2 . And if any denial-of-service vulnerability is discovered, it should be reported without it being exploited. Actions that would lead to an outage of services should be avoided` 
 
 Below is the pictorial representation of the tasks performed.
-![A cute cat](https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture1.png)
+![A cute cat](https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture1.png )
 
 
 After the completion of the task, some of our recommendations include :
-Stronger credentials be utilized on the login page
-On the server, bash history should be deleted after each login sessions 
-Open ports should  be patched periodically to prevent malicious attack
+1. Stronger credentials be utilized on the login page
+2. On the server, bash history should be deleted after each login sessions
+3. Open ports should  be patched periodically to prevent malicious attacks
 
 
 
-Chapter 1 - Key findings and Recommendation
+__Chapter 1 - Key findings and Recommendation__
 
 During the penetration test, we found out the following :
 The use of unsecured ports (FTP and HTTP)
