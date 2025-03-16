@@ -22,12 +22,12 @@ The scope of the tasks includes:
 ` 2 . And if any denial-of-service vulnerability is discovered, it should be reported without it being exploited. Actions that would lead to an outage of services should be avoided` 
 
 Below is the pictorial representation of the tasks performed.
-![A cute cat]( )
+![Picture 1]()
 
 
 After the completion of the task, some of our recommendations include :
-1. Stronger credentials be utilized on the login page
-2. On the server, bash history should be deleted after each login sessions
+1. Stronger credentials should be utilized on the login page
+2. On the server, bash history should be deleted after each login session
 3. Open ports should  be patched periodically to prevent malicious attacks
 
 
@@ -35,59 +35,29 @@ After the completion of the task, some of our recommendations include :
 __Chapter 1 - Key findings and Recommendation__
 
 During the penetration test, we found out the following :
-The use of unsecured ports (FTP and HTTP)
-Hidden directories ( robots.txt, login.html)
-Weak credentials are used on the login page
-SSH credentials were left exposed in the homepage
-TWo users were found on the server (root and cyblack-user)
-A flag was found in the home directory of cyblack-user
-MySQL database credentials were found in a file (authenticate.php)
-Three users credentials were found in the database.
-The tar command was found to have sudo privileges on cyblack-user account
-A root.txt file was found in the root’s home directory 
+1. The use of unsecured ports (FTP and HTTP)
+2. Hidden directories ( robots.txt, login.html)
+3. Weak credentials are used on the login page
+4. SSH credentials were left exposed in the homepage
+5. Two users were found on the server (root and cyblack-user)
+6. A flag was found in the home directory of cyblack-user
+7. MySQL database credentials were found in a file (authenticate.php)
+8. Three user credentials were found in the database.
+9. The tar command was found to have sudo privileges on the cyblack-user account
+10. A root.txt file was found in the root’s home directory 
 
 Our Recommendation includes
-The FTP port should be replaced with SFTP 
-The HTTP port should be replaced with HTTPS
-Stronger credentials on the login page
-Bash history should be deleted
-Open ports should be patched periodically
-SSH credentials should be removed from homepage
-Database credentials should be removed from the website directory
-Non root users binaries should have no sudo privilege
+1. The FTP port should be replaced with SFTP
+2. The HTTP port should be replaced with HTTPS
+3. Stronger credentials on the login page
+4. Bash history should be deleted
+5. Open ports should be patched periodically
+6. SSH credentials should be removed from homepage
+7. Database credentials should be removed from the website directory
+8. Non root users binaries should have no sudo privilege
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Chapter 2 -Vulnerability Register
+##Chapter 2 -Vulnerability Register*
 
 
 Vulnerability register
@@ -119,10 +89,10 @@ If anonymous login is allowed, anyone can connect to the FTP server without prov
 
 
 Weak login credentials
-There is a use of weak and common credential on the website. This was easily bruteforced using burpsuite as the credentials were caught in a word-list and a SSH login was discovered after the sign in was completed.	
+There is a use of weak and common credentials on the website. This was easily brute-forced using BurpSuite as the credentials were caught in a word-list and an SSH login was discovered after the sign in was completed.	
 
 Open port 22 (SSH)
-Though the credentials for  this port was gotten from the homepage, the port is vulnerable to bruteforce.
+Though the credentials for  this port were gotten from the homepage, the port is vulnerable to brute force.
  An open port 22 typically refers to an SSH (Secure Shell) service running on a system that is listening for incoming connections on port 22. SSH is a network protocol that allows secure remote access to a system or device over an unsecured network, such as the internet. 
 This could allow an attacker to gain unauthorized access to the system or escalate privileges.  An open port 22 can be a security risk if weak authentication mechanisms or outdated software are used.
 If weak authentication mechanisms are used, an attacker could potentially gain unauthorized access to the system by guessing or brute-forcing the password. This can be mitigated by enforcing strong password policies, implementing two-factor authentication, or using public-key authentication instead of passwords.
