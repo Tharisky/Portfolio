@@ -22,6 +22,7 @@ The scope of the tasks includes:
 ` 2 . And if any denial-of-service vulnerability is discovered, it should be reported without it being exploited. Actions that would lead to an outage of services should be avoided` 
 
 Below is the pictorial representation of the tasks performed.
+![A cute cat](https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture1.png)
 
 
 After the completion of the task, some of our recommendations include :
