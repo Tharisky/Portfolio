@@ -6,7 +6,7 @@ TEAM LIST
 `1. Tharisky (Team lead) _Full name, and names of other teammembers with held)`
 
 
-__EXECUTIVE SUMMARY__
+# EXECUTIVE SUMMARY
 
 Penetration testing is the use of authorized hacking techniques to discover exploitable weaknesses in the target's security systems. Pen testing is also referred to as ethical hacking. This report aims to provide the details of the recently conducted vulnerability assessment and penetration tests carried out for Yellowstone. 
 To ensure the success and usefulness of penetration tests, the following steps may be carried out by the Security team:  
@@ -22,7 +22,7 @@ The scope of the tasks includes:
 ` 2 . And if any denial-of-service vulnerability is discovered, it should be reported without it being exploited. Actions that would lead to an outage of services should be avoided` 
 
 Below is the pictorial representation of the tasks performed.
-![Picture 1]()
+![Picture 1](https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture1.png)
 
 
 After the completion of the task, some of our recommendations include :
@@ -32,7 +32,7 @@ After the completion of the task, some of our recommendations include :
 
 
 
-__Chapter 1 - Key findings and Recommendation__
+# Chapter 1 - Key findings and Recommendation__
 
 During the penetration test, we found out the following :
 1. The use of unsecured ports (FTP and HTTP)
@@ -57,7 +57,7 @@ Our Recommendation includes
 8. Non root users binaries should have no sudo privilege
 
 
-##Chapter 2 -Vulnerability Register*
+# Chapter 2 -Vulnerability Register
 
 
 Vulnerability register
@@ -132,51 +132,31 @@ A binary, tar , has a sudo privilege configured on it. This was exploited to gai
 
 
 
-Chapter 3 - Testing Timeline
+# Chapter 3 - Testing Timeline
 
-PArt A -  Reconnaissance: Port/Service Scannning Steps
+### PArt A -  Reconnaissance: Port/Service Scanning Steps
 
-This is the information gathering stage where we collected data about the targeted system.The following data were gathered during the port scanning stage
-Port 21 - FTP
-Port 22 - SSH
-Port 25 - SMTP
-Port 80 - HTTP
-Port 587 - submission
-To gather this data, we;
-Opened a terminal on our Linux virtual machine and the following command was used sudo Nmap -O 104.248.32.109
-
-
+This is the information-gathering stage where we collected data about the targeted system. The following data were gathered during the port scanning stage
+1. Port 21 - FTP
+2. Port 22 - SSH
+3. Port 25 - SMTP
+4. Port 80 - HTTP
+5. Port 587 - submission
+To gather this data, we opened a terminal on our Linux virtual machine, and the following command was used sudo Nmap -O `x.x.x.x (IP Witheld)`
+![Picture 2]( https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture2.png)
 
 
-Part B - Web content discovery
+### Part B - Web content discovery
 
-Content discovery is the  process of searching through website’s directory to access or see its content that are kept hidden from the public.
-The team used a tool called Gobuster to find robots.txt, a hidden directory on the website.To achieve this, we :
+Content discovery is the  process of searching through a website’s directory to access or see its content that is kept hidden from the public.
+The team used a tool called Gobuster to find robots.txt, a hidden directory on the website. To achieve this, we :
+1. Opened a terminal on our Linux virtual machine and the following command was used Gobuster dir --url http://x.x.x.x --word-list big.txt -t20
+2. After robots.txt, the hidden directory was found, we tried the directory out on our browser and we got another exposed directory - login.html
+3. The login.html directory was accessed and it turned out to be a login page
+4. We performed a brute-force attack on the login page using Burpusite where we got the credentials admin(user)  - password(password)
+5. The credentials were later used to sign in and we found  SSH credentials lying on the homepage
 
-Opened a terminal on our Linux virtual machine and the following command was used gobuster dir --url http://104.248.32.169 --word-list big.txt -t20
-
-
-
-
-After robots.txt, the hidden directory was found, we tried the directory out on our browser and we got another exposed directory - login.html
-
-
-
-
-
-
-The login.html directory was accessed and it turned out to be a login page 
-
-
-
-
-We performed a brute-force attack on the login page using burpusite where we got the credentials admin(user)  - password(password)
-
-
-
-
-
-The gotten credentials were later used to sign in and we found  SSH credentials lying in the homepage
+![Picture 2]( https://github.com/Tharisky/Portfolio/blob/main/Projects/Penetration%20Testing%20(%20March%202023)%20-%20Cyblack/.assets/Picture3.png)
 
 
 
@@ -184,10 +164,7 @@ The team used a tool called Gobuster to find robots.txt, a hidden directory on t
 
 
 
-
-
-
-Part C -  Linux Enumeration, Exploitation and Privilege Escalation Steps.
+### Part C -  Linux Enumeration, Exploitation and Privilege Escalation Steps.
 
 
 
