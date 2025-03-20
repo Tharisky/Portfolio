@@ -36,10 +36,10 @@ b)User accounts no longer required are not removed: This vulnerability indicates
 2.The impact, risk and likelihood of having Open ports 21-90, 3389.
 a)The Impact of  this vulnerability. 
 i.These ports, when actively probed by attackers, will give out potential information that can be used to further exploit and gain access to the servers.
-ii.Ports like FTP(21), HTTP(80) , Telnet (23) and some other open ports are built without security mechanism. Data in transit  can then be easily manipulated, eavesdropped or redirected  in the face of a man in the middle attack. 
-b)The risks associated with this vulnerability includes:
+ii. Ports like FTP(21), HTTP(80) , Telnet (23), and some other open ports are built without a security mechanism. Data in transit  can then be easily manipulated, eavesdropped or redirected  in the face of a man-in-the-middle attack. 
+b)The risks associated with this vulnerability include:
 i.Unauthorized access to the servers
-ii.Unintended file disclosure.
+ii. Unintended file disclosure.
 iii.The compromise of Data confidentiality and Integrity.
 
 c)The likelihood  of attackers exploiting these ports is extremely high, as they will be captured during the early stage of cyber attacks (Reconnaissance and scanning).
