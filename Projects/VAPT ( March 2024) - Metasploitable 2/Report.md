@@ -28,31 +28,36 @@ _i. Types of malware that can breach the system_
 
 __Section 2: Execution of the Penetration Tests	6__
 
-2. 1. Reconnaissance and Scanning	6
-2. 2. Gaining Access	10
-2.3 Password Cracking:	12
-2.4 Exploitation Testing	14
-2. 3. Maintaining Access	20
-2. 4. Clearing Tracks	21
-Section 3: Controls	22
-References	24
+_Reconnaissance and Scanning_
+
+_Gaining Access_
+
+_Password Cracking_
+
+_Exploitation Testing_
+
+_Maintaining Access_
+
+_Clearing Tracks_
+
+__Section 3: Controls__
+
+__References__
 
 
+__List of Tables__
 
+_Table 1.2 Test Cases_
 
+_Table 2.1 Reconnaissance and Scanning Tools_
 
+_Table 2.2  Open ports and running service discovered on HappieeCorp’s server Using Nmap_
 
+_Table 2.5  tools used for exploitation_
 
+Table 2.4 Vulnerabilities Discovered and Exploited in the Server_
 
-
-
-List of Tables
-Table 1.2 Test Cases 									3
-Table 2.1 Reconnaissance and Scanning tools						 6
-Table 2.2  Open ports and running service discovered on HappieeCorp’s server Using Nmap	 9
-Table 2.5  tools used for exploitation 							10
-Table 2.4 Vulnerabilities Discovered and exploited in the server 				12
-Table 3.1  Controls									 23
+_Table 3.1  Controls_
 
 
 List of Figures
