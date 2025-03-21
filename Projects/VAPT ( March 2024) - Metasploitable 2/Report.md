@@ -2,23 +2,32 @@
 
 
 ## Table of Content
-List of Tables	iii
+List of Tables	
 
-List of Figures	iv
+List of Figures	
 
-__Section 1: Penetration Test Design and Scenario	1__
-1. 1 Penetration Test Scenario	1
+__Section 1: Penetration Test Design and Scenario__
 
-Objective	1
+_a. Penetration Test Scenario_
 
-Scope	1
-1. 2 Assets and Dependency	1
-1. 3 Potential Vulnerabilities for the assets and their possible exploitation within the assets dependencies	2
-1. 4 The Possible test  cases relevant to the scenario	3
-1. 5 How Each Stage of the Penetration Testing Methodology will be carried out	3
-1. 6 Considering Red and Blue team-based testing for the test cases	4
-1. 7 Types of malware that can breach the system	4
+_b. Objective_
+
+_c. Scope_
+
+_d. Assets and Dependency_
+
+_e. Potential Vulnerabilities for the assets and their possible exploitation within the assets' dependencies_
+
+_f. The Possible test  cases relevant to the scenario_
+
+_g. How Each Stage of the Penetration Testing Methodology will be carried out_
+
+_h. Considering Red and Blue team-based testing for the test cases_
+
+_i. Types of malware that can breach the system_
+
 __Section 2: Execution of the Penetration Tests	6__
+
 2. 1. Reconnaissance and Scanning	6
 2. 2. Gaining Access	10
 2.3 Password Cracking:	12
@@ -72,44 +81,54 @@ Figure 2.22  The Deleted Bash history 							21
 Figure 2.23   The Deleted logs.								 21
 . 
 
-Section 1: Penetration Test Design and Scenario
+# Section 1: Penetration Test Design and Scenario
 This section covers the penetration test design and scenario
-1. 1 Penetration Test Scenario
-HappieeCorp is a medium-sized company that specializes in software development. They have an internal network infrastructure that includes various servers and workstations. As part of their commitment to security, HappieeCorp has requested an internal network penetration test to identify and address any vulnerabilities that could potentially be exploited by malicious actors.
+### Penetration Test Scenario
+HappieeCorp is a medium-sized company that specializes in software development. They have an internal network infrastructure that includes various servers and workstations. As part of their commitment to security, HappieeCorp has requested an internal network penetration test to identify and address any vulnerabilities that malicious actors could potentially exploit.
 
-Objective
-The objective of this penetration test is to identify and exploit vulnerabilities within HappieeCorp's  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
+### Objective
+This penetration test aims to identify and exploit vulnerabilities within HappieeCorp's  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
 
-Scope
- The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata 2023).
-1. 2 Assets and Dependency
+### Scope
+The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata 2023).
+
+### Assets and Dependency
 The Assets include 
-1.HappieeCorp server: A server hosting Apache web server,tomcat web server, Postfix mail server, MySQL and PostgreSQL database.
-2.Workstation
-3.Router
+1. Web server: A server hosting Apache web server, tomcat web server, Postfix mail server, MySQL and PostgreSQL database.
+2. Workstation
+3 .Router
 
 Figure 1.1  Assets Dependecy 
-1. 3 Potential Vulnerabilities for the assets and their possible exploitation within the assets dependencies
+
+
+### Potential Vulnerabilities for the assets and their possible exploitation within the assets dependencies
 1.HappieeCorp Server:
+
 a.Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plugins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
+
 b.Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
+
 c.Postfix Mail Server: Vulnerabilities in Postfix might involve email spoofing, denial of service via mail flood, or remote code execution through crafted email content. Exploitation can lead to unauthorized access or disruption of email services.
+
 d.MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from SQL injection, weak authentication, or outdated software. Exploitation may result in unauthorized data access, manipulation, or deletion.
-2.Workstations: Vulnerabilities on workstations often involve outdated software, phishing attacks, or weak passwords. Exploitation can lead to malware infection, data theft, or unauthorized access.
-3.Router: Vulnerabilities in routers could include default credentials, outdated firmware, or misconfigured access control lists (ACLs). Exploitation can result in unauthorized access to network traffic, DNS hijacking, or complete compromise of the network.
-1. 4 The Possible test  cases relevant to the scenario
-The following are the possible test that will be carried out to ensure that HappieeCorp's server is resilient in the face of cyber attacks.
+
+2. Workstations: Vulnerabilities on workstations often involve outdated software, phishing attacks, or weak passwords. Exploitation can lead to malware infection, data theft, or unauthorized access.
+
+3. Router: Vulnerabilities in routers could include default credentials, outdated firmware, or misconfigured access control lists (ACLs). Exploitation can result in unauthorized access to network traffic, DNS hijacking, or complete compromise of the network.
+   
+### The Possible test  cases relevant to the scenario
+The following are the possible tests that will be carried out to ensure that HappieeCorp's server is resilient in the face of cyber attacks.
 
 Test	Description	Type of test 
 Service Enumeration	This aims to to identify all open ports and  services running on the HappieeCorp server using tools like Nmap	This would be considered a gray box test as some prior information about the active services were given already
 Exploitation Testing	Attempts to exploit the discovered vulnerabilities on the HappieeCorp's server using exploit modules available in Metasploit	This would be considered a gray box as prior information was given about the potentials vulnerabilities that would be exploited during the course of the test
 Database Security Assessment
 
-	Perform SQL injection testing on MySQL and PostgreSQL databases to validate input sanitization.	White Box testing is appropriate for assessing database security because testers have full knowledge of the internal structure, schema, and access controls of the databases. This allows for a detailed examination of security configurations, SQL injection vulnerabilities, and privilege escalation risks.
+Perform SQL injection testing on MySQL and PostgreSQL databases to validate input sanitization.	White Box testing is appropriate for assessing database security because testers have full knowledge of the internal structure, schema, and access controls of the databases. This allows for a detailed examination of security configurations, SQL injection vulnerabilities, and privilege escalation risks.
 Password Cracking	Tools like Hydra would be used in attempts to crack passwords on various services such as SSH, FTP, or Telnet.	This would be considered a black box test as no prior credentials were provided as part of the needed credentials for a successful password attack
 Table 1.2 Test Cases
 
-1. 5 How Each Stage of the Penetration Testing methodology will be carried out
+### How Each Stage of the Penetration Testing methodology will be carried out
 The stages of  Penetration testing includes reconnaissance, Scanning,Gaining access, maintaining access, and clearing tracks. (EC-Council 2022)
 1.Reconnaissance: This involves gathering information about the target system to identify potential vulnerabilities and attack vectors. Using tools like Nmap to scan the target network for open ports, services, and operating systems, an active reconnaissance would be carried out on HappieeCorp server .
 2.Scanning: This involves probing the target system for vulnerabilities and weaknesses identified during the reconnaissance phase. Using tools like Nessus to identify known vulnerabilities , Smtp-user-enum would be  used to discover valid users  on HappieeCorp server. 
