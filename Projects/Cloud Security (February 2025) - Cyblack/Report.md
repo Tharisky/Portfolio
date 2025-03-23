@@ -26,7 +26,7 @@ In conclusion, this cloud computing task provides a robust and secure environmen
 
 
 
-## PART A - STEPS IN ENABLING AND ENFORCING MFA
+### PART A - STEPS IN ENABLING AND ENFORCING MFA
 
 
 Multi-factor Authentication (MFA) is an authentication method that requires the user to provide two or more verification factors to gain access to a resource such as an application, online account, or a VPN. MFA is a core component of a strong identity and access management (IAM) policy. Rather than just asking for a username and password, MFA requires one or more additional verification factors, which decreases the likelihood of a successful cyber attack.
@@ -50,7 +50,7 @@ Multi-factor Authentication (MFA) is an authentication method that requires the 
 
 
 
-## PART B - STEPS TO CONFIGURE MFA 
+### PART B - STEPS TO CONFIGURE MFA 
 
 
 1)Sign  in to the Azure portal using your administrator account, go to the Azure active directory blade, select the security blade 
@@ -75,7 +75,7 @@ Multi-factor Authentication (MFA) is an authentication method that requires the 
 
 
 
-## PART C - STEPS TO SETUP RBAC 
+### PART C - STEPS TO SETUP RBAC 
 
 Role-based access control (RBAC) restricts network access based on a person's role within an organization and has become one of the main methods for advanced access control. The roles in RBAC refer to the levels of access that employees have to the network. The primary advantage of ABAC is that it establishes access based on attributes. This allows for higher levels of access security, beyond provisioning access based on roles
 
@@ -95,7 +95,7 @@ Role-based access control (RBAC) restricts network access based on a person's ro
 4. Select next and in the settings blade, select assignment type to active, write the justification , and Assign.
 
 
-## PART D - CHALLENGES, FINDINGS AND RESULT OF THE IAM TASK
+### PART D - CHALLENGES, FINDINGS AND RESULT OF THE IAM TASK
 
 1)Only users with admin privilege can create new users.
 2)After users were created, they were unable to access the active directory or make any configuration. They were only able to  access the AD after they were assigned roles.
@@ -118,64 +118,64 @@ Role-based access control (RBAC) restricts network access based on a person's ro
 # CHAPTER 2 : AUDIT MONITORING AND LOGGING ON CLOUD.
 
 
-## PART A - CREATION OF  A VIRTUAL MACHINE
+### PART A - CREATION OF  A VIRTUAL MACHINE
 
 A virtual machine (VM) is an instance of a computer that has been virtualized and can carry out practically all of the same tasks as a computer, including running programs and operating systems.
 The steps listed below can be used to deploy a virtual machine on the Azure cloud
 
-1.Sign in to  Azure portal and Click on "Create a resource" button. 
+1. Sign in to the   Azure portal and Click on the "Create a resource" button. 
 
 
-2.Select "Windows Server 2019 Data-center" (or any other desired operating system) from the list of virtual machines.
+2. Select "Windows Server 2019 Data-center" (or any other desired operating system) from the list of virtual machines.
 
 
 
 
-3.Fill in the required information in the "Basics" tab, such as virtual machine name, username, password, and subscription.
+3. Fill in the required information in the "Basics" tab, such as virtual machine name, username, password, and subscription.
 
 
-4.Select a resource group or create a new one.
+4. Select a resource group or create a new one.
 
 
 
-5.Choose a storage account or create a new one, then, Select a virtual network or create a new one. In the "Disks" tab, choose the desired disk type (OS disk or data disk).
+5. Choose a storage account or create a new one, then, Select a virtual network or create a new one. In the "Disks" tab, choose the desired disk type (OS disk or data disk).
 
 
-6.In the "Networking" tab, you can configure the network settings, such as assigning a public IP address or configuring a network security group.
+6. In the "Networking" tab, you can configure the network settings, such as assigning a public IP address or configuring a network security group.
 
 
-7.In the "Management" tab, you can enable boot diagnostics, backup and monitoring options.
+7. In the "Management" tab, you can enable boot diagnostics, backup, and monitoring options.
 
 
 
 
 
 
-8.Review the settings and click on the "Create" button to deploy the virtual machine.
+8. Review the settings and click on the "Create" button to deploy the virtual machine.
 
 
 
 
 
-PART B - ASSIGNING LOG READER PERMISSION
+### PART B - ASSIGNING LOG READER PERMISSION
 
 
-The actions listed below must be carried out in order to assign the Log Reader permission to user in an Azure Virtual Machine (VM):
+The actions listed below must be carried out to assign the Log Reader permission to the user in an Azure Virtual Machine (VM):
 
-1.Sign in to the Azure portal with an account that has the Contributor or Owner role for the virtual machine and Select the newly created virtual machine.
+1. Sign in to the Azure portal with an account that has the Contributor or Owner role for the virtual machine and Select the newly created virtual machine.
 
 
-2.Select Access control (IAM) from the left-side menu.
+2. Select Access Control (IAM) from the left-side menu.
 
 
 
 
-3.Select Add role assignment
+3. Select Add role assignment
 
 
 
 
-4.Select Log Reader from the Role drop down.
+4. Select Log Reader from the Role drop-down.
 
 
 
@@ -183,14 +183,14 @@ The actions listed below must be carried out in order to assign the Log Reader p
 
 
 
-5.Select the user, group, or service principal you want to assign the role to from the Assign access to drop down.
+5. Select the user, group, or service principal you want to assign the role to from the Assign access drop down.
 
 
 
 
 
 
-6.Select review and assign.
+6. Select review and assign.
 
 
 
@@ -205,52 +205,52 @@ The actions listed below must be carried out in order to assign the Log Reader p
 
 
 
-PART C - BEHAVIOUR AND EVENTS FROM THE VIRTUAL MACHINE
+### PART C - BEHAVIOUR AND EVENTS FROM THE VIRTUAL MACHINE
 
 
-1.The Machine becomes dealloacted whenever it is not running and no connection can be made to it .
+1. The Machine becomes deallocated whenever it is not running and no connection can be made to it.
 
 
 
-2.The machine becomes allocated when it is running and connections can be made to it via RDP, SSH or Bastion.
+2. The machine becomes allocated when it is running and connections can be made to it via RDP, SSH, or Bastion.
 
 
 
-3.Sentinel Log queries was   used to monitor login  events on the resource
+3. Sentinel Log queries were   used to monitor login  events on the resource
 
-4.Sentinel Log queries was   used to monitor sign in locations   on the resource
+4. Sentinel Log queries were   used to monitor sign-in locations   on the resource
 
 
 
-5.Only users with  access can view, run or perform actions on the virtual machine.
+5. Only users with  access can view, run, or perform actions on the virtual machine.
 
-CHAPTER 3 : DATA LOSS PREVENTION AND  MICROSOFT COMPLIANCE .
+# CHAPTER 3: DATA LOSS PREVENTION AND  MICROSOFT COMPLIANCE.
 
 
 
-PART A - CONFIGURING DLP
+### PART A - CONFIGURING DLP
 
 Data loss prevention (DLP) is a set of tools and processes used to ensure that sensitive data is not lost, misused, or accessed by unauthorized users. 
 The following are the steps needed to configure DLP:
 
-1.Sign in to the Microsoft compliance portal and select the “Data loss privacy” option. 
+1. Sign in to the Microsoft compliance portal and select the “Data loss privacy” option. 
 
 
-2.Select create policy
+2. Select Create Policy
 
 
 3. Select a category(e.g privacy), a template(U.K data protection)  and click on next.
 
 
 
-4.Name the policy and choose the locations.
+4. Name the policy and choose the locations.
 
 
 
-5.Define the policy setting, policy mode and create the policy.
+5. Define the policy setting, and policy mode and create the policy.
 
 
-PART B - CREATING PERMISSIONS 
+### PART B - CREATING PERMISSIONS 
 
 
  Microsoft purview gives the admin the ability to manage and give permissions to users, for compliance solutions and features like DLP, insider risks management, e.t.c
@@ -269,7 +269,7 @@ Below are the steps to create permissions In Microsoft purview.
 
 
 
-PART C - CHALLENGES, FINDINGS AND RESULT OF THE DLP AND PERMISSION TASK.
+## PART C - CHALLENGES, FINDINGS AND RESULT OF THE DLP AND PERMISSION TASK.
 
 
 1)After signing in, the “Data loss prevention policy ” option was not found on Microsoft compliance portal and we were unable to configure the policy
@@ -283,33 +283,30 @@ PART C - CHALLENGES, FINDINGS AND RESULT OF THE DLP AND PERMISSION TASK.
 5)Users that were not assigned license(on the azure portal) were unable to access DLP
 6)
 
- CHAPTER 4 : SECURITY INCIDENT AND EVENT MANAGEMENT.
+# CHAPTER 4 : SECURITY INCIDENT AND EVENT MANAGEMENT.
 
 
-PART A - CREATING INDICATORS 
+### PART A - CREATING INDICATORS 
 
 
 Security information and event management is a solution that helps organizations detect, analyze, and respond to security threats before they harm business operations.
 The steps involved in creating indicators related to security investigations:
 
-1.Sign in to the azure portal and navigate to Microsoft sentinel service and choose a workspace(Team-workspace) and select Threat intelligence.
+1. Sign in to the azure portal and navigate to Microsoft sentinel service and choose a workspace(Team-workspace) and select Threat intelligence.
 
 
-2.Select the “add new” and choose the indicator type(domain name).
+2. Select the “add new” and choose the indicator type(domain name).
 
 
-3.Fill the form fields and click apply.
-
-
-
-PART B - OUTCOME AND BENEFIT OF TAGGING THREAT INDICATORS.
-
-1.Tagging threat indicators is an easy way to group them together to make them easier to find.
-2.Tagging threat indicators can help security teams prioritize their efforts, allowing them to focus on the most critical threats first. This can save time and resources, and improve overall efficiency.
-3.Tagging threat indicators provides a way for security teams to make sense of the vast amounts of data they collect, and respond to threats more quickly and effectively.
+3. Fill in the form fields and click apply.
 
 
 
+### PART B - OUTCOME AND BENEFIT OF TAGGING THREAT INDICATORS.
+
+1. Tagging threat indicators is an easy way to group them together to make them easier to find.
+2. Tagging threat indicators can help security teams prioritize their efforts, allowing them to focus on the most critical threats first. This can save time and resources, and improve overall efficiency.
+3. Tagging threat indicators provides a way for security teams to make sense of the vast amounts of data they collect, and respond to threats more quickly and effectively.
 
 
 
@@ -327,13 +324,16 @@ PART B - OUTCOME AND BENEFIT OF TAGGING THREAT INDICATORS.
 
 
 
-CHAPTER 5 : IMPLEMENT DIRECTORY SYNCHRONIZATION STUDENT LAB MANUAL.
 
-PART A - Deploying an Azure VM hosting an active directory domain controller
+
+
+# CHAPTER 5: IMPLEMENT DIRECTORY SYNCHRONIZATION STUDENT LAB MANUAL.
+
+### PART A - Deploying an Azure VM hosting an active directory domain controller
 
 1)Open your  browser and navigate to the https://github.com/Azure/azure-quickstart-templates/tree/master/modules/active-directory-new-domain/0.9
 
-2)On github,  click Deploy to Azure. This will automatically redirect the browser to the Create an Azure VM with a new AD Forest blade in the Azure portal.
+2)On Github,  click Deploy to Azure. This will automatically redirect the browser to the Create an Azure VM with a new AD Forest blade in the Azure portal.
 
 
 
@@ -355,7 +355,7 @@ PART A - Deploying an Azure VM hosting an active directory domain controller
 
 
 
-PART B - CREATE AND CONFIGURE AN ACTIVE DIRECTORY TENANT
+### PART B - CREATE AND CONFIGURE AN ACTIVE DIRECTORY TENANT
 
 
 
@@ -386,49 +386,47 @@ PART B - CREATE AND CONFIGURE AN ACTIVE DIRECTORY TENANT
 
 
 
-PART C - SYNCHRONIZE ACTIVE DIRECTORY FOREST WITH AN AZURE ACTIVE DIRECTORY TENANT
+### PART C - SYNCHRONIZE ACTIVE DIRECTORY FOREST WITH AN AZURE ACTIVE DIRECTORY TENANT
 
-1.Sign in to the azure portal and switch, from the newly created tenant, back to the former tenant. 
-2.Locate the VM that was created for this task (Yellowstone-VM) and connect it using RDP.
-
-
-3.Once the VM is up, and the server manager is running, click local server and set the IE enhanced security configuration to off
+1. Sign in to the Azure portal and switch, from the newly created tenant, back to the former tenant. 
+2. Locate the VM that was created for this task (Yellowstone-VM) and connect it using RDP.
 
 
-
-
-
-4.Back to the server managers, navigate to tools and select AD administrative center
-
-
-
-5.In the AC AD , click Yellowstone(local), in the Tasks pane, under the domain name Yellowstone (local) click New, and, in the cascading menu, click Organizational Unit.
-6.In the Create Organizational Unit window, in the Name text box, type ToSync and click OK. Double-click the newly crated ToSync organizational unit such that its content appears in the details pane of the Active Directory Administrative Center console. In the Tasks pane, within the ToSync section, click New, and, in the cascading menu, click User.
-7.In the Create User window, create a new user account(Yellowstonuser)  and click OK
+3. Once the VM is up, and the server manager is running, click local server and set the IE enhanced security configuration to off
 
 
 
 
 
-
-8.Start the internet explorer and download another browser(Edge)
-9.On Microsoft edge, navigate to azure portal and sign in with the Global admin user account that was created earlier ( Forest-Admin)
-10.Locate the Azure AD and navigate to Azure Ad connect and download.
-11.Launch the AD connect and agree with the terms
-12.On the Express Settings page of the Microsoft Azure Active Directory Connect wizard, click the Customize option.
-13.On the Install required components page, leave all optional configuration options deselected and click Install
-14.On the User sign-in page, ensure that only the Password Hash Synchronization is enabled and click Next.
-15.On the Connect to Azure AD page, authenticate by using the credentials of the yellowstoneadmin user account that was create earlier and click Next.
-16.On the Connect your directories page, click the Add Directory button to the right of the yellowstone.com forest entry.
-17.In the AD forest account window, ensure that the option to Create new AD account is selected, specify the following credential - YELLOWSTONE\Forest-Admin -  and click OK
-18.Back on the Connect your directories page, ensure that the Yellowstone.com entry appears as a configured directory and click Next
-19.On the Domain and OU filtering page, click the option Sync selected domains and OUs, domain name yellowstone.com will be checked, expand the yellowstone.com to view the ToSync. Clear all check-boxes, click only the checkbox next to the ToSync OU, and click Next.
-20.On the Uniquely identifying your users page, accept the default settings, and click Next.
-21.On the Filter users and devices page, accept the default settings, and click Next.
-22.On the Optional features page, accept the default settings, and click Next.
-23.On the Ready to configure page, ensure that the Start the synchronization process when configuration completes checkbox is selected and click Install.
+4. Back to the server managers, navigate to tool,s and select AD administrative center
 
 
+
+5. In the AC AD, click Yellowstone(local), in the Tasks pane, under the domain name Yellowstone (local) click New, and, in the cascading menu, click Organizational Unit.
+6. In the Create Organizational Unit window, in the Name text box, type ToSync and click OK. Double-click the newly created ToSync organizational unit such that its content appears in the details pane of the Active Directory Administrative Center console. In the Tasks pane, within the ToSync section, click New, and, in the cascading menu, click User.
+7. In the Create User window, create a new user account(Yellowstonuser)  and click OK
+
+
+
+
+
+
+8. Start the internet explorer and download another browser(Edge)
+9. On Microsoft Edge, navigate to the Azure portal and sign in with the Global admin user account that was created earlier ( Forest-Admin)
+10. Locate the Azure AD, navigate to Azure Ad Connect, and download.
+11. Launch the AD connect and agree with the terms
+12. On the Express Settings page of the Microsoft Azure Active Directory Connect wizard, click the Customize option.
+13. On the Install required components page, leave all optional configuration options deselected and click Install
+14. On the User sign-in page, ensure that only the Password Hash Synchronization is enabled and click Next.
+15. On the Connect to Azure AD page, authenticate by using the credentials of the yellowstoneadmin user account that was create earlier and click Next.
+16. On the Connect Your Directories page, click the Add Directory button to the right of the yellowstone.com forest entry.
+17. In the AD forest account window, ensure that the option to Create a new AD account is selected, specify the following credential - YELLOWSTONE\Forest-Admin -  and click OK
+18. Back on the Connect your directories page, ensure that the Yellowstone.com entry appears as a configured directory, and click Next
+19. On the Domain and OU filtering page, click the option Sync selected domains and OUs, The domain name yellowstone.com will be checked, expand the yellowstone.com to view the ToSync. Clear all checkboxes, click only the checkbox next to the ToSync OU, and click Next.
+20. On the Uniquely identifying your users' page, accept the default settings, and click Next.
+21. On the Filter users and devices page, accept the default settings, and click Next.
+22. On the Optional features page, accept the default settings, and click Next.
+23. On the Ready to Configure page, ensure that the Start the synchronization process when configuration completes checkbox is selected and click Install.
 
 
 
@@ -456,17 +454,6 @@ PART C - SYNCHRONIZE ACTIVE DIRECTORY FOREST WITH AN AZURE ACTIVE DIRECTORY TENA
 
 
 
-
-
-
-
-
-
-
-
-
-CHAPTER 6 : CONCLUSION
-
-
+# CHAPTER 6: CONCLUSION
 In conclusion, cloud computing has revolutionized the way businesses and individuals store and access data. With its many advantages, including increased accessibility, scalability, cost-effectiveness, and security, it has become an increasingly popular option for organizations and individuals alike. However, the cloud also presents some challenges, such as data privacy concerns, vendor lock-in, and the potential for downtime. Despite these challenges, the future of cloud computing remains bright as technology continues to evolve and provide new opportunities for innovation. Companies and individuals who embrace cloud computing and take advantage of its benefits are poised for success in the years to come.
 
