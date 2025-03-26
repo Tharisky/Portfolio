@@ -33,7 +33,12 @@ Since there's a write access for everyone, I then continued to replace the origi
 
         copy C:\Users\user\esc.exe "C:\Program Files\Autorun Program\program.exe" /
 
-![image](https://github.com/user-attachments/assets/fff7106d-aad4-4e60-a244-588fc87cd278)
+
+ ![image](https://github.com/user-attachments/assets/e8dd74ce-ee59-4188-b5db-84815e455904)
+       
+
+
+
 
 
 
@@ -42,9 +47,3 @@ The next thing is to wait for an admin to try to log in to the machine to trigge
 ![image](https://github.com/user-attachments/assets/320ae655-96d5-403c-b4ed-49a2161825fd)
 
 
-
-
-![image](https://github.com/user-attachments/assets/59a4dc95-0765-4517-a87c-03cb5a35e4ca)
-
-    
-    
