@@ -10,106 +10,175 @@ Based on the Independent Security Report provided, here is a summary of the gaps
 # Task B
 The following are the mitigation strategies needed to address the gaps identified in the independent security report 
 __1. Best practices and standards include:__ 
-a.Implement policy elements covering acceptable use, mobile device usage, secure passwords, and protection of personally identifiable information (PII) and payment card data.
-b.Utilize regulatory standards (e.g., NIST) and security best practices outlined in PCI DSS for policy development.
-c.Develop comprehensive policies and procedures aligned with PCI DSS and GDPR requirements.
 
-__2.Expertise and Compliance__
+a. Implement policy elements covering acceptable use, mobile device usage, secure passwords, and protection of personally identifiable information (PII) and payment card data.
 
-a.Enhance the information security team's expertise and compliance efforts.
-b.Hire additional staff with expertise in governance, risk, and compliance (GRC) to support regulatory compliance efforts.
-c.Clearly define roles and responsibilities for new hires and existing team members about compliance with PCI DSS and GDPR.
+b. Utilize regulatory standards (e.g., NIST) and security best practices outlined in PCI DSS for policy development.
 
-__3.Cybersecurity Awareness:__
+c. Develop comprehensive policies and procedures aligned with PCI DSS and GDPR requirements.
 
-a.Develop and implement a structured cybersecurity awareness training program.
-b.Design training programs that align with NIST standards and PCI Requirement 12.6.
-c.Ensure regular and mandatory training for all employees, including new hires, covering essential security practices, data protection, and compliance requirements.
+__2. Expertise and Compliance__
+
+a. Enhance the information security team's expertise and compliance efforts.
+
+b. Hire additional staff with expertise in governance, risk, and compliance (GRC) to support regulatory compliance efforts.
+
+c. Clearly define roles and responsibilities for new hires and existing team members about compliance with PCI DSS and GDPR.
+
+__3. Cybersecurity Awareness:__
+
+a. Develop and implement a structured cybersecurity awareness training program.
+
+b. Design training programs that align with NIST standards and PCI Requirement 12.6.
+
+c. Ensure regular and mandatory training for all employees, including new hires, covering essential security practices, data protection, and compliance requirements.
 
 __4.Incident Response:__
-a.Revise and enhance the incident response plan (IRP) to align with best practices and standards.
-b.Update the IRP to include clear roles and responsibilities for incident response team members.
-c.Develop detailed procedures for incident handling and analysis following NIST SP 800-61 R2 guidelines.
-d.Conduct regular training and simulations to ensure the effectiveness of the IRP and the readiness of the incident response team.
+
+a. Revise and enhance the incident response plan (IRP) to align with best practices and standards.
+
+b. Update the IRP to include clear roles and responsibilities for incident response team members.
+
+c. Develop detailed procedures for incident handling and analysis following NIST SP 800-61 R2 guidelines.
+
+d. Conduct regular training and simulations to ensure the effectiveness of the IRP and the readiness of the incident response team.
 
 __5.Business Continuity Planning:__
 
-a.Enhance the business continuity plan (BCP) to address natural disasters and other critical incidents.
-b.Conduct a comprehensive business impact analysis (BIA) to identify risks and prioritize recovery efforts.
-c.Develop specific recovery strategies for natural disasters such as earthquakes, tornadoes, and flooding.
-d.Ensure the BCP includes detailed plans for project scope, continuity planning, and implementation efforts, following recognized standards and best practices.
+a. Enhance the business continuity plan (BCP) to address natural disasters and other critical incidents.
+
+b. Conduct a comprehensive business impact analysis (BIA) to identify risks and prioritize recovery efforts.
+
+c. Develop specific recovery strategies for natural disasters such as earthquakes, tornadoes, and flooding.
+
+d. Ensure the BCP includes detailed plans for project scope, continuity planning, and implementation efforts, following recognized standards and best practices.
 
 # Task C
 Based on the NICE framework, below are the identified  critical security staff positions and the responsibilities for each position: 
-__1.Security Control Assessor. Responsibilities for this position include:__
 
-a.Manage and approve Accreditation Packages, such as ISO/IEC 15026-2, ensuring compliance with relevant standards and regulations.
-b.Conduct comprehensive security reviews to identify gaps in security architecture and develop risk management plans to address vulnerabilities.
-c.Perform risk analysis for applications and systems undergoing significant changes, evaluating threats, vulnerabilities, and probability of occurrence.
-d.Plan and execute security authorization reviews and develop assurance cases for the initial installation of systems and networks.
-e.Provide input to the Risk Management Framework process and related documentation, including system life-cycle support plans and operational procedures.
-f.Review authorization and assurance documents to ensure that the level of risk is acceptable for software applications, systems, and networks.
-g.Verify and update security documentation to reflect the security design features of applications and systems accurately.
-h.Verify the implementation of security postures as specified and recommend corrective actions for any deviations.
-i.Develop security compliance processes and audits for external services, such as cloud service providers and data centers.
-j.Participate in the Risk Governance process to provide input on security risks and mitigations.
-k.Ensure the development and implementation of plans of action and milestones for identified vulnerabilities.
-l.Assure the successful implementation of security requirements and IT policies consistent with organizational goals.
-m.Define and document the impact of new system implementations or interfaces on the security posture of the current environment.
+__1. Security Control Assessor. Duties for this position include:__
 
-__2.Cyber policy and strategic planner. Responsibilities for this position includes:__
+a. Manage and approve Accreditation Packages, such as ISO/IEC 15026-2, ensuring compliance with relevant standards and regulations.
 
-a.Develop guidelines, programs, and policies for implementation in the cyber domain.
-b.Establish and maintain open channels of communication with relevant stakeholders.
-c.Review both current and proposed policies collaboratively with stakeholders.
-d.Contribute expertise to agency and inter-agency policy boards.
-e.Advocate for sufficient funding to support cyber training initiatives, encompassing internal and external courses, instructors, and associated materials.
-f.Ensure that cyber workforce management practices align with legal and organizational requirements concerning equal opportunity, diversity, and fair employment.
-g.Promote awareness of cyber policy and strategy among management, integrating sound principles into the organization's mission, vision, and objectives.
-h.Evaluate cyber workforce effectiveness and adjust skill and qualification standards as necessary.
-i.Interpret and incorporate relevant laws, statutes, and regulatory documents into cyber policy.
-j.Analyze organizational cyber policy to identify areas for improvement.
-k.Collaborate with stakeholders to identify policy needs and develop governing policies for cyber activities.
-l.Define and align current and future mission environments within the cyber strategy.
-m.Design and integrate a comprehensive cyber strategy that articulates the vision, mission, and objectives in line with the organization's strategic plan.
-n.Draft, refine, and disseminate cyber policy documents.
+b. Conduct comprehensive security reviews to identify gaps in security architecture and develop risk management plans to address vulnerabilities.
 
-__3.Privacy compliance manager__
+c. Perform risk analysis for applications and systems undergoing significant changes, evaluating threats, vulnerabilities, and probability of occurrence.
 
-a.Coordinate with the Chief Information Security Officer to ensure alignment between security and privacy practices.
-b.Conduct functional and connectivity testing to ensure the ongoing operability of systems.
-c.Develop privacy training materials and communications to increase employee understanding of company privacy policies and legal obligations.
-d.Facilitate interactive training exercises to create effective learning environments for personnel.
-e.Evaluate contracts to ensure compliance with funding, legal, and program requirements.
-f.Assess cost/benefit, economic, and risk analyses to inform decision-making processes.
-g.Interpret and apply laws, regulations, policies, standards, or procedures to address specific issues.
-h.Analyze patterns of noncompliance to understand their impact on risk levels and the effectiveness of the cybersecurity program.
-i.Prepare audit reports identifying technical and procedural findings, with recommended remediation strategies/solutions.
-j.Deliver technical information effectively to both technical and non-technical audiences.
-k.Promote awareness of cybersecurity policies and strategies among management, ensuring alignment with organizational mission, vision, and goals.
+d. Plan and execute security authorization reviews and develop assurance cases for installing systems and networks.
+
+e. Provide input to the Risk Management Framework process and related documentation, including system life-cycle support plans and operational procedures.
+
+f. Review authorization and assurance documents to ensure that the level of risk is acceptable for software applications, systems, and networks.
+
+g. Verify and update security documentation to reflect the security design features of applications and systems accurately.
+
+h. Verify the implementation of security postures as specified and recommend corrective actions for any deviations.
+
+i. Develop security compliance processes and audits for external services, such as cloud service providers and data centers.
+
+j. Participate in the Risk Governance process to provide input on security risks and mitigations.
+
+k. Ensure the development and implementation of plans of action and milestones for identified vulnerabilities.
+
+l. Assure the successful implementation of security requirements and IT policies consistent with organizational goals.
+
+m. Define and document the impact of new system implementations or interfaces on the security posture of the current environment.
+
+
+__2. Cyber policy and strategic planner. Responsibilities for this position includes:__
+
+a. Develop guidelines, programs, and policies for implementation in the cyber domain.
+
+b. Establish and maintain open channels of communication with relevant stakeholders.
+
+c. Review both current and proposed policies collaboratively with stakeholders.
+
+d. Contribute expertise to agency and inter-agency policy boards.
+
+e. Advocate for sufficient funding to support cyber training initiatives, encompassing internal and external courses, instructors, and associated materials.
+
+f. Ensure that cyber workforce management practices align with legal and organizational requirements concerning equal opportunity, diversity, and fair employment.
+
+g. Promote awareness of cyber policy and strategy among management, integrating sound principles into the organization's mission, vision, and objectives.
+
+h. Evaluate cyber workforce effectiveness and adjust skill and qualification standards as necessary.
+
+i. Interpret and incorporate relevant laws, statutes, and regulatory documents into cyber policy.
+
+j. Analyze organizational cyber policy to identify areas for improvement.
+
+k. Collaborate with stakeholders to identify policy needs and develop governing policies for cyber activities.
+
+l. Define and align current and future mission environments within the cyber strategy.
+
+m. Design and integrate a comprehensive cyber strategy that articulates the vision, mission, and objectives in line with the organization's strategic plan.
+
+n. Draft, refine, and disseminate cyber policy documents.
+
+__3. Privacy compliance manager__
+
+a. Coordinate with the Chief Information Security Officer to ensure alignment between security and privacy practices.
+
+b. Conduct functional and connectivity testing to ensure the ongoing operability of systems.
+
+c. Develop privacy training materials and communications to increase employee understanding of company privacy policies and legal obligations.
+
+d. Facilitate interactive training exercises to create effective learning environments for personnel.
+
+e. Evaluate contracts to ensure compliance with funding, legal, and program requirements.
+
+f. Assess cost/benefit, economic, and risk analyses to inform decision-making processes.
+
+g. Interpret and apply laws, regulations, policies, standards, or procedures to address specific issues.
+
+h. Analyze patterns of noncompliance to understand their impact on risk levels and the effectiveness of the cybersecurity program.
+
+i. Prepare audit reports identifying technical and procedural findings, with recommended remediation strategies/solutions.
+
+j. Deliver technical information effectively to both technical and non-technical audiences.
+
+k. Promote awareness of cybersecurity policies and strategies among management, ensuring alignment with organizational mission, vision, and goals.
+
 l. Guide laws, regulations, policies, standards, or procedures to management, personnel, or clients.
-m.Collaborate with legal counsel, external affairs, and business units to ensure compliance with privacy and data security obligations.
-n.Work with regulatory and accrediting bodies to address civil rights, civil liberties, and privacy considerations comprehensively.
-o.Develop relationships with regulators and government officials responsible for privacy and data security issues.
-p.Stay informed about federal and state privacy laws and accreditation standards, adapting organizational practices to ensure compliance.
-q.Coordinate the registration of processing and/or databases with local privacy/data protection authorities as necessary.
-r.Collaborate with business teams and senior management to promote best practices on privacy and data security issues.
-s.Assist in the establishment of an organization-wide Privacy Oversight Committee and provide leadership for its activities.
-t.Collaborate on cybersecurity policies and procedures related to privacy.
-u.Coordinate with cybersecurity personnel on security risk assessments to address privacy compliance and risk mitigation.
-v.Interface with Senior Management to develop strategic plans for information collection, use, and sharing while complying with privacy regulations.
-w.Provide strategic guidance to corporate officers regarding information resources and technology.
-x.Assist the Security Officer with the development and implementation of an information infrastructure.
-y.Collaborate with applicable organization units to oversee consumer information access rights.
+
+m. Collaborate with legal counsel, external affairs, and business units to ensure compliance with privacy and data security obligations.
+
+n. Work with regulatory and accrediting bodies to address civil rights, civil liberties, and privacy considerations comprehensively.
+
+o. Develop relationships with regulators and government officials responsible for privacy and data security issues.
+
+p. Stay informed about federal and state privacy laws and accreditation standards, adapting organizational practices to ensure compliance.
+
+q. Coordinate the registration of processing and/or databases with local privacy/data protection authorities as necessary.
+
+r. Collaborate with business teams and senior management to promote best practices on privacy and data security issues.
+
+s. Assist in the establishment of an organization-wide Privacy Oversight Committee and provide leadership for its activities.
+
+t. Collaborate on cybersecurity policies and procedures related to privacy.
+
+u. Coordinate with cybersecurity personnel on security risk assessments to address privacy compliance and risk mitigation.
+
+v. Interface with Senior Management to develop strategic plans for information collection, use, and sharing while complying with privacy regulations.
+
+w. Provide strategic guidance to corporate officers regarding information resources and technology.
+
+x. Assist the Security Officer with the development and implementation of an information infrastructure.
+
+y. Collaborate with applicable organization units to oversee consumer information access rights.
 
 
 # Task D
 The following are three physical vulnerabilities and/or threats based on the attached “Company Overview” document and “Independent Security Report.”
-1. Physical Security of Distribution Centers: The Company Overview document mentions that SAGE Books operates three distribution centers located in California, Texas, and Florida. These distribution centers are critical nodes in the company's supply chain. However, the Independent Security Report highlights that SAGE Books' business continuity plan does not adequately address natural disasters. Given that these distribution centers are located in regions prone to natural disasters such as earthquakes, tornadoes, and flooding, there is a significant physical vulnerability. If any of these centers were to be affected by a natural disaster, it could disrupt the company's operations, leading to delays in shipping, loss of inventory, and revenue.
-2. Retail Store Security: With 400 retail locations across all 50 states and Puerto Rico, ensuring the security of these physical spaces is crucial. However, the Independent Security Report doesn't explicitly mention the physical security measures in place at these retail stores. Without robust physical security measures such as surveillance cameras, access controls, and security personnel, these stores could be vulnerable to theft, vandalism, or other physical security breaches. Such incidents could result in financial losses and damage to the company's reputation.
-3. Data Center or Critical Infrastructure Security: Although not explicitly mentioned in either document, safeguarding the physical security of data centers is paramount for protecting sensitive information and ensuring business continuity. Data centers house critical IT infrastructure and store vast amounts of customer data, including payment card information and personally identifiable information (PII). Any physical breach or unauthorized access to these data centers could result in data theft, data loss, or service disruptions, severely impacting the company's operations and reputation.
 
-The following are three Logical Vulnerabilities/Threats based on the attached “Company Overview” document and “Independent Security Report.”
+__1. Physical Security of Distribution Centers:__ The Company Overview document mentions that SAGE Books operates three distribution centers located in California, Texas, and Florida. These distribution centers are critical nodes in the company's supply chain. However, the Independent Security Report highlights that SAGE Books' business continuity plan does not adequately address natural disasters. Given that these distribution centers are located in regions prone to natural disasters such as earthquakes, tornadoes, and flooding, there is a significant physical vulnerability. If any of these centers were to be affected by a natural disaster, it could disrupt the company's operations, leading to delays in shipping, loss of inventory and revenue.
+
+__2. Retail Store Security:__ With 400 retail locations across all 50 states and Puerto Rico, ensuring the security of these physical spaces is crucial. However, the Independent Security Report doesn't explicitly mention the physical security measures in place at these retail stores. Without robust physical security measures such as surveillance cameras, access controls, and security personnel, these stores could be vulnerable to theft, vandalism, or other physical security breaches. Such incidents could result in financial losses and damage to the company's reputation.
+
+__3. Data Center or Critical Infrastructure Security:__ Although not explicitly mentioned in either document, safeguarding the physical security of data centers is paramount for protecting sensitive information and ensuring business continuity. Data centers house critical IT infrastructure and store vast amounts of customer data, including payment card information and personally identifiable information (PII). Any physical breach or unauthorized access to these data centers could result in data theft, data loss, or service disruptions, severely impacting the company's operations and reputation.
+
+__The following are three Logical Vulnerabilities/Threats based on the attached “Company Overview” document and “Independent Security Report.”__
+
 1. Cybersecurity Awareness and Training: The Independent Security Report highlights that SAGE Books' cybersecurity awareness program is not adequately aligned with industry standards. Only a quarter of new hires receive cybersecurity training, and the content of the training does not fully meet best practices outlined in standards such as NIST and PCI DSS. This presents a logical vulnerability as employees may lack the knowledge and skills to identify and mitigate cybersecurity threats effectively. Without proper training, employees could inadvertently fall victim to phishing attacks, malware infections, or other cyber threats, potentially compromising sensitive company data and customer information.
 2. Payment Card Data Security: The report identifies a logical vulnerability concerning the security of payment card data (PCI DSS compliance). SAGE Books collects payment card information from customers both in-store and online, making it a target for cybercriminals seeking to steal payment card data for fraudulent purposes. The absence of a documented policy or standardized procedure for accepting payments in accordance with PCI DSS requirements leaves the company vulnerable to data breaches and non-compliance penalties. A breach of payment card data could lead to financial losses, regulatory fines, and reputational damage.
 3. Incident Response and Management: The Independent Security Report reveals shortcomings in SAGE Books' incident response plan (IRP), indicating a logical vulnerability in incident response and management. The IRP lacks clear roles and responsibilities for incident response team members and detailed procedures for incident handling and analysis. Without a robust incident response framework aligned with industry best practices (such as NIST SP 800-61 R2), the company may struggle to detect, respond to, and recover from security incidents effectively. Delays or inadequacies in incident response could exacerbate the impact of security breaches, prolong downtime, and increase the risk of data exfiltration or further compromise.
