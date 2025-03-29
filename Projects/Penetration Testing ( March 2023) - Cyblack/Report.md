@@ -218,7 +218,7 @@ The linux enumeration is the act of methodically searching a target for data. Du
 
 
 
-Conclusion
+# Conclusion
 
 Based on the result of the penetration Testing, it is clear that there are vulnerabilities present in the server which could lead to security breaches and compromise . It is highly recommended that the identified vulnerabilities are promptly addressed and remediated.
 It is also important to note that penetration testing is an ongoing process that should be conducted regularly to keep up with new threats and potential vulnerabilities
@@ -269,7 +269,7 @@ It is also important to note that penetration testing is an ongoing process that
 
 
 
-Appendix 1: Tools Used
+# Appendix 1: Tools Used
 
 Visual Machine. The oracle VM virtual box is a powerful x86 and AM64/Intel64 visualization product
 
