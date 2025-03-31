@@ -29,7 +29,7 @@ It was also tested using burpsuite, and the picture below shows the result
 
 ## SQL Injection Exploitation
 For the exploitation of this vulnerability, SQLMAP was used 
-The HTTP request of the vulnerable page was copied, saved as a text file,  and used as a parameter in the sqlmap command
+The HTTP request of the vulnerable page was copied, saved as a text file`(testpage.txt)`,  and used as a parameter in the sqlmap command
 
         sqlmap -r testpage.txt --level=2 --risk=2 --tables
     
@@ -46,8 +46,58 @@ The tool also detected that the parameter "id" in the request is vulnerable to
 
 _____
 
-Eventually, the tool returend some useful tables from the websites's databae
+Eventually, the tool returned some useful tables from the websites's databae
 1. categories
 2. pictures
 3. users
 ![image](https://github.com/user-attachments/assets/ff562893-c1f7-4a01-93c4-3d03658c8acf)
+
+____
+The entire database was then dumped using the command below, 
+
+        sqlmap -r testpage.txt --level=2 -T users --dump-all
+
+
+and the user table entries were obtained.
+The table contained the admin username and password(this was saved in md5)
+
+![Screenshot from 2025-03-31 14-27-36](https://github.com/user-attachments/assets/f213e059-74eb-4e2c-bcbc-37599cd53533)
+
+____
+
+The discovered credentials were used to access the admin page
+![image](https://github.com/user-attachments/assets/1e08b720-ab83-4176-bd43-0b79dbc39350)
+
+
+____
+
+
+## Insecure file upload exploitation
+
+After getting access to the admin page, a `New Picture` functioanlity was found on the website, and it's work is to allow the admin upload a new image. This is where the website was tested for an inseucre file upload vulnerability, and a PHP script was uploaded instead of a picture
+
+![image](https://github.com/user-attachments/assets/f0a9229d-ec93-4347-a7b0-6f0d5a6c8bfc)
+
+
+
+A reverse shell script was modified to house the IP address of the vulnerable website, and was uploaded on to the website while a NC listener was active on the attacker's machine
+
+        puicture showing the php reverse shell script
+![image](https://github.com/user-attachments/assets/90ca856b-e1cc-4898-aa26-b821b2e086cc)
+
+
+The php was uploaded, and the website rejected it with the warning "NO PHP"
+     
+        Picture showing the upload process on the website, this was rejected
+![Screenshot from 2025-03-31 14-45-16](https://github.com/user-attachments/assets/878bc6f7-2cd5-434d-ad52-54203f8eac8e)
+
+
+The upload request was then intercepted on burpsuite, the name of the file was modified to end with "img", and the request was sent. The website accepted this file thinking it is an img file
+
+        picture showing the upload process that wass accepted
+![Screenshot from 2025-03-31 14-49-29](https://github.com/user-attachments/assets/97287cf0-5c8e-4a7c-8450-a7fadfe3a8f1)
+
+
+
+## Getting a shell
+
