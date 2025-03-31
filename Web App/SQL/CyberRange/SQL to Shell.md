@@ -74,30 +74,39 @@ ____
 
 ## Insecure file upload exploitation
 
-After getting access to the admin page, a `New Picture` functioanlity was found on the website, and it's work is to allow the admin upload a new image. This is where the website was tested for an inseucre file upload vulnerability, and a PHP script was uploaded instead of a picture
+After getting access to the admin page, a `New Picture` functionality was found on the website, and its work is to allow the admin to upload a new image. This is where the website was tested for an insecure file upload vulnerability, and a PHP script was uploaded instead of a picture
 
 ![image](https://github.com/user-attachments/assets/f0a9229d-ec93-4347-a7b0-6f0d5a6c8bfc)
 
 
 
-A reverse shell script was modified to house the IP address of the vulnerable website, and was uploaded on to the website while a NC listener was active on the attacker's machine
+A reverse shell script was modified to house the IP address of the vulnerable website and was uploaded onto the website while an NC listener was active on the attacker's machine
 
-        puicture showing the php reverse shell script
+        Picture showing the php reverse shell script
 ![image](https://github.com/user-attachments/assets/90ca856b-e1cc-4898-aa26-b821b2e086cc)
 
 
-The php was uploaded, and the website rejected it with the warning "NO PHP"
+The php was uploaded, and the website rejected it with the warning "NO PHP."
      
         Picture showing the upload process on the website, this was rejected
 ![Screenshot from 2025-03-31 14-45-16](https://github.com/user-attachments/assets/878bc6f7-2cd5-434d-ad52-54203f8eac8e)
 
 
-The upload request was then intercepted on burpsuite, the name of the file was modified to end with "img", and the request was sent. The website accepted this file thinking it is an img file
+The upload request was then intercepted on Burpsuite, the file's name was modified to end with "php1", and the request was sent. The website accepted this file thinking it was an img file
 
-        picture showing the upload process that wass accepted
+        picture showing the upload process that was accepted
+![image](https://github.com/user-attachments/assets/aacb8d19-1ef0-4e88-a72b-2e361fda949d)
+
+
 ![Screenshot from 2025-03-31 14-49-29](https://github.com/user-attachments/assets/97287cf0-5c8e-4a7c-8450-a7fadfe3a8f1)
 
 
 
 ## Getting a shell
+
+Using gobuster, i was able to figure out the location of the uploaded reverse shell
+
+        
+
+![Screenshot from 2025-03-31 15-26-36](https://github.com/user-attachments/assets/f1010513-6a51-4541-969b-862a8644a45a)
 
