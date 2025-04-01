@@ -1,5 +1,5 @@
 # Overview
-This lab environment, which is available at  contains a web application vulnerable to SQL injection, and insecure file upload
+This lab environment, which is available at,  contains a web application vulnerable to SQL injection and insecure file upload
 
 ![image](https://github.com/user-attachments/assets/cc6282c4-5bfb-4f62-86ea-e00bec94290b)
 
@@ -9,7 +9,7 @@ Using the command below, the server was scanned for running services, and two ru
 
     nmap -T4 -sV 192.168.125.150
 
-The website was accessed, and the picture below sghowcases the website
+The website was accessed, and the picture below showcases the website
 ![image](https://github.com/user-attachments/assets/3b01ee4d-5d42-4f25-839d-f9d5a15f0da9)
 
 
@@ -29,7 +29,7 @@ It was also tested using burpsuite, and the picture below shows the result
 
 ## SQL Injection Exploitation
 For the exploitation of this vulnerability, SQLMAP was used 
-The HTTP request of the vulnerable page was copied, saved as a text file`(testpage.txt)`,  and used as a parameter in the sqlmap command
+The HTTP request of the vulnerable page was copied, saved as a text file `(testpage.txt)`,  and used as a parameter in the sqlmap command
 
         sqlmap -r testpage.txt --level=2 --risk=2 --tables
     
