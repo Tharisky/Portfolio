@@ -57,31 +57,44 @@ ____
 
 The stages of  Penetration testing include reconnaissance, scanning, gaining access, maintaining access, and clearing tracks. (EC-Council, 2022)
 1. Reconnaissance: This involves gathering information about the target system to identify potential vulnerabilities and attack vectors. Using tools like Nmap to scan the target network for open ports, services, and operating systems, an active reconnaissance would be carried out on the Risky_Corporations server.
-2. Scanning: This involves probing the target system for vulnerabilities and weaknesses identified during the reconnaissance phase. Using tools like Nessus to identify known vulnerabilities , Smtp-user-enum would be  used to discover valid users  on Risky_Corporations server.
-3. Gaining Access: This  involves exploiting vulnerabilities identified during the reconnaissance and scanning phases to gain unauthorized access to the target system. This would be done using exploits targeting specific vulnerabilities in the target's software or configurations,  attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra. To escalate privilege, accounts with sudo permissions would be used to switch to the root users, VNC credentials would be harvested and exploited to gain root access, vulnerable service running on privileged ports would be exploited.
+2. Scanning: This involves probing the target system for vulnerabilities and weaknesses identified during the reconnaissance phase. Using tools like Nessus to identify known vulnerabilities, Smtp-user-enum would be  used to discover valid users  on the Risky_Corporations server.
+3. Gaining Access: This  involves exploiting vulnerabilities identified during the reconnaissance and scanning phases to gain unauthorized access to the target system. This would be done using exploits targeting specific vulnerabilities in the target's software or configurations,  attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra. To escalate privilege, accounts with sudo permissions would be used to switch to the root users, VNC credentials would be harvested and exploited to gain root access, and vulnerable services running on privileged ports would be exploited.
 4. Maintaining Access: This  involves establishing persistent access to the target system to ensure continued control even after initial access is lost. This would be achieved  utilizing the backdoor shells  contained on the target system, and  using a tool called nano to modify the sshd_config file to allow the use of ssh keys on the root account at a later time. 
 5. Clearing Tracks: This involves covering up evidence of the attacker's presence on the target system to avoid detection and forensic analysis. This would be done by  using the rm tool to delete the  SSH or Apache log files and bash history command 
 
-1. 6 Considering Red and Blue team-based testing for the test cases
-1.Service Enumeration:
-a.Red Team (Attackers): Actively scan for open ports and services using tools like Nmap to identify potential attack vectors.
-b.Blue Team (Defenders): Monitor network traffic and logs for unauthorized service discovery attempts, and ensure unnecessary services are disabled.
-2.Exploitation Testing:
-a.Red Team (Attackers): Exploit vulnerabilities in target systems using tools like Metasploit to demonstrate the impact of successful attacks.
-b.Blue Team (Defenders): Deploy intrusion detection systems to detect and block exploit attempts, and ensure systems are promptly patched.
-3.Password Cracking:
-a.Red Team (Attackers): Attempt to crack passwords using tools like John the Ripper to highlight the risks of weak passwords.
-b.Blue Team (Defenders): Enforce strong password policies, monitor authentication logs, and conduct user awareness training on password security.
-4.Database Security Assessment:
-a.Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL databases to access or manipulate sensitive data.
-b.Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
-1. 7 Types of malware that can breach the system 
+### Considering Red and Blue team-based testing for the test cases
+
+1. Service Enumeration:
+
+a. Red Team (Attackers): Actively scan for open ports and services using tools like Nmap to identify potential attack vectors.
+
+b. Blue Team (Defenders): Monitor network traffic and logs for unauthorized service discovery attempts and ensure unnecessary services are disabled.
+
+2. Exploitation Testing:
+
+a. Red Team (Attackers): Exploit vulnerabilities in target systems using tools like Metasploit to demonstrate the impact of successful attacks.
+
+b. Blue Team (Defenders): Deploy intrusion detection systems to detect and block exploit attempts, and ensure systems are promptly patched.
+
+3. Password Cracking:
+
+a. Red Team (Attackers): Attempt to crack passwords using tools like John the Ripper to highlight the risks of weak passwords.
+
+b. Blue Team (Defenders): Enforce strong password policies, monitor authentication logs, and conduct user awareness training on password security.
+
+4. Database Security Assessment:
+   
+a. Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL databases to access or manipulate sensitive data.
+
+b. Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
+
+### Types of malware that can breach the system 
 Some of the malware that can breach the server  includes:
-1.Trojans: Malicious software disguised as legitimate programs, used to steal information or gain unauthorized access.
-2.Worms: Self-replicating malware that spreads across networks, exploiting vulnerabilities to infect other systems.
-3.Rootkit: Malware that hides its presence and gives attackers privileged access to compromised systems, often for spying or further attacks.
-4.Ransomware: Malware that encrypts files or locks users out of their systems, demanding ransom payments for restoration.
-5.Botnets: Networks of compromised computers controlled by attackers, used for various malicious activities like DDoS attacks, spamming, or spreading malware.
+1. Trojans: Malicious software disguised as legitimate programs, used to steal information or gain unauthorized access.
+2. Worms: Self-replicating malware that spreads across networks, exploiting vulnerabilities to infect other systems.
+3. Rootkit: Malware that hides its presence and gives attackers privileged access to compromised systems, often for spying or further attacks.
+4. Ransomware: Malware that encrypts files or locks users out of their systems, demanding ransom payments for restoration.
+5. Botnets: Networks of compromised computers controlled by attackers, used for various malicious activities like DDoS attacks, spamming, or spreading malware.
 
 
 
@@ -90,21 +103,20 @@ Some of the malware that can breach the server  includes:
 
 
 
-Section 2: Execution of the Penetration Tests
+# Section 2: Execution of the Penetration Tests
+
 This section encompass the penetration carried out on Happiee web app in details, the test follows the methodology discussed in class, and the stages of the test includes:
-a.Reconnaissance and scanning
-b.Gaining Access
-c.Maintaining Access
-d.Clearing Tracks
-2. 1.Reconnaissance and Scanning 
+1. Reconnaissance and scanning
+2. Gaining Access
+3. Maintaining Access
+4. Clearing Tracks
+
+# Reconnaissance and Scanning 
 During this stage, Risky_Corporations examined and analyzed to obtain information needed to proceed with the test. Nmap,  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website  The tools used during this phase includes: 
-1.Nmap
-2.Goburster
-3.Smtp-user-enum
-Tools 	Function
-Goburster	Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations web server. 
-Nmap	Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on Risky_Corporations server
-Smtp-user-enum	The Smtp-User-Enum is a tool used to discover valid users  on a target mail server.
+1. Goburster: Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations web server.
+2. Nmap: Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on Risky_Corporations server
+3. Smtp-user-enum: The Smtp-User-Enum is a tool used to discover valid users  on a target mail server.
+
 
 Table 2.1 Reconnaissance and Scanning tools
 
