@@ -426,9 +426,10 @@ https://www.cvedetails.com/cve/CVE-2010-4094/	Replacing the current version with
 Table 3.1  Controls
 
 
-References
+# References
+
 Canocical Ubunt. (2008). USN-671-1 Retrieved from  https://ubuntu.com/security/notices/USN-671-1
-CVE Details . (1998) CVE-1999-0506 Retrieved from https://www.cvedetails.com/cve/CVE-1999-0506/
+CVE Details. (1998) CVE-1999-0506 Retrieved from https://www.cvedetails.com/cve/CVE-1999-0506/
 CVE Details. (1999) CVE-1999-0651 Retrieved from https://www.cvedetails.com/cve/CVE-1999-0651/
 CVE Details. (2007). CVE-2007-2447. Retrieved from https://www.cvedetails.com/cve/CVE-2007-2447/
 CVE Details.(2007).  CVE-2007-3280. Retrieved from https://www.cvedetails.com/cve/CVE-2007-3280
