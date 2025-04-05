@@ -13,7 +13,7 @@ Risky_Corporations is a medium-sized company that specializes in software develo
 This penetration test aims to identify and exploit vulnerabilities within Risky_Corporations'  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
 
 ### Scope
-The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata, 2023).
+The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal networks, or to focus on some elements.(Vaadata, 2023).
 
 ### Assets and Dependency
 The Assets include 
@@ -178,11 +178,11 @@ s. Port 6667 (IRC)
 Version: UnrealIRCd	Internet Relay Chat (IRC) is a protocol used for real-time text messaging and chatting over the Internet.
 Port 8009 (ajp13)	Port 8009 is typically associated with the Apache JServ Protocol version 1.3 (AJP13). AJP is a binary protocol that allows communication between a web server (like Apache HTTP Server) and a servlet container (like Apache Tomcat).
 Port 8180(http)
-Version: Apache Tomcat/ Coyote JSP engine 1.1	Port 8180 is commonly associated with HTTP (Hypertext Transfer Protocol) service, which is used for serving web pages and other resources over the internet or a local network
+Version: Apache Tomcat/ Coyote JSP engine 1.1	Port 8180 is commonly associated with the HTTP (Hypertext Transfer Protocol) service, which is used for serving web pages and other resources over the internet or a local network
 
-Table 2.2  Open ports and running service discovered on Risky_Corporations’s server Using Nmap
+Table 2.2  Open ports and running services discovered on Risky_Corporations’s server using Nmap
 
-2.Web pages discovery: The Nmap scan revealed an open port 80. Subsequently, a scan was initiated to probe for hidden directories using Gobuster. However, no additional actions were pursued on the webpages, as they fell outside the defined scope of the assessment.
+2. Web pages discovery: The Nmap scan revealed an open port 80. Subsequently, a scan was initiated to probe for hidden directories using Gobuster. However, no additional actions were pursued on the web pages as they fell outside the defined scope of the assessment.
 
 Figure 2.2 Goburster scan
 
@@ -190,25 +190,25 @@ Figure 2.2 Goburster scan
 
 
 
-3.User enumeration: Following user enumeration conducted with the Smtp-User-Enum tool, the valid users identified are incorporated into the wordlist essential for brute-force attacks.
+3. User enumeration: Following user enumeration conducted with the Smtp-User-Enum tool, the valid users identified are incorporated into the wordlist essential for brute-force attacks.
 
 Figure 2.3 SMTP-ENUM scan
 
 2. 2. Gaining Access
 This  section involves exploiting vulnerabilities identified during the reconnaissance and scanning phases to gain unauthorized access to the target system. This was done by:  
-1.Password Cracking:  Attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra.
-2.Exploitation Testing: Leveraging publicly available exploits, vulnerabilities present in Risky_Corporations's server services or configuration were exploited.
-Tools 	Function
+1. Password Cracking:  Attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra.
+2. Exploitation Testing: Leveraging publicly available exploits, vulnerabilities present in Risky_Corporations's server services or configuration were exploited
+
+
 Hydra	Hydra is a powerful and versatile password-cracking tool used for performing online attacks against various types of network services. It supports multiple protocols including HTTP, HTTPS, FTP, SSH, Telnet, SMB, SNMP, and others. 
 Metasploit	Metasploit is a widely-used penetration testing framework that provides tools for developing, testing, and executing exploit code against remote target systems. It includes a vast database of known vulnerabilities and exploits, allowing security professionals to simulate real-world attacks and assess the security posture of systems and networks
 
-Table 2.5  tools used for exploitation
+Table 2.5  Tools used for exploitation
 
-The Vulnerabilities discovered during the reconnaissance and scanning inlcude:
-S/N	Information	Description
-1	Port 21 (ftp)
-Version: vsftpd 2.3.4
- CVE-2011-2523	The port appears open and it is running an ftp vsftpd 2.3.4, an outdated and vulnerable  version of the very secure FTP daemon that contains a backdoor which opens a shell on port 6200/tcp.
+The Vulnerabilities discovered during the reconnaissance and scanning include:
+
+1. Port 21 (FTP) Version: vsftpd 2.3.4
+CVE-2011-2523	The port appears open and it is running an ftp vsftpd 2.3.4, an outdated and vulnerable  version of the very secure FTP daemon that contains a backdoor which opens a shell on port 6200/tcp.
 
 Default credential is also been used on this port (msfadmin/msfadmin)
 2	Port 22 (ssh)
