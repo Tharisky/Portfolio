@@ -160,7 +160,7 @@ j. Port 514( Login)	This port is used for remote shell services on UNIX systems,
 
 k. Port 1099 (java -rmi)	Port 1099 is commonly associated with Java Remote Method Invocation (RMI), a mechanism that allows Java objects to invoke methods on remote Java objects operating in different Java virtual machines (JVMs), possibly on different hosts. It facilitates communication between Java applications distributed across a network.
 
-l. Port 1524 (ingreslock?) Version:GNU Classpath grmiregistry: Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
+l. Port 1524 (ingreslock?) Version: GNU Classpath grmiregistry: Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
 
 m. Port 2049 (nfs) Version:  2-4(RPC #100003)	NFS is a Network File Sharing protocol that allows users to share directories and files over the network across different operating systems
 
@@ -172,8 +172,9 @@ p. Port 5432 (PostgreSQL) Version: PostgreSQL  DB 8.3.0 - 8.3.7	PostgreSQL is an
 
 q. Port 5900 (vnc) Version: VNC (protocol) 3.3  Virtual Network Computing (VNC) allows remote desktop access to another computer over a network.
 
-Port 6000 (x11)	Port 6000 is commonly associated with the X Window System (X11), which is a widely-used windowing system for bitmap displays in UNIX-like operating systems. X11 allows users to run graphical applications remotely, enabling the display of graphical user interfaces (GUIs) from a remote system on a local machine.
-Port 6667 (IRC)
+r. Port 6000 (x11): Port 6000 is commonly associated with the X Window System (X11), which is a widely-used windowing system for bitmap displays in UNIX-like operating systems. X11 allows users to run graphical applications remotely, enabling the display of graphical user interfaces (GUIs) from a remote system on a local machine.
+
+s. Port 6667 (IRC)
 Version: UnrealIRCd	Internet Relay Chat (IRC) is a protocol used for real-time text messaging and chatting over the Internet.
 Port 8009 (ajp13)	Port 8009 is typically associated with the Apache JServ Protocol version 1.3 (AJP13). AJP is a binary protocol that allows communication between a web server (like Apache HTTP Server) and a servlet container (like Apache Tomcat).
 Port 8180(http)
