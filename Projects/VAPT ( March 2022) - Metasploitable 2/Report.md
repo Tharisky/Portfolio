@@ -13,7 +13,7 @@ Risky_Corporations is a medium-sized company that specializes in software develo
 This penetration test aims to identify and exploit vulnerabilities within Risky_Corporations'  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
 
 ### Scope
-The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata 2023).
+The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata, 2023).
 
 ### Assets and Dependency
 The Assets include 
@@ -26,10 +26,10 @@ ____
 Figure 1.1  Assets Dependecy 
 
 
-### Potential Vulnerabilities for the assets and their possible exploitation within the assets dependencies
+### Potential Vulnerabilities for the assets and their possible exploitation within the assets' dependencies
 1. Risky_Corporations Server: g
 
-a. Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plugins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
+a. Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plug-ins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
 
 b. Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
 
@@ -46,7 +46,7 @@ d. MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from 
 The following are the possible tests that will be carried out to ensure that Risky_Corporations's server is resilient in the face of cyber attacks.
 
 1. Service Enumeration: This aims to identify all open ports and  services running on the Risky_Corporations server using tools like Nmap. This would be considered a gray box test as some prior information about the active services was given already
-2. Exploitation Testing	Attempts to exploit the discovered vulnerabilities on the Risky_Corporations's server using exploit modules available in Metasploit. This would be considered a gray box as prior information was given about the potential vulnerabilities that would be exploited during the course of the test
+2. Exploitation Testing	Attempts to exploit the discovered vulnerabilities on the Risky_Corporations's server using exploit modules available in Metasploit. This would be considered a gray box as prior information was given about the potential vulnerabilities that would be exploited during the test
 3. Database Security Assessment: This performs SQL injection testing on MySQL and PostgreSQL databases to validate input sanitization.	White Box testing is appropriate for assessing database security because testers have full knowledge of the internal structure, schema, and access controls of the databases. This allows for a detailed examination of security configurations, SQL injection vulnerabilities, and privilege escalation risks.
 4. Password Cracking Tools like Hydra would be used in attempts to crack passwords on various services such as SSH, FTP, or Telnet.	This would be considered a black box test as no prior credentials were provided as part of the needed credentials for a successful password attack
 
@@ -89,7 +89,7 @@ a. Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL datab
 b. Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
 
 ### Types of malware that can breach the system 
-Some of the malware that can breach the server  includes:
+Some of the malware that can breach the server  include:
 1. Trojans: Malicious software disguised as legitimate programs, used to steal information or gain unauthorized access.
 2. Worms: Self-replicating malware that spreads across networks, exploiting vulnerabilities to infect other systems.
 3. Rootkit: Malware that hides its presence and gives attackers privileged access to compromised systems, often for spying or further attacks.
@@ -105,16 +105,17 @@ Some of the malware that can breach the server  includes:
 
 # Section 2: Execution of the Penetration Tests
 
-This section encompass the penetration carried out on Happiee web app in details, the test follows the methodology discussed in class, and the stages of the test includes:
+This section encompasses the penetration carried out on the Happiee web app in detail. The test follows the methodology discussed in class, and the stages of the test include:
 1. Reconnaissance and scanning
 2. Gaining Access
 3. Maintaining Access
 4. Clearing Tracks
 
-# Reconnaissance and Scanning 
-During this stage, Risky_Corporations examined and analyzed to obtain information needed to proceed with the test. Nmap,  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website  The tools used during this phase includes: 
-1. Goburster: Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations web server.
-2. Nmap: Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on Risky_Corporations server
+### Reconnaissance and Scanning 
+During this stage, Risky_Corporations was examined and analyzed to obtain the information needed to proceed with the test. Nmap, a  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website.  The tools used during this phase include: 
+
+1. Gobuster: Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations' web server.
+2. Nmap: Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on the Risky_Corporations server
 3. Smtp-user-enum: The Smtp-User-Enum is a tool used to discover valid users  on a target mail server.
 
 
@@ -127,53 +128,50 @@ Table 2.1 Reconnaissance and Scanning tools
 
 
 
- The information gathered during this phase includes: 
-1.Service enumeration using nmap: This action was carried out to get information about the running services and open ports on Risky_Corporations's server.
+The information gathered during this phase includes: 
+
+1. Service enumeration using nmap: This action was carried out to get information about the running services and open ports on Risky_Corporations's server.
 
 Figure 2.1 Nmap result
 
 
-Information	Description
-Port 21 (ftp)
-Version: vsftpd 2.3.4
-	File Transfer Protocol (FTP) is used for transferring files between a client and a server on a network.
-Port 22 (ssh)
-Version: OpenSSH 4.7p1	 Secure Shell (SSH) provides secure access to a remote computer or server over an encrypted connection.
-Port 23(telnet) 
-Version: Linux Telnetd	Telnet is a network protocol used for remote terminal access. However, it's insecure as data is transmitted in plaintext.
-Port 25(smtp)
-Version: Postfix smtpd	Simple Mail Transfer Protocol (SMTP) is used for sending email messages between servers.
-Port 53(domain)
-Version: ISC bind 9.4.2
-	Domain Name System (DNS) resolves domain names to IP addresses and vice versa.
-Port 80(http)
-Version: Apache httpd 2.2.8 (DAV/2)
-	Hypertext Transfer Protocol (HTTP) is the foundation of data communication on the World Wide Web, used for accessing web pages.
-Port 111(rpc Bind)
-Version:2(RPC #100000)
-	Port 111 is used for the RPC Bind service, facilitating remote program execution over a network. 
-Port 139, 445  (netbios -ssn)
-Samba smbd 3.x - 4.x 	NetBIOS session service facilitates communication between devices on a local network, often used for file and printer sharing.
 
-Ports 512 (Exec)	Traditionally used for remote execution services on UNIX systems, allowing users to execute commands on a remote system.
-Port 513 (Shell)	Historically used for remote login services on UNIX systems, enabling users to log in remotely to a system
-Port 514( Login)	This port is used for remote shell services on UNIX systems, providing users with interactive shell access to a remote system.
-Port 1099 (java -rmi)	Port 1099 is commonly associated with Java Remote Method Invocation (RMI), a mechanism that allows Java objects to invoke methods on remote Java objects operating in different Java virtual machines (JVMs), possibly on different hosts. It facilitates communication between Java applications distributed across a network.
-Port 1524 (ingreslock?)
-Version:GNU Classpath grmiregistry
-	Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
-Port 2049 (nfs)
-Version:  2-4(RPC #100003)	NFS is a Network File Sharing protocol that allows users to share directories and files over the network across different operating systems
-Port 2121 (ftp)
-Version: ProFTPD 1.3
-	Port 2121 is an alternative port often used for FTP (File Transfer Protocol) services. 
-Port 3306 (mysql)
-Version: MySql 5.0.51a -3ubuntu5	MySQL is a popular open-source relational database management system, and port 3306 is the default port for MySQL server.
-Port 5432 (postgresql)
-Version: PostgreSQL  DB 8.3.0 - 8.3.7	PostgreSQL is an open-source object-relational database system, and port 5432 is the default port for PostgreSQL server.
-Port 5900 (vnc)
-Version: VNC (protocol) 3.3 
-	Virtual Network Computing (VNC) allows remote desktop access to another computer over a network.
+a. Port 21 (FTP) Version: vsftpd 2.3.4: File Transfer Protocol (FTP) is used for transferring files between a client and a server on a network.
+
+b. Port 22 (ssh) Version: OpenSSH 4.7p1	 Secure Shell (SSH) provides secure access to a remote computer or server over an encrypted connection.
+
+c. Port 23(telnet) Version: Linux Telnetd: Telnet is a network protocol used for remote terminal access. However, it's insecure as data is transmitted in plain text.
+
+d. Port 25(smtp) Version: Postfix smtpd	Simple Mail Transfer Protocol (SMTP) is used for sending email messages between servers.
+
+e. Port 53(domain) Version: ISC bind 9.4.2 Domain Name System (DNS) resolves domain names to IP addresses and vice versa.
+
+e. Port 80(HTTP) Version: Apache httpd 2.2.8 (DAV/2): Hypertext Transfer Protocol (HTTP) is the foundation of data communication on the World Wide Web, used for accessing web pages.
+
+f. Port 111(rpc Bind) Version:2(RPC #100000): Port 111 is used for the RPC Bind service, facilitating remote program execution over a network. 
+
+g. Port 139, 445  (netbios -ssn) Samba smbd 3.x - 4.x 	NetBIOS session service facilitates communication between devices on a local network, often used for file and printer sharing.
+
+h. Ports 512 (Exec)	Traditionally used for remote execution services on UNIX systems, allowing users to execute commands on a remote system.
+
+i. Port 513 (Shell)	Historically used for remote login services on UNIX systems, enabling users to log in remotely to a system
+
+j. Port 514( Login)	This port is used for remote shell services on UNIX systems, providing users with interactive shell access to a remote system.
+
+k. Port 1099 (java -rmi)	Port 1099 is commonly associated with Java Remote Method Invocation (RMI), a mechanism that allows Java objects to invoke methods on remote Java objects operating in different Java virtual machines (JVMs), possibly on different hosts. It facilitates communication between Java applications distributed across a network.
+
+l. Port 1524 (ingreslock?) Version:GNU Classpath grmiregistry: Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
+
+m. Port 2049 (nfs) Version:  2-4(RPC #100003)	NFS is a Network File Sharing protocol that allows users to share directories and files over the network across different operating systems
+
+n. Port 2121 (FTP) Version: ProFTPD 1.3 Port 2121 is an alternative port often used for FTP (File Transfer Protocol) services. 
+
+o. Port 3306 (MySQL) Version: MySql 5.0.51a -3ubuntu5	MySQL is a popular open-source relational database management system, and port 3306 is the default port for MySQL server.
+
+p. Port 5432 (PostgreSQL) Version: PostgreSQL  DB 8.3.0 - 8.3.7	PostgreSQL is an open-source object-relational database system, and port 5432 is the default port for the PostgreSQL server.
+
+q. Port 5900 (vnc) Version: VNC (protocol) 3.3  Virtual Network Computing (VNC) allows remote desktop access to another computer over a network.
+
 Port 6000 (x11)	Port 6000 is commonly associated with the X Window System (X11), which is a widely-used windowing system for bitmap displays in UNIX-like operating systems. X11 allows users to run graphical applications remotely, enabling the display of graphical user interfaces (GUIs) from a remote system on a local machine.
 Port 6667 (IRC)
 Version: UnrealIRCd	Internet Relay Chat (IRC) is a protocol used for real-time text messaging and chatting over the Internet.
