@@ -4,11 +4,13 @@
 
 ## Section 1: Penetration Test Design and Scenario
 This section covers the penetration test design and scenario
+
+
 ### Penetration Test Scenario
-HappieeCorp is a medium-sized company that specializes in software development. They have an internal network infrastructure that includes various servers and workstations. As part of their commitment to security, HappieeCorp has requested an internal network penetration test to identify and address any vulnerabilities that malicious actors could potentially exploit.
+Risky_Corporations is a medium-sized company that specializes in software development. They have an internal network infrastructure that includes various servers and workstations. As part of their commitment to security, Risky_Corporations has requested an internal network penetration test to identify and address any vulnerabilities that malicious actors could potentially exploit.
 
 ### Objective
-This penetration test aims to identify and exploit vulnerabilities within HappieeCorp's  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
+This penetration test aims to identify and exploit vulnerabilities within Risky_Corporations'  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
 
 ### Scope
 The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata 2023).
@@ -17,33 +19,35 @@ The penetration test will be conducted solely within the internal network enviro
 The Assets include 
 1. Web server: A server hosting Apache web server, tomcat web server, Postfix mail server, MySQL and PostgreSQL database.
 2. Workstation
-3 .Router
+3. Router
 
+
+____
 Figure 1.1  Assets Dependecy 
 
 
 ### Potential Vulnerabilities for the assets and their possible exploitation within the assets dependencies
-1.HappieeCorp Server:
+1. Risky_Corporations Server: g
 
-a.Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plugins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
+a. Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plugins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
 
-b.Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
+b. Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
 
-c.Postfix Mail Server: Vulnerabilities in Postfix might involve email spoofing, denial of service via mail flood, or remote code execution through crafted email content. Exploitation can lead to unauthorized access or disruption of email services.
+c. Postfix Mail Server: Vulnerabilities in Postfix might involve email spoofing, denial of service via mail flood, or remote code execution through crafted email content. Exploitation can lead to unauthorized access or disruption of email services.
 
-d.MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from SQL injection, weak authentication, or outdated software. Exploitation may result in unauthorized data access, manipulation, or deletion.
+d. MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from SQL injection, weak authentication, or outdated software. Exploitation may result in unauthorized data access, manipulation, or deletion.
 
 2. Workstations: Vulnerabilities on workstations often involve outdated software, phishing attacks, or weak passwords. Exploitation can lead to malware infection, data theft, or unauthorized access.
 
 3. Router: Vulnerabilities in routers could include default credentials, outdated firmware, or misconfigured access control lists (ACLs). Exploitation can result in unauthorized access to network traffic, DNS hijacking, or complete compromise of the network.
-   
-### The Possible test  cases relevant to the scenario
-The following are the possible tests that will be carried out to ensure that HappieeCorp's server is resilient in the face of cyber attacks.
 
-Test	Description	Type of test 
-Service Enumeration	This aims to to identify all open ports and  services running on the HappieeCorp server using tools like Nmap	This would be considered a gray box test as some prior information about the active services were given already
-Exploitation Testing	Attempts to exploit the discovered vulnerabilities on the HappieeCorp's server using exploit modules available in Metasploit	This would be considered a gray box as prior information was given about the potentials vulnerabilities that would be exploited during the course of the test
-Database Security Assessment
+   ____
+### The Possible test  cases relevant to the scenario
+The following are the possible tests that will be carried out to ensure that Risky_Corporations's server is resilient in the face of cyber attacks.
+
+1. Service Enumeration: This aims to identify all open ports and  services running on the Risky_Corporations server using tools like Nmap. This would be considered a gray box test as some prior information about the active services was given already
+2. Exploitation Testing	Attempts to exploit the discovered vulnerabilities on the Risky_Corporations's server using exploit modules available in Metasploit. This would be considered a gray box as prior information was given about the potential vulnerabilities that would be exploited during the course of the test
+3. Database Security Assessment
 
 Perform SQL injection testing on MySQL and PostgreSQL databases to validate input sanitization.	White Box testing is appropriate for assessing database security because testers have full knowledge of the internal structure, schema, and access controls of the databases. This allows for a detailed examination of security configurations, SQL injection vulnerabilities, and privilege escalation risks.
 Password Cracking	Tools like Hydra would be used in attempts to crack passwords on various services such as SSH, FTP, or Telnet.	This would be considered a black box test as no prior credentials were provided as part of the needed credentials for a successful password attack
@@ -51,8 +55,8 @@ Table 1.2 Test Cases
 
 ### How Each Stage of the Penetration Testing methodology will be carried out
 The stages of  Penetration testing includes reconnaissance, Scanning,Gaining access, maintaining access, and clearing tracks. (EC-Council 2022)
-1.Reconnaissance: This involves gathering information about the target system to identify potential vulnerabilities and attack vectors. Using tools like Nmap to scan the target network for open ports, services, and operating systems, an active reconnaissance would be carried out on HappieeCorp server .
-2.Scanning: This involves probing the target system for vulnerabilities and weaknesses identified during the reconnaissance phase. Using tools like Nessus to identify known vulnerabilities , Smtp-user-enum would be  used to discover valid users  on HappieeCorp server. 
+1.Reconnaissance: This involves gathering information about the target system to identify potential vulnerabilities and attack vectors. Using tools like Nmap to scan the target network for open ports, services, and operating systems, an active reconnaissance would be carried out on Risky_Corporations server .
+2.Scanning: This involves probing the target system for vulnerabilities and weaknesses identified during the reconnaissance phase. Using tools like Nessus to identify known vulnerabilities , Smtp-user-enum would be  used to discover valid users  on Risky_Corporations server. 
 3.Gaining Access: This  involves exploiting vulnerabilities identified during the reconnaissance and scanning phases to gain unauthorized access to the target system.This would be done using exploits targeting specific vulnerabilities in the target's software or configurations,  Attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra. To escalate privilege, accounts with sudo permissions would be used to switch to the root users, VNC credentials would be harvested and exploited to gain root access, vulnerable service running on privileged ports would be exploited.
 4.Maintaining Access: This  involves establishing persistent access to the target system to ensure continued control even after initial access is lost. This would be achieved  utilizing the backdoor shells  contained on the target system, and  using a tool called nano to modify the sshd_config file to allow the use of ssh keys on the root account at a later time. 
 5.Clearing Tracks: This involves covering up evidence of the attacker's presence on the target system to avoid detection and forensic analysis. This would be done by  using the rm tool to delete the  SSH or Apache log files and bash history command 
@@ -92,13 +96,13 @@ b.Gaining Access
 c.Maintaining Access
 d.Clearing Tracks
 2. 1.Reconnaissance and Scanning 
-During this stage, HappieeCorp examined and analyzed to obtain information needed to proceed with the test. Nmap,  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website  The tools used during this phase includes: 
+During this stage, Risky_Corporations examined and analyzed to obtain information needed to proceed with the test. Nmap,  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website  The tools used during this phase includes: 
 1.Nmap
 2.Goburster
 3.Smtp-user-enum
 Tools 	Function
-Goburster	Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on HappieeCorp web server. 
-Nmap	Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on HappieeCorp server
+Goburster	Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations web server. 
+Nmap	Nmap is a powerful open-source network scanning tool used for network discovery and security auditing. It was used to discover the services running on Risky_Corporations server
 Smtp-user-enum	The Smtp-User-Enum is a tool used to discover valid users  on a target mail server.
 
 Table 2.1 Reconnaissance and Scanning tools
@@ -111,7 +115,7 @@ Table 2.1 Reconnaissance and Scanning tools
 
 
  The information gathered during this phase includes: 
-1.Service enumeration using nmap: This action was carried out to get information about the running services and open ports on HappieeCorp's server.
+1.Service enumeration using nmap: This action was carried out to get information about the running services and open ports on Risky_Corporations's server.
 
 Figure 2.1 Nmap result
 
@@ -164,7 +168,7 @@ Port 8009 (ajp13)	Port 8009 is typically associated with the Apache JServ Protoc
 Port 8180(http)
 Version: Apache Tomcat/ Coyote JSP engine 1.1	Port 8180 is commonly associated with HTTP (Hypertext Transfer Protocol) service, which is used for serving web pages and other resources over the internet or a local network
 
-Table 2.2  Open ports and running service discovered on HappieeCorp’s server Using Nmap
+Table 2.2  Open ports and running service discovered on Risky_Corporations’s server Using Nmap
 
 2.Web pages discovery: The Nmap scan revealed an open port 80. Subsequently, a scan was initiated to probe for hidden directories using Gobuster. However, no additional actions were pursued on the webpages, as they fell outside the defined scope of the assessment.
 
@@ -181,7 +185,7 @@ Figure 2.3 SMTP-ENUM scan
 2. 2. Gaining Access
 This  section involves exploiting vulnerabilities identified during the reconnaissance and scanning phases to gain unauthorized access to the target system. This was done by:  
 1.Password Cracking:  Attempting to guess usernames and passwords for services like SSH or FTP using automated tools like Hydra.
-2.Exploitation Testing: Leveraging publicly available exploits, vulnerabilities present in HappieeCorp's server services or configuration were exploited.
+2.Exploitation Testing: Leveraging publicly available exploits, vulnerabilities present in Risky_Corporations's server services or configuration were exploited.
 Tools 	Function
 Hydra	Hydra is a powerful and versatile password-cracking tool used for performing online attacks against various types of network services. It supports multiple protocols including HTTP, HTTPS, FTP, SSH, Telnet, SMB, SNMP, and others. 
 Metasploit	Metasploit is a widely-used penetration testing framework that provides tools for developing, testing, and executing exploit code against remote target systems. It includes a vast database of known vulnerabilities and exploits, allowing security professionals to simulate real-world attacks and assess the security posture of systems and networks
@@ -211,7 +215,7 @@ CVE-1999-0651	These ports  are known as the  "r" services, running exec login an
 CVE-2011-3556	An unspecified vulnerability was identified in the Java Runtime Environment component within Oracle Java SE JDK and JRE versions 7, and earlier
 7	Port 3306 (mysql)
 Version: MySql 5.0.51a -3ubuntu5
-CVE-2008-4097	The MySQL database in HappieeCorp  has negligible security, it was exploited by  using the MySQL function of Kali,  defining the username and host IP while leaving the  password blank. 
+CVE-2008-4097	The MySQL database in Risky_Corporations  has negligible security, it was exploited by  using the MySQL function of Kali,  defining the username and host IP while leaving the  password blank. 
 
 8	Port 5432 (postgresql)
 Version: PostgreSQL  DB 8.3.0 - 8.3.7
@@ -269,7 +273,7 @@ Figure 2.10 Exploiting the samba 3x - 4x vulnerability using metasploit
 
 
 
-c.Exploiting Port 3306 (MYSQL): The MySQL database on port 3306 within HappieeCorp lacks adequate security measures. Exploitation involved connecting to it using the MySQL functionality of Kali, specifying the username and host IP, while leaving the password blank.
+c.Exploiting Port 3306 (MYSQL): The MySQL database on port 3306 within Risky_Corporations lacks adequate security measures. Exploitation involved connecting to it using the MySQL functionality of Kali, specifying the username and host IP, while leaving the password blank.
 
 Figure 2.11  Exploiting Mysql  vulnerability 
 
