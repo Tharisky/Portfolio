@@ -115,7 +115,7 @@ This section encompasses the penetration carried out on the Happiee web app in d
 4. Clearing Tracks
 
 ____
-### Reconnaissance and Scanning 
+### Section 2 ( Stage 1) - Reconnaissance and Scanning 
 During this stage, Risky_Corporations was examined and analyzed to obtain the information needed to proceed with the test. Nmap, a  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website.  The tools used during this phase include: 
 
 1. Gobuster: Gobuster is a tool primarily used for directory and file brute-forcing on web servers. It was used to discover hidden files and directories on Risky_Corporations' web server.
@@ -237,20 +237,21 @@ CVE-2008-4097	The MySQL database in Risky_Corporations  has negligible security,
 8	Port 5432 (postgresql)
 Version: PostgreSQL  DB 8.3.0 - 8.3.7
 CVE-2007-3280
-	Postgres is associated with SQL and it  runs a version 8.3.0 - 8.3.7 of this service  on port 5432. This version allows remote authenticated superusers to map and execute a function from any library,  the exploit/linux/postgres/postgres_payload  exploit was useful in exploiting this vulnerability.
+	Postgres is associated with SQL and it  runs a version 8.3.0 - 8.3.7 of this service  on port 5432. This version allows remote authenticated superusers to map and execute a function from any library.  The exploit/linux/postgres/postgres_payload  exploit was useful in exploiting this vulnerability.
 9	Port 5900 (vnc)
 Version: VNC (protocol) 3.3 
 CVE-1999-0506
 	Virtual Network Computing or VNC service runs on port 5900, this service was  exploited using a module in Metasploit to find the login credentials.
 
 10	Port 8180(http)
-Version: Apache Tomcat/ Coyote JSP engine 1.1	The port 8180 has been configured to run the Coyote JSP engine 1.1 version of the Apache tomcat. This is a vulnerable version that  makes it easier for attackers to remotely execute arbitrary code by leveraging access to the manager role. 
+Version: Apache Tomcat/ Coyote JSP engine 1.1	The port 8180 has been configured to run the Coyote JSP engine 1.1 version of the Apache tomcat. This is a vulnerable version that  makes it easier for attackers to execute arbitrary code remotely by leveraging access to the manager role. 
 
 
-Table 2.4 Vulnerabilities Discovered and exploited in the server
+Table 2.4 Vulnerabilities discovered and exploited in the server
 
-After vulnerabilities were discovered, the server fell victim to exploitation through various means, and initial access was gained. The different means includes password cracking and exploitation testing. 
-1.Password Cracking: 
+### Section 2 ( Stage 2) - Gaining Access
+After vulnerabilities were discovered, the server fell victim to exploitation through various means, and initial access was gained. The different means include password cracking and exploitation testing. 
+1. Password Cracking: 
 a.The SHH Port was  subjected to a password attack using Hydra, and two weak and common credentials were discovered. The credentials include:
 a)user-user: This account was logged into and it was discovered that it had no sudo or admin privileges
 b)msfadmin-msfadmin: This account was logged into and it was discovered that it had sudo privileges and can be used to escalate privileges or own the root account.
@@ -331,7 +332,7 @@ Figure 2.19 Exploiting the remote login
 
 
 
-2. 3. Maintaining Access
+### Section 2 ( Stage 3) - Maintaining Access
 1.The SSH config file was edited to accept root login using using ssh keys, this was later  used to directly gain access to the root account. 
 
 Figure 2.20 The edited SSHD_config file
@@ -343,8 +344,7 @@ Figure 2.21  The backdoor contained in the FTP version.
 
 
 
-
-2. 4.Clearing Tracks
+### Section 2 (Stage 4)- Clearing Tracks
 This stage  involves covering up evidence of the attacker's presence on the target system to avoid detection and forensic analysis. This was  done by deleting SSH or Apache log files and bash history command 
 
 
