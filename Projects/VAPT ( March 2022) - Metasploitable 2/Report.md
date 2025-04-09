@@ -13,7 +13,7 @@ Risky_Corporations is a medium-sized company that specializes in software develo
 This penetration test aims to identify and exploit vulnerabilities within Risky_Corporations'  server, assessing all  open ports and running services. The goal is to assess the effectiveness of their current security controls and provide recommendations for improving their overall security posture.
 
 ### Scope
-The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal networks, or to focus on some elements.(Vaadata, 2023).
+The penetration test will be conducted solely within the internal network environment, focusing on all ports and services explicitly listed in the provided asset list. The assessment will specifically target the server located at the IP address 192.168.0.136. Any additional services not documented in the asset list but discovered during the testing process, including web applications, will be considered out of scope for the assessment.  Note that it is possible to test all the components of an internal network, or to focus on some elements.(Vaadata, 2023).
 
 ### Assets and Dependency
 The Assets include 
@@ -62,6 +62,7 @@ The stages of  Penetration testing include reconnaissance, scanning, gaining acc
 4. Maintaining Access: This  involves establishing persistent access to the target system to ensure continued control even after initial access is lost. This would be achieved  utilizing the backdoor shells  contained on the target system, and  using a tool called nano to modify the sshd_config file to allow the use of ssh keys on the root account at a later time. 
 5. Clearing Tracks: This involves covering up evidence of the attacker's presence on the target system to avoid detection and forensic analysis. This would be done by  using the rm tool to delete the  SSH or Apache log files and bash history command 
 
+____ 
 ### Considering Red and Blue team-based testing for the test cases
 
 1. Service Enumeration:
@@ -88,6 +89,8 @@ a. Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL datab
 
 b. Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
 
+_____
+
 ### Types of malware that can breach the system 
 Some of the malware that can breach the server  include:
 1. Trojans: Malicious software disguised as legitimate programs, used to steal information or gain unauthorized access.
@@ -111,6 +114,7 @@ This section encompasses the penetration carried out on the Happiee web app in d
 3. Maintaining Access
 4. Clearing Tracks
 
+____
 ### Reconnaissance and Scanning 
 During this stage, Risky_Corporations was examined and analyzed to obtain the information needed to proceed with the test. Nmap, a  powerful scanning tool, was used to scan the assets to capture information about them. Goburster was also used to enumerate hidden directories on the website.  The tools used during this phase include: 
 
@@ -128,7 +132,7 @@ Table 2.1 Reconnaissance and Scanning tools
 
 
 
-The information gathered during this phase includes: 
+### The information gathered during this phase includes:__ 
 
 1. Service enumeration using nmap: This action was carried out to get information about the running services and open ports on Risky_Corporations's server.
 
@@ -205,7 +209,8 @@ Metasploit	Metasploit is a widely-used penetration testing framework that provid
 
 Table 2.5  Tools used for exploitation
 
-The Vulnerabilities discovered during the reconnaissance and scanning include:
+_____
+### The Vulnerabilities discovered during the reconnaissance and scanning include:
 
 1. Port 21 (FTP) Version: vsftpd 2.3.4
 CVE-2011-2523	The port appears open and it is running an ftp vsftpd 2.3.4, an outdated and vulnerable  version of the very secure FTP daemon that contains a backdoor which opens a shell on port 6200/tcp.
@@ -356,21 +361,25 @@ Figure 2.23   The Deleted logs.
 
 
 
-Section 3: Controls
-Vulnerability	Action	Reference 
-Port 21 (ftp)
-Version: vsftpd 2.3.4
-Severity: High
-Base score: 10.0
-CVE-2011-2523
-https://www.cvedetails.com/cve/CVE-2011-2523/	Newer version of vsptdf has to be downloaded .
-The default credentials should be replaced with strong and unique credentials 	https://vigilance.fr/vulnerability/vsftpd-backdoor-in-version-2-3-4-10805
+# Section 3: Controls
 
-Port 22 (ssh)
-Version:OpenSSH 4.7p1
-Severity: High
-Explo
-Weak and common credentials 	The default credentials should be replaced with strong and unique credentials.
+1. Port 21 (FTP)
+
+   		Version: vsftpd 2.3.4
+		Severity: High
+		Base score: 10.0
+		CVE-2011-2523
+		https://www.cvedetails.com/cve/CVE-2011-2523/
+a. A newer version of vsptdf has to be downloaded.
+b. The default credentials should be replaced with strong and unique credentials. 	https://vigilance.fr/vulnerability/vsftpd-backdoor-in-version-2-3-4-10805
+
+
+2. Port 22 (ssh)
+
+   		Version: OpenSSH 4.7p1
+		Severity: High
+
+The default credentials should be replaced with strong and unique credentials.
 SSH keys should also  be utilized.	https://securitytrails.com/blog/mitigating-ssh-based-attacks-top-15-best-security-practices#content-6-strong-passwordspassphrase-for-ssh-users-and-keys
 Port 23(telnet)
 Version: Linux Telnetd
