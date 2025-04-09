@@ -29,13 +29,13 @@ Figure 1.1  Assets Dependecy
 ### Potential Vulnerabilities for the assets and their possible exploitation within the assets' dependencies
 1. Risky_Corporations Server: g
 
-a. Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plug-ins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
+		a. Apache Web Server: Common vulnerabilities in Apache can include misconfigurations, outdated software versions, or vulnerable plug-ins/modules. Exploitation can lead to unauthorized access, denial of service (DoS), or remote code execution.
 
-b. Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
+		b. Tomcat Web Server: Vulnerabilities in Tomcat may arise due to weak authentication, session management issues, or known exploits targeting specific versions. Exploitation can result in data exposure or server compromise.
 
-c. Postfix Mail Server: Vulnerabilities in Postfix might involve email spoofing, denial of service via mail flood, or remote code execution through crafted email content. Exploitation can lead to unauthorized access or disruption of email services.
+		c. Postfix Mail Server: Vulnerabilities in Postfix might involve email spoofing, denial of service via mail flood, or remote code execution through crafted email content. Exploitation can lead to unauthorized access or disruption of email services.
 
-d. MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from SQL injection, weak authentication, or outdated software. Exploitation may result in unauthorized data access, manipulation, or deletion.
+		d. MySQL and PostgreSQL Databases: Vulnerabilities in databases could stem from SQL injection, weak authentication, or outdated software. Exploitation may result in unauthorized data access, manipulation, or deletion.
 
 2. Workstations: Vulnerabilities on workstations often involve outdated software, phishing attacks, or weak passwords. Exploitation can lead to malware infection, data theft, or unauthorized access.
 
@@ -67,27 +67,27 @@ ____
 
 1. Service Enumeration:
 
-a. Red Team (Attackers): Actively scan for open ports and services using tools like Nmap to identify potential attack vectors.
+		a. Red Team (Attackers): Actively scan for open ports and services using tools like Nmap to identify potential attack vectors.
 
-b. Blue Team (Defenders): Monitor network traffic and logs for unauthorized service discovery attempts and ensure unnecessary services are disabled.
+		b. Blue Team (Defenders): Monitor network traffic and logs for unauthorized service discovery attempts and ensure unnecessary services are disabled.
 
 2. Exploitation Testing:
 
-a. Red Team (Attackers): Exploit vulnerabilities in target systems using tools like Metasploit to demonstrate the impact of successful attacks.
+		a. Red Team (Attackers): Exploit vulnerabilities in target systems using tools like Metasploit to demonstrate the impact of successful attacks.
 
-b. Blue Team (Defenders): Deploy intrusion detection systems to detect and block exploit attempts, and ensure systems are promptly patched.
+		b. Blue Team (Defenders): Deploy intrusion detection systems to detect and block exploit attempts, and ensure systems are promptly patched.
 
 3. Password Cracking:
 
-a. Red Team (Attackers): Attempt to crack passwords using tools like John the Ripper to highlight the risks of weak passwords.
+		a. Red Team (Attackers): Attempt to crack passwords using tools like John the Ripper to highlight the risks of weak passwords.
 
-b. Blue Team (Defenders): Enforce strong password policies, monitor authentication logs, and conduct user awareness training on password security.
+		b. Blue Team (Defenders): Enforce strong password policies, monitor authentication logs, and conduct user awareness training on password security.
 
 4. Database Security Assessment:
    
-a. Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL databases to access or manipulate sensitive data.
+		a. Red Team: Exploit SQL injection vulnerabilities in MySQL and PostgreSQL databases to access or manipulate sensitive data.
 
-b. Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
+		b. Blue Team: Implement input validation and parameterized queries to prevent SQL injection attacks, monitor database activity for suspicious behavior, and enforce least privilege access controls.
 
 _____
 
@@ -139,54 +139,55 @@ Table 2.1 Reconnaissance and Scanning tools
 Figure 2.1 Nmap result
 
 
-
-a. Port 21 (FTP) Version: vsftpd 2.3.4: File Transfer Protocol (FTP) is used for transferring files between a client and a server on a network.
-
-b. Port 22 (ssh) Version: OpenSSH 4.7p1	 Secure Shell (SSH) provides secure access to a remote computer or server over an encrypted connection.
-
-c. Port 23(telnet) Version: Linux Telnetd: Telnet is a network protocol used for remote terminal access. However, it's insecure as data is transmitted in plain text.
-
-d. Port 25(smtp) Version: Postfix smtpd	Simple Mail Transfer Protocol (SMTP) is used for sending email messages between servers.
-
-e. Port 53(domain) Version: ISC bind 9.4.2 Domain Name System (DNS) resolves domain names to IP addresses and vice versa.
-
-e. Port 80(HTTP) Version: Apache httpd 2.2.8 (DAV/2): Hypertext Transfer Protocol (HTTP) is the foundation of data communication on the World Wide Web, used for accessing web pages.
-
-f. Port 111(rpc Bind) Version:2(RPC #100000): Port 111 is used for the RPC Bind service, facilitating remote program execution over a network. 
-
-g. Port 139, 445  (netbios -ssn) Samba smbd 3.x - 4.x 	NetBIOS session service facilitates communication between devices on a local network, often used for file and printer sharing.
-
-h. Ports 512 (Exec)	Traditionally used for remote execution services on UNIX systems, allowing users to execute commands on a remote system.
-
-i. Port 513 (Shell)	Historically used for remote login services on UNIX systems, enabling users to log in remotely to a system
-
-j. Port 514( Login)	This port is used for remote shell services on UNIX systems, providing users with interactive shell access to a remote system.
-
-k. Port 1099 (java -rmi)	Port 1099 is commonly associated with Java Remote Method Invocation (RMI), a mechanism that allows Java objects to invoke methods on remote Java objects operating in different Java virtual machines (JVMs), possibly on different hosts. It facilitates communication between Java applications distributed across a network.
-
-l. Port 1524 (ingreslock?) Version: GNU Classpath grmiregistry: Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
-
-m. Port 2049 (nfs) Version:  2-4(RPC #100003)	NFS is a Network File Sharing protocol that allows users to share directories and files over the network across different operating systems
-
-n. Port 2121 (FTP) Version: ProFTPD 1.3 Port 2121 is an alternative port often used for FTP (File Transfer Protocol) services. 
-
-o. Port 3306 (MySQL) Version: MySql 5.0.51a -3ubuntu5	MySQL is a popular open-source relational database management system, and port 3306 is the default port for MySQL server.
-
-p. Port 5432 (PostgreSQL) Version: PostgreSQL  DB 8.3.0 - 8.3.7	PostgreSQL is an open-source object-relational database system, and port 5432 is the default port for the PostgreSQL server.
-
-q. Port 5900 (vnc) Version: VNC (protocol) 3.3  Virtual Network Computing (VNC) allows remote desktop access to another computer over a network.
-
-r. Port 6000 (x11): Port 6000 is commonly associated with the X Window System (X11), which is a widely-used windowing system for bitmap displays in UNIX-like operating systems. X11 allows users to run graphical applications remotely, enabling the display of graphical user interfaces (GUIs) from a remote system on a local machine.
-
-s. Port 6667 (IRC)
-Version: UnrealIRCd	Internet Relay Chat (IRC) is a protocol used for real-time text messaging and chatting over the Internet.
-Port 8009 (ajp13)	Port 8009 is typically associated with the Apache JServ Protocol version 1.3 (AJP13). AJP is a binary protocol that allows communication between a web server (like Apache HTTP Server) and a servlet container (like Apache Tomcat).
-Port 8180(http)
-Version: Apache Tomcat/ Coyote JSP engine 1.1	Port 8180 is commonly associated with the HTTP (Hypertext Transfer Protocol) service, which is used for serving web pages and other resources over the internet or a local network
+	
+	a. Port 21 (FTP) Version: vsftpd 2.3.4: File Transfer Protocol (FTP) is used for transferring files between a client and a server on a network.
+	
+	b. Port 22 (ssh) Version: OpenSSH 4.7p1	 Secure Shell (SSH) provides secure access to a remote computer or server over an encrypted connection.
+	
+	c. Port 23(telnet) Version: Linux Telnetd: Telnet is a network protocol used for remote terminal access. However, it's insecure as data is transmitted in plain text.
+	
+	d. Port 25(smtp) Version: Postfix smtpd	Simple Mail Transfer Protocol (SMTP) is used for sending email messages between servers.
+	
+	e. Port 53(domain) Version: ISC bind 9.4.2 Domain Name System (DNS) resolves domain names to IP addresses and vice versa.
+	
+	e. Port 80(HTTP) Version: Apache httpd 2.2.8 (DAV/2): Hypertext Transfer Protocol (HTTP) is the foundation of data communication on the World Wide Web, used for accessing web pages.
+	
+	f. Port 111(rpc Bind) Version:2(RPC #100000): Port 111 is used for the RPC Bind service, facilitating remote program execution over a network. 
+	
+	g. Port 139, 445  (netbios -ssn) Samba smbd 3.x - 4.x 	NetBIOS session service facilitates communication between devices on a local network, often used for file and printer sharing.
+	
+	h. Ports 512 (Exec)	Traditionally used for remote execution services on UNIX systems, allowing users to execute commands on a remote system.
+	
+	i. Port 513 (Shell)	Historically used for remote login services on UNIX systems, enabling users to log in remotely to a system
+	
+	j. Port 514( Login)	This port is used for remote shell services on UNIX systems, providing users with interactive shell access to a remote system.
+	
+	k. Port 1099 (java -rmi)	Port 1099 is commonly associated with Java Remote Method Invocation (RMI), a mechanism that allows Java objects to invoke methods on remote Java objects operating in different Java virtual machines (JVMs), possibly on different hosts. It facilitates communication between Java applications distributed across a network.
+	
+	l. Port 1524 (ingreslock?) Version: GNU Classpath grmiregistry: Port 1542 is associated with the IngresLock service, which is a part of the Ingres Database Management System (DBMS). IngresLock is responsible for managing locks within the Ingres database to ensure data integrity and prevent conflicts between concurrent transactions.
+	
+	m. Port 2049 (nfs) Version:  2-4(RPC #100003)	NFS is a Network File Sharing protocol that allows users to share directories and files over the network across different operating systems
+	
+	n. Port 2121 (FTP) Version: ProFTPD 1.3 Port 2121 is an alternative port often used for FTP (File Transfer Protocol) services. 
+	
+	o. Port 3306 (MySQL) Version: MySql 5.0.51a -3ubuntu5	MySQL is a popular open-source relational database management system, and port 3306 is the default port for MySQL server.
+	
+	p. Port 5432 (PostgreSQL) Version: PostgreSQL  DB 8.3.0 - 8.3.7	PostgreSQL is an open-source object-relational database system, and port 5432 is the default port for the PostgreSQL server.
+	
+	q. Port 5900 (vnc) Version: VNC (protocol) 3.3  Virtual Network Computing (VNC) allows remote desktop access to another computer over a network.
+	
+	r. Port 6000 (x11): Port 6000 is commonly associated with the X Window System (X11), which is a widely-used windowing system for bitmap displays in UNIX-like operating systems. X11 allows users to run graphical applications remotely, enabling the display of graphical user interfaces (GUIs) from a remote system on a local machine.
+	
+	s. Port 6667 (IRC)
+	Version: UnrealIRCd	Internet Relay Chat (IRC) is a protocol used for real-time text messaging and chatting over the Internet.
+	Port 8009 (ajp13)	Port 8009 is typically associated with the Apache JServ Protocol version 1.3 (AJP13). AJP is a binary protocol that allows communication between a web server (like Apache HTTP Server) and a servlet container (like Apache Tomcat).
+	Port 8180(http)
+	Version: Apache Tomcat/ Coyote JSP engine 1.1	Port 8180 is commonly associated with the HTTP (Hypertext Transfer Protocol) service, which is used for serving web pages and other resources over the internet or a local network
 
 Table 2.2  Open ports and running services discovered on Risky_Corporations’s server using Nmap
 
-2. Web pages discovery: The Nmap scan revealed an open port 80. Subsequently, a scan was initiated to probe for hidden directories using Gobuster. However, no additional actions were pursued on the web pages as they fell outside the defined scope of the assessment.
+
+__2. Web pages discovery__: The Nmap scan revealed an open port 80. Subsequently, a scan was initiated to probe for hidden directories using Gobuster. However, no additional actions were pursued on the web pages as they fell outside the defined scope of the assessment.
 
 Figure 2.2 Goburster scan
 
