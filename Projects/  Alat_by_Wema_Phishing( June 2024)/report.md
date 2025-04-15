@@ -1,4 +1,4 @@
----
+
 
 # Project: Comprehensive Analysis of an "ALAT" Phishing Campaign
 
@@ -60,18 +60,34 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
 7. **Enumeration and Discovery of Backend Infrastructure**  
    Through further enumeration of the `alat` subdomain, I uncovered critical components of the phishing operation:
    - A page designed to display a "hacked" message, likely used to scare victims into compliance.
+![image](https://github.com/user-attachments/assets/6f2fb222-967a-4410-9261-bdb282bca8a4)
+
+     
    - A database (DB) and control center that logged victim data and controlled the phishing workflow.
+     ![image](https://github.com/user-attachments/assets/b71d5901-d0e0-4134-95c2-7258e7764e48)
+
    - The DB contained over 1,200 entries, including both test and real accounts, with sensitive information such as email addresses, passwords, PINs, and OTPs.
 
-   *Screenshot of the enumeration results:*  
-   ![Enumeration Results](images/enumeration-results.jpg)
 
 8. **Analysis of the Control Center and Database**  
    The control center and DB were shockingly unsecured, lacking any form of authentication or authorization—a major oversight by the attacker.  
    - **Control Center Features**:
      - Displayed metrics such as "2083 Users," "477219 Awarded Bonus," "2900 Purchased," and "₦600000 Total Income," likely fabricated to give the appearance of a legitimate operation.
+       ![image](https://github.com/user-attachments/assets/bcbb3f26-5809-46a8-b769-11512cfe2401)
+
+
      - Allowed the attacker to dynamically redirect victims to different pages (e.g., PIN, NIN, or OTP input) after they submitted their login credentials.
      - Included an email functionality to send further phishing emails, impersonating other brands like Kuda Bank.
+
+            The Picture below shows the  Mail sent using the website's email functionality
+      ![image](https://github.com/user-attachments/assets/3a0900ae-f62d-4380-befb-2332f87b41e4)
+
+
+            The picture below shows that the mail was ,received and it appeared to come from KUDA
+   
+    ![image](https://github.com/user-attachments/assets/3acedc8e-875a-453a-983c-65505a18a498)
+
+       
    - **Database Exposure**:
      - Contained over 1,200 victim entries, exposing their email addresses, passwords, PINs, and OTPs.
      - Included the developer’s personal details, such as their full name, email (`gbemilekeji@gmail.com`), phone number (`09056381534`), and other profile information, likely due to sloppy coding practices.
@@ -80,9 +96,9 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
    ![Control Center Dashboard](images/control-center-dashboard.jpg)
 
    *Screenshot of the developer’s exposed details:*  
-   ![Developer Details](images/developer-details.jpg)
+![image](https://github.com/user-attachments/assets/f4e52f49-073e-4fd2-b4be-65eab74d4c2a)
 
-9. **Phishing Workflow Dissection**  
+10. **Phishing Workflow Dissection**  
    The phishing campaign followed a multi-step process to harvest sensitive information from victims:
    - **Step 1: Account Number Submission**  
      The victim clicks the SMS link and lands on the user verification page, where they select their bank (Wema Bank) and enter their account number.
@@ -99,10 +115,12 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
        - **OTP Page**: Requests the victim’s One-Time Password.
    - **Step 4: Data Logging**  
      All submitted data (email, password, PIN, NIN, OTP) is logged in the unsecured database.
+     ![image](https://github.com/user-attachments/assets/40dce962-c5a8-4dec-ac04-fea6d2f75a1b)
+
    - **Step 5: Potential Exploitation**  
      The OTP, in particular, could be used immediately to perform unauthorized transactions on the victim’s account.
 
-10. **Additional Features of the Phishing Infrastructure**  
+11. **Additional Features of the Phishing Infrastructure**  
    - **Victim Activity Logging**: The site included a page to log the victim’s activities, likely for further exploitation or analysis by the attacker.
    - **Email Functionality**: The control center allowed the attacker to send follow-up phishing emails, impersonating other financial institutions like Kuda Bank, to widen the campaign’s reach. For example, an email might instruct the victim to perform additional actions, further compromising their security.
 
