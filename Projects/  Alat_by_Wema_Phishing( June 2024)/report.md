@@ -104,13 +104,14 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
      The victim clicks the SMS link and lands on the user verification page, where they select their bank (Wema Bank) and enter their account number.
    - **Step 2: Login Page**  
      After submission, the victim is redirected to a login page requesting their email and password. I avoided submitting my own credentials and instead found hardcoded credentials in the page’s source code, which I used to proceed (though these credentials were inconsistent and sometimes failed).  
-     *Screenshot of the login page:*  
-     ![Login Page](images/login-page.jpg)
+     *Screenshot of the login page:*
+                ![image](https://github.com/user-attachments/assets/517247ac-4700-4a75-b7cb-6a6e1c20a02d)
+
    - **Step 3: Dynamic Redirection**  
      Upon submitting the login details, the page stalls, waiting for the attacker to decide the next action via the control center. The attacker could choose to redirect the victim to one of several pages:
        - **PIN Page**: Requests the victim’s bank PIN.  
          *Screenshot of the PIN page:*
-         ![image](https://github.com/user-attachments/assets/517247ac-4700-4a75-b7cb-6a6e1c20a02d)
+![image](https://github.com/user-attachments/assets/d894b558-59e4-47ca-9412-55d891473b0f)
 
        - **NIN Page**: Requests the victim’s National Identification Number.
 ![image](https://github.com/user-attachments/assets/1e8a0b87-d9b3-4d64-a878-bbd870a1bfed)
@@ -153,22 +154,4 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
 - **Expand Research**: Conduct a broader analysis of phishing campaigns targeting financial institutions in the region to identify trends and common tactics.
 - **Enhance Detection Mechanisms**: Explore the use of machine learning models (as referenced in related research) to improve early detection of phishing kits, especially those using novel evasion techniques.
 
-#### References and Additional Context
-- Research on phishing detection (e.g., *Automatically Determining Phishing Campaigns Using the USCAP Methodology*, 2010) emphasizes the importance of clustering phishing attacks by provenance to profile attackers and improve detection mechanisms.
-- Social engineering and phishing are closely related, as noted in resources like Check Point Software’s article on *Social Engineering vs Phishing* (2023). This case study exemplifies how attackers use deceptive messaging platforms (e.g., SMS) to manipulate users into performing actions that compromise their security.
-
----
-
-### Notes for Your GitHub Portfolio
-- **Screenshots**: Replace the placeholder image links (e.g., `images/sms-screenshot.jpg`) with actual links to the screenshots in your GitHub repository. You can upload the images to a folder named `images/` in your repo and reference them using relative paths (e.g., `![SMS Screenshot](images/sms-screenshot.jpg)`).
-- **Markdown Formatting**: This content is written in Markdown, which GitHub supports natively. Use it in your repository’s README or a dedicated project page to ensure proper rendering of headings, bullet points, and images.
-- **Professional Presentation**: The rewritten content adopts a formal tone, avoids casual language (e.g., "shitty jobs"), and focuses on technical details, making it suitable for a professional audience.
-- **Skills Highlighted**: This project showcases your expertise in:
-  - Phishing detection and analysis.
-  - Social engineering and smishing awareness.
-  - Web enumeration and source code analysis.
-  - Threat intelligence and investigation.
-  - Communication of technical findings to a broader audience.
-
-Let me know if you’d like to further refine this or add more technical details, such as specific enumeration commands or code snippets from your analysis!
 
