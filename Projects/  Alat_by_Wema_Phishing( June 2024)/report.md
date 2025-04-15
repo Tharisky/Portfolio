@@ -92,8 +92,8 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
      - Contained over 1,200 victim entries, exposing their email addresses, passwords, PINs, and OTPs.
      - Included the developer’s personal details, such as their full name, email (`gbemilekeji@gmail.com`), phone number (`09056381534`), and other profile information, likely due to sloppy coding practices.
 
-   *Screenshot of the control center dashboard:*  
-   ![Control Center Dashboard](images/control-center-dashboard.jpg)
+   *Screenshot of the control center dashboard:*
+   ![image](https://github.com/user-attachments/assets/3769c778-d4e7-4af0-a38d-e1b7eb42bc83)
 
    *Screenshot of the developer’s exposed details:*  
 ![image](https://github.com/user-attachments/assets/f4e52f49-073e-4fd2-b4be-65eab74d4c2a)
@@ -109,10 +109,16 @@ An X post was created to raise the awareness: https://x.com/thariskyjohn/status/
    - **Step 3: Dynamic Redirection**  
      Upon submitting the login details, the page stalls, waiting for the attacker to decide the next action via the control center. The attacker could choose to redirect the victim to one of several pages:
        - **PIN Page**: Requests the victim’s bank PIN.  
-         *Screenshot of the PIN page:*  
-         ![PIN Page](images/pin-page.jpg)
+         *Screenshot of the PIN page:*
+         ![image](https://github.com/user-attachments/assets/517247ac-4700-4a75-b7cb-6a6e1c20a02d)
+
        - **NIN Page**: Requests the victim’s National Identification Number.
+![image](https://github.com/user-attachments/assets/1e8a0b87-d9b3-4d64-a878-bbd870a1bfed)
+
        - **OTP Page**: Requests the victim’s One-Time Password.
+    ![image](https://github.com/user-attachments/assets/9f17866e-e3fc-44bc-962a-a5e3dd19781a)
+
+         
    - **Step 4: Data Logging**  
      All submitted data (email, password, PIN, NIN, OTP) is logged in the unsecured database.
      ![image](https://github.com/user-attachments/assets/40dce962-c5a8-4dec-ac04-fea6d2f75a1b)
