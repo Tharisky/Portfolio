@@ -92,10 +92,3 @@ During a collaborative session with a student, I identified and investigated a s
 
 ---
 
-### Notes for Your GitHub Portfolio
-- **Screenshots**: Replace the placeholder links (`link-to-screenshot-X.jpg`) with actual links to the images in your GitHub repository. You can upload the images to a folder (e.g., `images/`) in your repo and link them using relative paths like `![Phishing Page](images/phishing-page.jpg)`.
-- **Formatting**: Use Markdown to format this entry in your GitHub README or a dedicated project page. GitHub supports Markdown, so headings, bullet points, and image embedding will render nicely.
-- **Professional Tone**: The rewritten content avoids casual language (e.g., "shitty jobs") and focuses on technical details and lessons learned, which aligns with a professional portfolio.
-- **Skills Highlighted**: This entry showcases your expertise in phishing analysis, social engineering, web enumeration, and threat investigation, making it a strong addition to your portfolio.
-
-Let me know if you’d like to adjust the tone further or add more technical details!
