@@ -1,1 +1,3 @@
 # Overview
+
+A multiple endpoint race condition occurs when multiple endpoints (e.g., API endpoints, services, or processes) attempt to access or modify shared resources concurrently, leading to unpredictable behavior or collisions.
