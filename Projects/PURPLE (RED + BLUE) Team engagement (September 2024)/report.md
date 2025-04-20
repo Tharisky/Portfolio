@@ -180,10 +180,3 @@ I evaluated the CyBOK Incident Response Management model, inspired by NIST SP 80
 
 ---
 
-### Notes for GitHub Portfolio
-- **Screenshots**: Replace placeholder references (e.g., “Figure X”) with actual image links in your GitHub repository (e.g., `![Nessus Scan](images/nessus-scan.jpg)`).
-- **Markdown Formatting**: Use this Markdown content in your GitHub README or a project page for proper rendering.
-- **Professional Tone**: The content is formal, detailed, and focused on technical analysis, making it suitable for a professional portfolio.
-- **Skills Highlighted**: Vulnerability scanning, intrusion detection, incident response, and threat intelligence analysis.
-
-Let me know if you’d like further adjustments!
