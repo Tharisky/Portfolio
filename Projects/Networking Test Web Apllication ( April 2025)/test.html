@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec Test Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="floating-objects">
+        <div class="float-item padlock"></div>
+        <div class="float-item binary"></div>
+        <div class="float-item circuit"></div>
+        <div class="float-item padlock"></div>
+        <div class="float-item binary"></div>
+    </div>
+    <div class="container">
+        <h1>CyberSec Test Terminal</h1>
+        <p>Logged in as: <span id="usernameDisplay"></span></p> <!-- Added username display -->
+        <p>Time Remaining: <span id="timer">30:00</span></p>
+        <form id="testForm"></form>
+        <div class="navigation-buttons">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+        <button id="submitTest">Submit Answers</button>
+        <div id="questionNav" class="question-nav"></div>
+    </div>
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
