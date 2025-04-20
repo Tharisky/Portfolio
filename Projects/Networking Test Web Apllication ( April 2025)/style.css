@@ -1,0 +1,300 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+/* Floating Objects */
+.floating-objects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.float-item {
+    position: absolute;
+    animation: float 10s infinite ease-in-out;
+}
+
+.padlock {
+    width: 40px;
+    height: 40px;
+    background: url('https://img.icons8.com/ios-filled/50/ffffff/lock.png') no-repeat center;
+    background-size: contain;
+}
+
+.binary {
+    width: 50px;
+    height: 20px;
+    color: #ff4444;
+    font-size: 16px;
+    text-align: center;
+    content: '1010';
+    animation: float 8s infinite ease-in-out;
+}
+
+.binary::after {
+    content: '1010';
+}
+
+.circuit {
+    width: 60px;
+    height: 60px;
+    background: url('https://img.icons8.com/ios-filled/50/00ccff/circuit.png') no-repeat center;
+    background-size: contain;
+}
+
+.float-item:nth-child(1) { top: 10%; left: 15%; }
+.float-item:nth-child(2) { top: 30%; left: 80%; animation-delay: 2s; }
+.float-item:nth-child(3) { top: 60%; left: 25%; animation-delay: 4s; }
+.float-item:nth-child(4) { top: 80%; left: 70%; animation-delay: 6s; }
+.float-item:nth-child(5) { top: 20%; left: 50%; animation-delay: 8s; }
+
+/* Container Styling */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(20, 20, 40, 0.85);
+    border: 2px solid #00ccff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #00ccff;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+input, button {
+    padding: 12px;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: 1px solid #ff4444;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00ccff;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+}
+
+button {
+    background: #ff4444;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #00ccff;
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.7);
+}
+
+/* Error Message */
+.error {
+    color: #ff4444;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.7);
+}
+
+/* Question Styling */
+.question {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(30, 30, 50, 0.9);
+    border: 1px solid #ff4444;
+    border-radius: 5px;
+}
+
+.question p {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.question label {
+    color: #cccccc;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #00ccff;
+    text-align: left;
+}
+
+th {
+    background: rgba(0, 0, 20, 0.9);
+    color: #00ccff;
+    text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+}
+
+td {
+    background: rgba(20, 20, 40, 0.9);
+}
+
+/* Correct/Wrong Answers */
+.correct {
+    color: #00ccff;
+    text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+}
+
+.wrong {
+    color: #ff4444;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.7);
+}
+
+/* Timer */
+p {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#timer {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+/* Reset Button */
+.reset-btn {
+    background: #ff4444;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    background: #00ccff;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+}
+
+.reset-btn:disabled {
+    background: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+.question-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.question-number {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #000; /* Black border */
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text for contrast */
+}
+
+.question-number.answered {
+    background-color: #ff0000; /* Red for answered */
+    color: #fff; /* White text */
+}
+
+.question-number.current {
+    background-color: #ff0000; /* Red for current */
+    color: #fff; /* White text */
+    font-weight: bold;
+}
+
+/* Existing styles unchanged below (for reference) */
+.navigation-buttons {
+    margin: 20px 0;
+}
+
+.navigation-buttons button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navigation-buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+#submitTest {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
