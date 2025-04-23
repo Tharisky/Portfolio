@@ -24,8 +24,7 @@ Reviewed Sage Books’ security gaps in February 2024, developing a comprehensiv
 - Reduced data breach risks by 25% through the proposed training program.
 - Strengthened BCP for 3 distribution centers against natural disasters.
 
-## Screenshots
-- Business Continuity Plan diagram:
+
 
 ## Lessons Learned
 - NIST standards ensure robust cybersecurity frameworks.
