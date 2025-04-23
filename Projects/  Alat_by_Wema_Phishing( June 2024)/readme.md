@@ -4,7 +4,7 @@
 
 ## Overview
 Investigated a phishing campaign targeting ALAT by Wema Bank users in June 2024, uncovering its infrastructure and raising community awareness.
-
+link to post on x : https://x.com/thariskyjohn/status/1805315517902627005
 ## Problem Statement
 - Suspicious SMS impersonated ALAT, tricking users into sharing sensitive data.
 - The campaign exploited trust, risking financial fraud for over 1,200 victims.
