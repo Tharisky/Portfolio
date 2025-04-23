@@ -17,11 +17,11 @@ Reviewed Sage Books’ security gaps in February 2024, developing a comprehensiv
 ## Tools Used
 - NIST Framework
 - Microsoft Office
-- Trello
+  
 
 ## Results
-- Delivered response plan, approved by board, enhancing compliance readiness.
-- Reduced data breach risks by 25% through proposed training program.
+- Delivered response plan, approved by the board, enhancing compliance readiness.
+- Reduced data breach risks by 25% through the proposed training program.
 - Strengthened BCP for 3 distribution centers against natural disasters.
 
 ## Screenshots
