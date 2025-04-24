@@ -1,3 +1,7 @@
+This can be automated using a tool called Forbidden-Buster 
+        
+        python3 forbidden_buster.py --url https://domain.com --method POST --header "Authorization: Bearer xxx" --data '{"key":"value"}' --include-unicode --include-user-agent
+
 X-Originating-IP: 127.0.0.1
 X-Forwarded-For: 127.0.0.1
 X-Forwarded: 127.0.0.1
