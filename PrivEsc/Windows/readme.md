@@ -18,8 +18,6 @@
 
 
 
-Below is a categorized list of all commands used across the Proof of Concept (PoC) reports for the vulnerabilities ("Insecure Service Executables," "Insecure Autoruns," and "Insecure Service Permissions").
----
 
 ## List of Commands Used in the Privilege Escalation PoCs
 
