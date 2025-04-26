@@ -1,61 +1,81 @@
-# Vulnerability Overview 
+# Proof of Concept: Privilege Escalation via Insecure Service Permissions
 
-Insecure Service permission is a Windows privilege escalation vulnerability in which a service’s permissions allow a low-privileged user to modify its configuration (e.g., binary path) via the Service Control Manager (SCM).
+### Vulnerability Overview
 
-Since Windows services often run with SYSTEM privileges, an attacker can manipulate a service if its configuration allows a low-privileged user to modify its executable path or settings, and get a next level access
+**Insecure Service Permissions** is a Windows privilege escalation vulnerability where a service's permissions allow a low-privileged user to modify its configuration (e.g., binary path) via the Service Control Manager (SCM). Since Windows services often run with `SYSTEM` privileges, an attacker can manipulate the service's configuration—such as changing the executable path—to execute a malicious binary, thereby gaining elevated access to the system.
 
-# POC
+---
 
-The test is a white box test, as prior information was given as regards login credentials and affected service (daclsvc)
+### Proof of Concept (PoC)
 
-The machine was logged into, and an inital access was gotten by running a reverse shell to connect to the attacker machine
+This PoC demonstrates how a low-privileged user can exploit the "Insecure Service Permissions" vulnerability to escalate privileges on a Windows machine. The test was conducted as a white box assessment, with prior knowledge of login credentials and the affected service (`daclsvc`). The process involves gaining initial access, identifying the vulnerable service, modifying its binary path to point to a malicious executable, and starting the service to gain an elevated shell.
+
+#### Initial Access
+- Logged into the target Windows machine using credentials for the user account `user`.  
+- Established a reverse shell to connect to the attacker machine for command execution.  
+  - **Screenshot**: Initial Access via Reverse Shell  
+    ![Initial Access](https://github.com/user-attachments/assets/6705201c-abfd-4448-ba41-52b7822884fa)
+
+#### Step 1: Query the Service Configuration
+- Queried the service `daclsvc` to verify its privilege level using the following command:  
+  ```bash
+  sc qc daclsvc
+  ```
+- **Result**: The service runs with `SYSTEM` privileges (`SERVICE_START_NAME: LocalSystem`), and its binary path is `BINARY_PATH_NAME: "C:\Program Files\DACL Service\daclservice.exe"`.  
+  - **Screenshot**: Service Configuration  
+    ![Service Details](https://github.com/user-attachments/assets/15578eb3-d703-4a3b-8338-0e9aa873261d)
+
+#### Step 2: Check User Permissions on the Service
+- Used `accesschk.exe` from Sysinternals to analyze the permissions of the user account `user` on the service `daclsvc`:  
+  ```bash
+  C:\PrivEsc\accesschk.exe /accepteula -uwcqv user daclsvc
+  ```
+  - **Command Breakdown**:  
+    - `/accepteula`: Auto-accepts the EULA.  
+    - `-u`: Checks user-level access.  
+    - `-w`: Checks for write permissions.  
+    - `-c`: Targets a specific service.  
+    - `-q`: Quiet mode, suppresses banners.  
+    - `-v`: Verbose output for detailed permissions.  
+    - `user`: The user account being checked.  
+    - `daclsvc`: The target service.  
+
+- **Result**: The user account `user` has permissions including `SERVICE_CHANGE_CONFIG`, allowing modification of the service's configuration (e.g., binary path, display name, start type).  
+  - **Screenshot**: Permission Results  
+    ![Permission Results](https://github.com/user-attachments/assets/7f66ca50-bb75-4957-ad89-f05ad46e6320)
+
+#### Step 3: Exploit the Vulnerability
+- **Objective**: Modify the service's binary path to point to a malicious executable (`esc.exe`) with reverse shell capabilities.  
+- Changed the binary path of the `daclsvc` service using the following command:  
+  ```bash
+  sc config daclsvc binpath= "\"C:\users\user\esc.exe\""
+  ```
+  - **Note**: The binary path was updated to execute `esc.exe`, a malicious file that establishes a reverse shell when the service starts.  
+  - **Screenshot**: Binary Path Modification Success  
+    ![Binary Path Modified](https://github.com/user-attachments/assets/a709d56f-61e2-4b89-b67a-7c39ba2b3b6a)
+
+#### Step 4: Trigger the Malicious File and Gain Elevated Shell
+- Set up a listener on the attacker machine to capture the reverse shell connection (command not shown but implied from prior setup).  
+- Started the service to execute the malicious binary:  
+  ```bash
+  net start daclsvc
+  ```
+- **Result**: The service executed `esc.exe`, establishing a reverse shell with `SYSTEM` privileges on the attacker machine.  
+  - **Screenshot**: Elevated Shell via Reverse Shell  
+    ![Elevated Shell](https://github.com/user-attachments/assets/c58ea347-7bd3-450e-8bf6-e30a70964771)
 
 
-![image](https://github.com/user-attachments/assets/6705201c-abfd-4448-ba41-52b7822884fa)
+---
 
+### Summary of Findings
 
-The service was querried to see if it has system privileges using the following command 
+- The `daclsvc` service had insecure permissions, allowing the low-privileged user `user` to modify its configuration (`SERVICE_CHANGE_CONFIG`).  
+- By changing the service's binary path to a malicious executable (`esc.exe`), the user successfully escalated privileges to `SYSTEM` level upon starting the service.  
+- The exploit demonstrates the potential for attackers to gain full control of the system by leveraging misconfigured service permissions.
 
-`sc qc daclsvc`
+---
 
-the command returned the pictuire below, showcasing  (SERVICE_START_NAME): Local system - which means that the service is running with system privilege
-![image](https://github.com/user-attachments/assets/15578eb3-d703-4a3b-8338-0e9aa873261d)
+### Conclusion
 
+This PoC confirms that the "Insecure Service Permissions" vulnerability in the `daclsvc` service allows a low-privileged user to escalate privileges to `SYSTEM` level. By exploiting the `SERVICE_CHANGE_CONFIG` permission, an attacker can modify the service's binary path to execute arbitrary code with elevated privileges, posing a significant risk to system security. Immediate remediation is recommended, such as restricting service permissions to prevent unauthorized configuration changes and ensuring services run with the least privilege necessary.
 
-to get the access righht of the user account "user", the following command was used 
-`C:\PrivEsc\accesschk.exe /accepteula -uwcqv user daclsvc`
-
-Pictyure showing that user account "user" has read/write access on some  permissions like the 'service_change_config" on the target service
-![image](https://github.com/user-attachments/assets/7f66ca50-bb75-4957-ad89-f05ad46e6320)
-
-
-The 'service_change_config" permision access that the user has means, the user can go ahead to make changes to the service's configuration, such as changing the binary path, display name, start type, or account under which the service runs.
-
-
-
-
-The Binary path option        BINARY_PATH_NAME   : "C:\Program Files\DACL service\daclservice.exe" was then focused on, as any changes made here will affect the service binary. it means any time the service is meant to run, it will call on the newly specified binary
-The newly modified binary can either be
-  1. A binary that gives reverse shell
-  2. A binary that adds the current user to the admin group
-
-
-
-To exploit this vulnerability, the binary path was changed to a path containing a malicious file with reverse shell capabilities using the following command
-
-`sc config daclsvc binpath= "\"C:\users\user\esc.exe""`
-The picture showing success after the command has been ran
-![image](https://github.com/user-attachments/assets/a709d56f-61e2-4b89-b67a-7c39ba2b3b6a)
-
-Then, a listner was started on another terminl on the attacker machine, to listen to connections that the now compromised binary path will initiate on start
-
-the command below was then use to start the service, and an elevated shell was gotten
-`net start daclsvc`
-
-
-![image](https://github.com/user-attachments/assets/c58ea347-7bd3-450e-8bf6-e30a70964771)
-
-
-
-
-sc config daclsvc binpath= "C:\Users\user\malicious.exe"
