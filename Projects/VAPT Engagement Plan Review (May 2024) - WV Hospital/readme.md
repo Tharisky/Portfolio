@@ -11,7 +11,6 @@ Evaluated a vulnerability assessment and penetration testing (VAPT) plan for Wes
 
 ## My Contributions
 - Evaluated penetration testing plan, identifying risks and HIPAA gaps.
-- Conducted internal, external, and social engineering tests using PTES methodology.
 - Recommended continuous testing and risk-assessed exploit use.
 - Authored report with solutions for secure patient record management.
 
