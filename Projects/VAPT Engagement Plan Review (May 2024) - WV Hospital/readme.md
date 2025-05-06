@@ -3,7 +3,7 @@
 # **Vulnerability Assessment and Penetration Testing - Western View Hospital**
 
 ## Overview
-Conducted a vulnerability assessment and penetration testing (VAPT) for Western View Hospital in 2023, ensuring HIPAA-compliant patient data security.
+Evaluated a vulnerability assessment and penetration testing (VAPT) plan for Western View Hospital in 2023, ensuring HIPAA-compliant patient data security.
 
 ## Problem Statement
 - Risky testing plan using EternalBlue could disrupt critical systems.
