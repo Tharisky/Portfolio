@@ -4,7 +4,10 @@ This is a vulnerable lab available @ https://tryhackme.com/room/chocolatefactory
 
 POC
 
-1. Nmap scan: The pentest started with a nmap scan using 
+
+part A: gaining initial Access
+
+Nmap scan: The pentest started with a nmap scan using 
 nmap -T4 -sV -A 10.10.12.204  
 ![image](https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c)
 
@@ -61,11 +64,30 @@ Picture showing the reverse shell gotten from the server hosting the website
 And we were able to get initial access...
 
 
+Part B: Privilege escalation
+
+After initial access was gained with the user www-data
+some files were found in the directory which includes key_rev_key
+
+Using the command "strings" to check the content of the file "key_rev_key"
+![image](https://github.com/user-attachments/assets/af1530b0-29d1-4246-a24c-22a9777c0180)
+
+
+Then using cat /etc/passwd, the user accounts on the machine was discovered, and a user called charlie was part of it.
+
+Thn I navigated to charlie's home directory and files like telport, telport.pub were found
+the content of charlie's home directory
+![image](https://github.com/user-attachments/assets/fc896cf9-6549-4345-90e2-ecf7d2debc0c)
 
 
 
+The teleport file contained a private ssh key, this key was copied and saved on the attacker's machine 
 
+The key was then used to login to charlie's account via ssh 
+ssh charlie@10.10.12.204 -i charley 
 
+Picture showing a successful login
+![image](https://github.com/user-attachments/assets/6cd2fc4f-ff14-4f8d-b632-d71b9e41ebf9)
 
 
 
