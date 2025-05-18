@@ -1,3 +1,9 @@
+
+
+
+![image](https://github.com/user-attachments/assets/b3a5f8a7-9b04-4950-a58c-9f3b9e34eb96)
+
+
 Below is a table summarizing the **Operating Systems and Machine Specifications** for each machine in the network environment.
 
 
