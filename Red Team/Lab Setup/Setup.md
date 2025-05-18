@@ -234,4 +234,4 @@ Internal Network (10.10.10.0/24)          External Network (192.168.50.0/24)
 
 ---
 
-This configuration ensures the internal network is isolated, the Web Server bridges both networks, and the Kali Machine resides in the external network. Let me know if you need help with specific OS configurations (e.g., Windows Server for the Domain Controller or Apache for the Web Server)!
+This configuration ensures the internal network is isolated, the Web Server bridges both networks, and the Kali Machine resides in the external network.
