@@ -1,6 +1,4 @@
-Below is the rewritten analysis of the "APT Dataset Analysis" Jupyter notebook, formatted in GitHub Markdown for direct use in a GitHub README.md or project page. The content preserves all key details from the original notebook, streamlines the structure for clarity, adopts a formal tone suitable for a professional portfolio, and ensures proper Markdown formatting with headers, bullet points, code blocks, and references to visualizations. Since the original images (e.g., `target_files.png`, `attack_timeline.png`) are generated dynamically and not provided, they are referenced as placeholders in the Markdown.
 
----
 
 ## Analysis: Advanced Persistent Threat (APT) Dataset for Path Traversal Attacks
 
@@ -167,11 +165,3 @@ This analysis reveals a concentrated path traversal attack campaign targeting a 
 This analysis underscores the need for robust web application security and proactive monitoring to mitigate such threats.
 
 ---
-
-### Notes for GitHub Portfolio
-- **Image References**: Visualizations (`target_files.png`, `encodings.png`, `mitre_techniques.png`, `attack_timeline.png`, `attack_heatmap.png`) are referenced as placeholders. In a real portfolio, these should be generated and uploaded to your GitHub repository for rendering.
-- **Copy and Paste**: This Markdown content can be directly copied into a GitHub README.md or project page for proper rendering of headers, bullet points, and code blocks.
-- **Professional Tone**: The report maintains a formal tone, suitable for a professional portfolio, while preserving all technical details.
-- **Skills Highlighted**: Demonstrates expertise in log analysis, attack pattern identification, IoC extraction, YARA rule creation, and data visualization using Python (Pandas, Matplotlib, Seaborn).
-
-Let me know if you need further adjustments or assistance!
