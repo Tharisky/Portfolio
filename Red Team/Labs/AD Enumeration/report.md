@@ -44,18 +44,35 @@ Alternatively, another tool called smbmap.py could be used to enumerate these sh
    ![image](https://github.com/user-attachments/assets/092f6c0c-8974-4fee-8e85-ba1f73566b2b)
 
 
-4. LDAP Enumeration (Anonymous Bind): Lightweight Directory Access Protocol (LDAP) is a widely used protocol for accessing and managing directory services, such as Microsoft Active Directory. LDAP helps locate and organise resources within a network, including users, groups, devices, and organisational information, by providing a central directory that applications and users can query.
+4. Domain Enumeration: Lightweight Directory Access Protocol (LDAP) is a widely used protocol for accessing and managing directory services, such as Microsoft Active Directory. LDAP helps locate and organise resources within a network, including users, groups, devices, and organisational information, by providing a central directory that applications and users can query.
 
-   using a tool called ldapsearch We can test if anonymous LDAP bind is enabled on the DOman COntroller.
-  a.  ldapsearch -x -H ldap://10.211.11.10 -s base
+   a.ldapsearch using a tool called ldapsearch We can test if anonymous LDAP bind is enabled on the DOman COntroller.
+    ldapsearch -x -H ldap://10.211.11.10 -s base
    I got the followwing 
    ![image](https://github.com/user-attachments/assets/a21cf785-6418-4f89-a2ac-2ad4848de85d)
 
-   b. ldapsearch -x -H ldap://10.211.11.10 -b "dc=tryhackme,dc=loc" "(objectClass=person)"
+ ldapsearch -x -H ldap://10.211.11.10 -b "dc=tryhackme,dc=loc" "(objectClass=person)"
 ![image](https://github.com/user-attachments/assets/46c0bbe4-d48a-49be-a4f3-cd6fa7ae4b72)
 
-Using another tool called 
+b. enum4linux-ng: Using another tool called enum4linux-ng, and the command enum4linux-ng -A 10.211.11.10
+
 ![image](https://github.com/user-attachments/assets/d228cf31-f477-4fa2-8b72-3b5fc354d63f)
+
+
+Tools like ldapsearch, enum4linux-ng or rpcclient may return some usernames, but they could be:
+
+Disabled accounts
+Non-domain accounts
+Fake honeypot users
+Or even false positives
+Running those through kerbrute lets us confirm which ones are real, active AD users, which allows us to target them more accurately with password sprays.
+
+c. Username Enumeration With Kerbrute: Kerberos is the primary authentication protocol for Microsoft Windows domains. Unlike NTLM, which relies on a challenge-response mechanism, Kerberos uses a ticket-based system managed by a trusted third party, the Key Distribution Centre (KDC). 
+
+We can create a user list thanks to the usernames we gathered with the previous tools.
+and then using the command ./kerbrute userenum --dc  10.211.11.10 -d  tryhackme.loc user.txt, the valid accounts were confirmed to be 23 out of 27
+
+![image](https://github.com/user-attachments/assets/889f4a2b-3ef3-4995-81f3-6b22da86c177)
 
 
 The result of all these tools includes alot of info, and the user info were exracted and compiled into the table below
