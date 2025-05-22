@@ -20,7 +20,7 @@ Checing  that the attacker machine can communicate with the target network using
 
 ## Nework Enumeration via SMB
 
-From the nma scan, SMB was found to be running on the domain controller and the other hosts
+From the nmap scan, SMB was found to be running on the domain controller and the other hosts
 1. Snb enumeration for the DC: using a tool called smbclient
       a. Smbclient on the DC: the command smbclient -L \\\\10.211.11.10\\ we can notice that the smb lsted shares without using anypassword.  there are three non-standard shares that catch  attention: AnonShare, SharedFiles and UserBackups.
    ![image](https://github.com/user-attachments/assets/a6d3a504-952d-46e0-80c5-0d7371cf6ac2)
@@ -130,4 +130,11 @@ The result of all these tools includes alot of info, and the user info were exra
 - **Password Last Set**: Time of last password change (`pwdLastSet`), converted to UTC. If `0`, listed as "Never."
 
 ---
+
+## Password Spraying
+Password spraying is an attack technique where a small set of common passwords is tested across many accounts. Unlike brute-force attacks, password spraying avoids account lockouts by testing each account with only a few attempts, exploiting poor password practices common in many organisations. Password spraying is often effective because many organisations:
+
+Require frequent password changes, leading users to pick predictable patterns (for example, Summer2025!).
+Don't enforce their policies well.
+Reuse common passwords across multiple accounts.
 
