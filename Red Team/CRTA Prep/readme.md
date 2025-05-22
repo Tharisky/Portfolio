@@ -1,1 +1,1 @@
-This is a lab setup for your APT attack simulations using VirtualBox
+This is a CRTA prep lab setup
