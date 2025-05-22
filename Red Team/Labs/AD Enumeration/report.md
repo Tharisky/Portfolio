@@ -16,3 +16,12 @@ Checing  that the attacker machine can communicate with the target network using
    ![image](https://github.com/user-attachments/assets/d3ac2eed-29f8-43d8-ba49-2d1734671a64)
    The scan confirmed that this is the Domain controller.
 
+
+
+## Nework Enumeration via SMB
+
+From the nma scan, SMB was found to be running on the domain controller and the other hosts
+1. Snb enumeration for the DC
+   ![image](https://github.com/user-attachments/assets/a6d3a504-952d-46e0-80c5-0d7371cf6ac2)
+
+
