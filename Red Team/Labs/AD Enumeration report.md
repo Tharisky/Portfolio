@@ -1,182 +1,236 @@
-![image](https://github.com/user-attachments/assets/39ecce70-a851-4d1c-b8ef-a61381c75bbd)![image](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)
+# Active Directory Enumeration Lab
 
-This lab is available on https://tryhackme.com/room/adbasicenumeration
-Active Directory (AD) enumeration is a crucial first step in penetration testing Microsoft Windows enterprise networks. During many internal penetration tests, we are often given VPN access to the target network without user credentials. That means we need to gather as much information as possible about the domain: users, groups, computers, and policies. This will allow us to identify potential vulnerabilities or attack paths that might give us an initial foothold, such as access to a user’s workstation.
+This lab, completed on [TryHackMe](https://tryhackme.com/room/adbasicenumeration), demonstrates Active Directory (AD) enumeration techniques critical for penetration testing Windows enterprise networks. The objective was to gather comprehensive information about the target domain—users, groups, computers, and policies—without initial credentials, simulating an internal penetration test with VPN access.
 
-Checking  that the attacker machine can communicate with the target network using the command route -n
-![image](https://github.com/user-attachments/assets/79c6293a-a682-490c-a912-5438061f109b)
+![Network Setup](https://github.com/user-attachments/assets/39ecce70-a851-4d1c-b8ef-a61381c75bbd)
+![Network Communication](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)
 
+## Initial Network Verification
+To confirm connectivity to the target network, I executed:
 
-## Mapping out the network 
-1. Host discovery: this was done to chec out the availble macines in the activev directory enviironmnt usin the command fping  -agq 10.211.11.20/24. Four hosts were returned 
-   ![image](https://github.com/user-attachments/assets/79e25dd6-aa59-4c82-9d1c-f7d452803583)
-2. Nmap scan: This was done on each of the hosts fond in the environment to enumerate their services and undrstadn their role in the environment
-     a. using nmap -T4 -sV -A 10.211.11.20. The  ports and sevices contained in the picture were discovered, 
-   ![image](https://github.com/user-attachments/assets/949a1fe9-f8d6-4b9d-b8a4-722ccf4150b3)
-   This
-   b. using nmap -T4 -sV -A 10.211.11.10. The  ports and sevices contained in the picture were discovered
-   ![image](https://github.com/user-attachments/assets/d3ac2eed-29f8-43d8-ba49-2d1734671a64)
-   The scan confirmed that this is the Domain controller.
+```bash
+route -n
+```
 
+![Routing Check](https://github.com/user-attachments/assets/79c6293a-a682-490c-a912-5438061f109b)
 
+## Network Mapping
+### 1. Host Discovery
+To identify active hosts in the AD environment, I used:
 
-## Nework Enumeration via SMB
+```bash
+fping -agq 10.211.11.20/24
+```
 
-From the nmap scan, SMB was found to be running on the domain controller and the other hosts
-1. Snb enumeration for the DC: using a tool called smbclient
-      a. Smbclient on the DC: the command smbclient -L \\\\10.211.11.10\\ we can notice that the smb lsted shares without using anypassword.  there are three non-standard shares that catch  attention: AnonShare, SharedFiles and UserBackups.
-   ![image](https://github.com/user-attachments/assets/a6d3a504-952d-46e0-80c5-0d7371cf6ac2)
+This returned four active hosts.
 
-   b. Smbclient on the other wiindows machine: smbclient -L \\\\10.211.11.20\\ . This returned session setup failed: NT_STATUS_ACCESS_DENIED
+![Host Discovery](https://github.com/user-attachments/assets/79e25dd6-aa59-4c82-9d1c-f7d452803583)
 
-   ![image](https://github.com/user-attachments/assets/70573a30-bcbd-4f00-88ac-6ccd95477465)
-Alternatively, another tool called smbmap.py could be used to enumerate these shares 
-   a. using the command smbmap -H 10.211.11.10 on the domain controller, smbmap listed the same share as what was gotten y smbclient eaarlir but this time, it shoowed  the permissions aailale on each sare, and the AnonShare, SharedFiles and UserBackups returned read and write access.
+### 2. Nmap Scanning
+I performed detailed Nmap scans to enumerate services and determine host roles:
 
-![image](https://github.com/user-attachments/assets/6c736ed7-2355-421e-85d3-2729200b266e)
+- **Domain Controller (10.211.11.10)**:
+  ```bash
+  nmap -T4 -sV -A 10.211.11.10
+  ```
 
+  ![Domain Controller Scan](https://github.com/user-attachments/assets/d3ac2eed-29f8-43d8-ba49-2d1734671a64)
 
-3. Accessing SMB shares: Trying to access the shares with read and write permissions 
-   a. Aaccessing Anonshare: using smbclient \\\\10.211.11.10\\Anonshare, the share has nothing inside
-   ![image](https://github.com/user-attachments/assets/49b92d8a-528d-4e45-84a0-7dc3622a4a3b)
-   b. Accessing ShareFiles: using smbclient \\\\10.211.11.10\\SharedFiles. This returned a file called " Mouse and Malware.txt)
-   ![image](https://github.com/user-attachments/assets/b24766c4-a109-4d2c-94e1-fcf002180056)
-   c. Accessing UserBackus: smbclient \\\\10.211.11.10\\UserBackups.  Two files were found here.
+- **Other Host (10.211.11.20)**:
+  ```bash
+  nmap -T4 -sV -A 10.211.11.20
+  ```
 
-   ![image](https://github.com/user-attachments/assets/092f6c0c-8974-4fee-8e85-ba1f73566b2b)
+  ![Host Scan](https://github.com/user-attachments/assets/949a1fe9-f8d6-4b9d-b8a4-722ccf4150b3)
 
+The scans confirmed `10.211.11.10` as the Domain Controller (DC).
 
-4. Domain Enumeration: Lightweight Directory Access Protocol (LDAP) is a widely used protocol for accessing and managing directory services, such as Microsoft Active Directory. LDAP helps locate and organise resources within a network, including users, groups, devices, and organisational information, by providing a central directory that applications and users can query.
+## SMB Enumeration
+Nmap revealed SMB services on the DC and other hosts. I proceeded with SMB enumeration to identify accessible shares.
 
-   a.ldapsearch using a tool called ldapsearch We can test if anonymous LDAP bind is enabled on the DOman COntroller.
-    ldapsearch -x -H ldap://10.211.11.10 -s base
-   I got the followwing 
-   ![image](https://github.com/user-attachments/assets/a21cf785-6418-4f89-a2ac-2ad4848de85d)
+### 1. SMB Enumeration on the Domain Controller
+Using `smbclient` to list shares on the DC:
 
- ldapsearch -x -H ldap://10.211.11.10 -b "dc=tryhackme,dc=loc" "(objectClass=person)"
-![image](https://github.com/user-attachments/assets/46c0bbe4-d48a-49be-a4f3-cd6fa7ae4b72)
+```bash
+smbclient -L \\\\10.211.11.10\\
+```
 
-b. enum4linux-ng: Using another tool called enum4linux-ng, and the command enum4linux-ng -A 10.211.11.10
+This identified three non-standard shares—`AnonShare`, `SharedFiles`, and `UserBackups`—accessible without credentials.
 
-![image](https://github.com/user-attachments/assets/d228cf31-f477-4fa2-8b72-3b5fc354d63f)
+![SMB Shares](https://github.com/user-attachments/assets/a6d3a504-952d-46e0-80c5-0d7371cf6ac2)
 
+### 2. SMB Enumeration on Other Host
+On the host at `10.211.11.20`:
 
-Tools like ldapsearch, enum4linux-ng or rpcclient may return some usernames, but they could be:
+```bash
+smbclient -L \\\\10.211.11.20\\
+```
 
-Disabled accounts
-Non-domain accounts
-Fake honeypot users
-Or even false positives
-Running those through kerbrute lets us confirm which ones are real, active AD users, which allows us to target them more accurately with password sprays.
+This returned an access denied error (`NT_STATUS_ACCESS_DENIED`).
 
-c. Username Enumeration With Kerbrute: Kerberos is the primary authentication protocol for Microsoft Windows domains. Unlike NTLM, which relies on a challenge-response mechanism, Kerberos uses a ticket-based system managed by a trusted third party, the Key Distribution Centre (KDC). 
+![SMB Access Denied](https://github.com/user-attachments/assets/70573a30-bcbd-4f00-88ac-6ccd95477465)
 
-We can create a user list thanks to the usernames we gathered with the previous tools.
-and then using the command ./kerbrute userenum --dc  10.211.11.10 -d  tryhackme.loc user.txt, the valid accounts were confirmed to be 23 out of 27
+### 3. SMB Enumeration with smbmap
+To verify share permissions, I used:
 
-![image](https://github.com/user-attachments/assets/889f4a2b-3ef3-4995-81f3-6b22da86c177)
+```bash
+smbmap -H 10.211.11.10
+```
 
+This confirmed read and write access to `AnonShare`, `SharedFiles`, and `UserBackups`.
 
-The result of all these tools includes alot of info, and the user info were exracted and compiled into the table below
+![SMB Permissions](https://github.com/user-attachments/assets/6c736ed7-2355-421e-85d3-2729200b266e)
 
+### 4. Accessing SMB Shares
+I accessed the shares to inspect their contents:
 
-| Username          | Account Status      | Bad Pwd Count | Last Bad Pwd Time       | Last Logon Time         | Last Logon Timestamp    | Logon Count | Password Last Set       |
-|-------------------|---------------------|---------------|-------------------------|-------------------------|-------------------------|-------------|-------------------------|
-| Guest             | Disabled, No Pwd    | 5             | 2025-05-22 13:58:00     | Never                   | Never                   | 0           | Never                   |
-| sshd              | Enabled, No Pwd     | 5             | 2025-05-22 13:58:03     | Never                   | Never                   | 0           | 2025-04-30 08:26:36     |
-| gerald.burgess    | Enabled             | 5             | 2025-05-22 13:28:08     | 2025-04-07 22:32:04     | 2025-04-30 13:02:22     | 4           | 2025-04-30 13:17:21     |
-| nigel.parsons     | Enabled             | 5             | 2025-05-22 13:28:09     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| guy.smith         | Enabled             | 5             | 2025-05-22 13:28:09     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| jeremy.booth      | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| barbara.jones     | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| marion.kay        | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| kathryn.williams  | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| danny.baker       | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| gary.clarke       | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| daniel.turner     | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
-| debra.yates       | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
-| jeffrey.thompson  | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
-| martin.riley      | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
-| danielle.lee      | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
-| douglas.roberts   | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
-| dawn.bolton       | Disabled            | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | Never                   |
-| danielle.ali      | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 15:06:44     |
-| michelle.palmer   | Disabled            | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | Never                   |
-| katie.thomas      | Disabled, No Pwd    | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-05-10 15:14:56     |
-| jennifer.harding  | Enabled             | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 15:06:44     |
-| strate905         | Enabled, No Pwd     | 5             | 2025-05-22 13:28:10     | 2025-04-30 13:16:29     | 2025-04-30 13:22:10     | 5           | 2025-04-30 10:21:05     |
-| krbtgtsvc         | Enabled, No Pwd     | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-05-01 13:16:53     |
-| asrepuser1        | Enabled, No Pre-Auth| 5             | 2025-05-22 13:28:10     | 2025-05-22 13:15:26     | 2025-05-22 12:45:23     | 4           | 2025-05-02 03:29:08     |
-| rduke             | Enabled, No Pwd     | 0             | 2025-05-22 13:28:10     | 2025-05-22 13:28:10     | 2025-05-13 07:50:45     | 1           | 2025-05-13 07:46:00     |
-| user              | Enabled, No Pwd     | 0             | Never                   | Never                   | Never                   | 0           | 2025-05-15 14:57:17     |
+- **AnonShare**:
+  ```bash
+  smbclient \\\\10.211.11.10\\AnonShare
+  ```
+  The share was empty.
 
+  ![AnonShare](https://github.com/user-attachments/assets/49b92d8a-528d-4e45-84a0-7dc3622a4a3b)
 
+- **SharedFiles**:
+  ```bash
+  smbclient \\\\10.211.11.10\\SharedFiles
+  ```
+  Contained a file named `Mouse and Malware.txt`.
 
----
+  ![SharedFiles](https://github.com/user-attachments/assets/b24766c4-a109-4d2c-94e1-fcf002180056)
 
-### **Explanation of Table Columns**
+- **UserBackups**:
+  ```bash
+  smbclient \\\\10.211.11.10\\UserBackups
+  ```
+  Contained two files.
 
-- **Username**: The `sAMAccountName` attribute, used for logging into the domain.
-- **Account Status**:
-  - Derived from `userAccountControl`:
-    - `512`: Enabled (normal account).
-    - `514`: Disabled (normal account).
-    - `66048`: Enabled, no password required.
-    - `66050`: Disabled, no password required.
-    - `4260352`: Enabled, no Kerberos pre-authentication (vulnerable to AS-REP roasting).
+  ![UserBackups](https://github.com/user-attachments/assets/092f6c0c-8974-4fee-8e85-ba1f73566b2b)
+
+## Domain Enumeration via LDAP
+LDAP enumeration was performed to gather AD resource details.
+
+### 1. Testing Anonymous LDAP Bind
+Using `ldapsearch` to check anonymous binding:
+
+```bash
+ldapsearch -x -H ldap://10.211.11.10 -s base
+```
+
+![LDAP Base](https://github.com/user-attachments/assets/a21cf785-6418-4f89-a2ac-2ad4848de85d)
+
+To enumerate user objects:
+
+```bash
+ldapsearch -x -H ldap://10.211.11.10 -b "dc=tryhackme,dc=loc" "(objectClass=person)"
+```
+
+![LDAP Users](https://github.com/user-attachments/assets/46c0bbe4-d48a-49be-a4f3-cd6fa7ae4b72)
+
+### 2. Enum4linux-ng
+For comprehensive enumeration, I used:
+
+```bash
+enum4linux-ng -A 10.211.11.10
+```
+
+![Enum4linux-ng](https://github.com/user-attachments/assets/d228cf31-f477-4fa2-8b72-3b5fc354d63f)
+
+### 3. Username Enumeration with Kerbrute
+To validate usernames, I compiled a list from previous enumerations and used `kerbrute`:
+
+```bash
+./kerbrute userenum --dc 10.211.11.10 -d tryhackme.loc user.txt
+```
+
+This confirmed 23 valid accounts out of 27.
+
+![Kerbrute](https://github.com/user-attachments/assets/889f4a2b-3ef3-4995-81f3-6b22da86c177)
+
+### 4. Compiled User Information
+The enumeration results were consolidated into the following table:
+
+| Username          | Account Status            | Bad Pwd Count | Last Bad Pwd Time       | Last Logon Time         | Last Logon Timestamp    | Logon Count | Password Last Set       |
+|-------------------|---------------------------|---------------|-------------------------|-------------------------|-------------------------|-------------|-------------------------|
+| Guest             | Disabled, No Pwd          | 5             | 2025-05-22 13:58:00     | Never                   | Never                   | 0           | Never                   |
+| sshd              | Enabled, No Pwd           | 5             | 2025-05-22 13:58:03     | Never                   | Never                   | 0           | 2025-04-30 08:26:36     |
+| gerald.burgess    | Enabled                   | 5             | 2025-05-22 13:28:08     | 2025-04-07 22:32:04     | 2025-04-30 13:02:22     | 4           | 2025-04-30 13:17:21     |
+| nigel.parsons     | Enabled                   | 5             | 2025-05-22 13:28:09     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| guy.smith         | Enabled                   | 5             | 2025-05-22 13:28:09     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| jeremy.booth      | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| barbara.jones     | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| marion.kay        | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| kathryn.williams  | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| danny.baker       | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| gary.clarke       | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| daniel.turner     | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:22     |
+| debra.yates       | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
+| jeffrey.thompson  | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
+| martin.riley      | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
+| danielle.lee      | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
+| douglas.roberts   | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 13:17:23     |
+| dawn.bolton       | Disabled                  | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | Never                   |
+| danielle.ali      | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 15:06:44     |
+| michelle.palmer   | Disabled                  | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | Never                   |
+| katie.thomas      | Disabled, No Pwd          | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-05-10 15:14:56     |
+| jennifer.harding  | Enabled                   | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-04-30 15:06:44     |
+| strate905         | Enabled, No Pwd           | 5             | 2025-05-22 13:28:10     | 2025-04-30 13:16:29     | 2025-04-30 13:22:10     | 5           | 2025-04-30 10:21:05     |
+| krbtgtsvc         | Enabled, No Pwd           | 5             | 2025-05-22 13:28:10     | Never                   | Never                   | 0           | 2025-05-01 13:16:53     |
+| asrepuser1        | Enabled, No Pre-Auth      | 5             | 2025-05-22 13:28:10     | 2025-05-22 13:15:26     | 2025-05-22 12:45:23     | 4           | 2025-05-02 03:29:08     |
+| rduke             | Enabled, No Pwd           | 0             | 2025-05-22 13:28:10     | 2025-05-22 13:28:10     | 2025-05-13 07:50:45     | 1           | 2025-05-13 07:46:00     |
+| user              | Enabled, No Pwd           | 0             | Never                   | Never                   | Never                   | 0           | 2025-05-15 14:57:17     |
+
+#### Table Column Explanations
+- **Username**: The `sAMAccountName` used for domain logins.
+- **Account Status**: Derived from `userAccountControl`:
+  - `512`: Enabled (normal account).
+  - `514`: Disabled (normal account).
+  - `66048`: Enabled, no password required.
+  - `66050`: Disabled, no password required.
+  - `4260352`: Enabled, no Kerberos pre-authentication (vulnerable to AS-REP roasting).
 - **Bad Pwd Count**: Number of failed login attempts (`badPwdCount`).
-- **Last Bad Pwd Time**: Last failed login attempt (`badPasswordTime`), converted from FILETIME to UTC (YYYY-MM-DD HH:MM:SS). If `0`, listed as "Never."
+- **Last Bad Pwd Time**: Last failed login attempt (`badPasswordTime`), converted to UTC. If `0`, listed as "Never."
 - **Last Logon Time**: Last successful logon (`lastLogon`), converted to UTC. If `0`, listed as "Never."
-- **Last Logon Timestamp**: Approximate last logon (`lastLogonTimestamp`), replicated across domain controllers, converted to UTC. If `0`, listed as "Never."
+- **Last Logon Timestamp**: Approximate last logon (`lastLogonTimestamp`), replicated across DCs, converted to UTC. If `0`, listed as "Never."
 - **Logon Count**: Number of successful logons (`logonCount`).
 - **Password Last Set**: Time of last password change (`pwdLastSet`), converted to UTC. If `0`, listed as "Never."
 
----
-
 ## Password Spraying
-Password spraying is an attack technique where a small set of common passwords is tested across many accounts. Unlike brute-force attacks, password spraying avoids account lockouts by testing each account with only a few attempts, exploiting poor password practices common in many organisations. Password spraying is often effective because many organisations:
+Password spraying was performed to test common passwords against the validated user list, exploiting weak password policies.
 
-Require frequent password changes, leading users to pick predictable patterns (for example, Summer2025!).
-Don't enforce their policies well.
-Reuse common passwords across multiple accounts.
-Before we can start our attack, it is essential to understand our target's password policy. This will allow us to retrieve information about the minimum password length, complexity, and the number of failed attempts that will lock out an account.
+### 1. Password Policy Enumeration
+To understand the password policy, I used:
 
-we can use CrackMapExec or rcpclient to do this
-1. Rpcclient: rpcclient -U "" 10.211.11.10 -N, then  getdompwinfo
-![image](https://github.com/user-attachments/assets/e07f79d7-6b76-4de5-840e-0b239a421f23)
+- **rpcclient**:
+  ```bash
+  rpcclient -U "" 10.211.11.10 -N
+  getdompwinfo
+  ```
 
-2. Crackmapexec: using the command crackmapexec smb 10.211.11.10 --pass-pol      we got the piciture below
+  ![rpcclient Policy](https://github.com/user-attachments/assets/e07f79d7-6b76-4de5-840e-0b239a421f23)
 
-   ![image](https://github.com/user-attachments/assets/f4146084-e720-4cdb-b806-25e2477a3632)
+- **CrackMapExec**:
+  ```bash
+  crackmapexec smb 10.211.11.10 --pass-pol
+  ```
 
-We have gathered a solid user list from our user enumeration in the previous task; we now need to create a small list of common passwords.
-Through our password policy enumeration, we saw that the password complexity is equal to 1:
+  ![CrackMapExec Policy](https://github.com/user-attachments/assets/f4146084-e720-4cdb-b806-25e2477a3632)
 
-In rpcclient: password_properties: 0x00000001
-With CrackMapExec: Password Complexity Flags: 000001
-This means that at least three of the following four conditions need to be respected for a password to be created:
+The policy required passwords to meet three of four conditions: uppercase letters, lowercase letters, digits, and special characters.
 
-Uppercase letters
-Lowercase letters
-Digits
-Special characters
+### 2. Password Spraying Attack
+Using OSINT, the lab environment  created and provided a password list based on common patterns (`Password!`, `Password1`, `Password1!`, `P@ssword`, `Pa55word1`). The attack was executed with:
 
+```bash
+crackmapexec smb 10.211.11.20 -u valid.txt -p user_pass.txt
+```
 
+This identified a valid credential.
 
-Let's imagine that through some OSINT, we discovered that this company was in a data breach, and some of the known passwords were variations of the string "Password". We can create the following list, making sure to respect the password policy:
+![Password Spray](https://github.com/user-attachments/assets/b5653d14-d7b3-4911-84ee-47bd63517ea1)
+![Valid Credential](https://github.com/user-attachments/assets/9e33a491-5b7e-4921-a83c-53b301d920b6)
 
-Password!
-Password1
-Password1!
-P@ssword
-Pa55word1
+## Conclusion
+This lab showcased essential AD enumeration techniques, including network mapping, SMB and LDAP enumeration, username validation, and password spraying. The process revealed vulnerabilities such as misconfigured SMB shares and weak password policies, enabling the identification of a valid credential. These skills demonstrate proficiency in penetration testing and network security analysis.
 
-Then using crackmapexec smb 10.211.11.20 -u valid.txt -p user_pass.txt 
-passwords were tried and a correct credential as gottten
-![image](https://github.com/user-attachments/assets/b5653d14-d7b3-4911-84ee-47bd63517ea1)
-
-The last line showed the gotten credential
-![image](https://github.com/user-attachments/assets/9e33a491-5b7e-4921-a83c-53b301d920b6)
-
-
-End of lab
