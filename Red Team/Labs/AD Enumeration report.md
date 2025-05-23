@@ -1,7 +1,9 @@
-![image](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)This lab is available on https://tryhackme.com/room/adbasicenumeration
+![image](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)
 
+This lab is available on https://tryhackme.com/room/adbasicenumeration
+Active Directory (AD) enumeration is a crucial first step in penetration testing Microsoft Windows enterprise networks. During many internal penetration tests, we are often given VPN access to the target network without user credentials. That means we need to gather as much information as possible about the domain: users, groups, computers, and policies. This will allow us to identify potential vulnerabilities or attack paths that might give us an initial foothold, such as access to a user’s workstation.
 
-Checing  that the attacker machine can communicate with the target network using the command route -n
+Checking  that the attacker machine can communicate with the target network using the command route -n
 ![image](https://github.com/user-attachments/assets/79c6293a-a682-490c-a912-5438061f109b)
 
 
@@ -137,4 +139,10 @@ Password spraying is an attack technique where a small set of common passwords i
 Require frequent password changes, leading users to pick predictable patterns (for example, Summer2025!).
 Don't enforce their policies well.
 Reuse common passwords across multiple accounts.
+Before we can start our attack, it is essential to understand our target's password policy. This will allow us to retrieve information about the minimum password length, complexity, and the number of failed attempts that will lock out an account.
 
+we can use CrackMapExec or rcpclient to do this
+1. Rpcclient: rpcclient -U "" 10.211.11.10 -N, then  getdompwinfo
+![image](https://github.com/user-attachments/assets/e07f79d7-6b76-4de5-840e-0b239a421f23)
+
+2. 
