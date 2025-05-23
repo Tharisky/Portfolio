@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)
+![image](https://github.com/user-attachments/assets/39ecce70-a851-4d1c-b8ef-a61381c75bbd)![image](https://github.com/user-attachments/assets/32e3e37b-e3ef-4a1c-bea4-36a244bba89b)
 
 This lab is available on https://tryhackme.com/room/adbasicenumeration
 Active Directory (AD) enumeration is a crucial first step in penetration testing Microsoft Windows enterprise networks. During many internal penetration tests, we are often given VPN access to the target network without user credentials. That means we need to gather as much information as possible about the domain: users, groups, computers, and policies. This will allow us to identify potential vulnerabilities or attack paths that might give us an initial foothold, such as access to a user’s workstation.
@@ -145,4 +145,38 @@ we can use CrackMapExec or rcpclient to do this
 1. Rpcclient: rpcclient -U "" 10.211.11.10 -N, then  getdompwinfo
 ![image](https://github.com/user-attachments/assets/e07f79d7-6b76-4de5-840e-0b239a421f23)
 
-2. 
+2. Crackmapexec: using the command crackmapexec smb 10.211.11.10 --pass-pol      we got the piciture below
+
+   ![image](https://github.com/user-attachments/assets/f4146084-e720-4cdb-b806-25e2477a3632)
+
+We have gathered a solid user list from our user enumeration in the previous task; we now need to create a small list of common passwords.
+Through our password policy enumeration, we saw that the password complexity is equal to 1:
+
+In rpcclient: password_properties: 0x00000001
+With CrackMapExec: Password Complexity Flags: 000001
+This means that at least three of the following four conditions need to be respected for a password to be created:
+
+Uppercase letters
+Lowercase letters
+Digits
+Special characters
+
+
+
+Let's imagine that through some OSINT, we discovered that this company was in a data breach, and some of the known passwords were variations of the string "Password". We can create the following list, making sure to respect the password policy:
+
+Password!
+Password1
+Password1!
+P@ssword
+Pa55word1
+
+Then using crackmapexec smb 10.211.11.20 -u valid.txt -p user_pass.txt 
+passwords were tried and a correct credential as gottten
+![image](https://github.com/user-attachments/assets/b5653d14-d7b3-4911-84ee-47bd63517ea1)
+
+The last line showed the gotten credential
+![image](https://github.com/user-attachments/assets/9e33a491-5b7e-4921-a83c-53b301d920b6)
+
+
+End of lab
