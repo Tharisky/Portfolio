@@ -123,7 +123,9 @@ This PoC demonstrates how to gain initial access to the Chocolate Factory machin
      ```bash
      sudo -l
      ```
-  2. If `vi` is allowed, escalate to root:  
+     ![image](https://github.com/user-attachments/assets/4cab7dad-abf8-44d9-838a-755246eee5a4)
+
+  2. This showed that  `vi` is allowed, and we can escalate to root:  
      ```bash
      sudo /usr/bin/vi
      ```
@@ -131,7 +133,8 @@ This PoC demonstrates how to gain initial access to the Chocolate Factory machin
      ```
      !/bin/bash
      ```
-- **Note**: Root access exploitation is pending and will be documented in a future update.
+     ![image](https://github.com/user-attachments/assets/736ddfc1-0038-4848-9058-b1267e3f7507)
+
 
 ---
 
@@ -140,9 +143,9 @@ This PoC demonstrates how to gain initial access to the Chocolate Factory machin
 - **Initial Access**: Exploited a command injection vulnerability on `home.php` to gain a reverse shell as `www-data`.  
 - **Privilege Escalation**: Used a private SSH key (`telport`) found in `/home/charlie` to escalate privileges to the `charlie` user and retrieve the user flag.  
 - **Vulnerabilities Identified**:  
-  - Anonymous FTP access exposing potentially sensitive files.  
-  - Command injection in the web application allowing arbitrary command execution.  
-  - Insecure storage of SSH keys enabling privilege escalation.
+  - Anonymous FTP access exposes potentially sensitive files.  
+  - Command injection in the web application allows arbitrary command execution.  
+  - Insecure storage of SSH keys enables privilege escalation.
 
 ---
 
@@ -152,32 +155,5 @@ This PoC demonstrates the successful compromise of the Chocolate Factory lab mac
 
 ---
 
-### Notes for GitHub Portfolio
-- **Image Links**: The provided GitHub image links (e.g., `https://github.com/user-attachments/assets/d6c9ab51-46d6-495e-981e-8544c5f4d30c`) are retained and will render correctly in a GitHub README.md. Ensure these images are accessible in your repository.  
-- **Copy and Paste**: This Markdown content can be directly copied into a GitHub README.md or project page for proper rendering of headers, bullet points, code blocks, and images.  
-- **Professional Tone**: The report maintains a formal tone, suitable for a professional portfolio, while preserving all technical details.  
-- **Skills Highlighted**: Demonstrates expertise in network enumeration, web application security, command injection exploitation, privilege escalation, and use of tools like Nmap, FFUF, and SSH for penetration testing.
 
----
 
-### Additional Notes for Root Access (As Provided)
-- After gaining access as `charlie`:  
-  1. Perform directory brute-forcing to find the command injection page (already done via FFUF).  
-  2. Use the command injection page to run a PHP or Bash shell command (already exploited for the reverse shell).  
-  3. After getting the shell:  
-     - Find user accounts: `cat /etc/passwd` (already done).  
-     - Navigate to Charlie’s account and retrieve the user flag:  
-       - Grab the private SSH key (`telport`) and save it as `charley` (already done).  
-       - SSH into Charlie’s account:  
-         ```bash
-         ssh charlie@10.10.12.204 -i charley
-         ```
-       - Retrieve the user flag (already done).  
-  4. Escalate to root:  
-     - Check sudo privileges: `sudo -l`  
-     - Run `vi` with sudo: `sudo /usr/bin/vi`  
-     - Within `vi`, execute: `!/bin/bash` to gain a root shell.
-
-Let (
-
-me know if you need further adjustments!
