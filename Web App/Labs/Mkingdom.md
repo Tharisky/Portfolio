@@ -14,6 +14,11 @@ The homeoage picture
 
 2. Directory Enumeration: 
 Using FFUF
+ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.45.14:85/FUZZ -fc 403
+
 A page "app" was discovered 
 ![image](https://github.com/user-attachments/assets/a283822e-302f-4479-99b1-376969e462c6)
 
+
+The app page when accessed 
+![image](https://github.com/user-attachments/assets/5c9b7986-0359-45cd-b575-f20ac83d21f9)
