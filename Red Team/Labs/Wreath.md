@@ -69,8 +69,13 @@ cat /etc/shadow was used to enumerate the root's password hash, then wreath's pa
 ![image](https://github.com/user-attachments/assets/88fd9c34-d863-4a8d-9816-04b9ea6a41f5)
 
 
-4. f
-5.  
+3. Credential enumerations:
+The root's home directory was enumerated, and an SSH key was discovered which is going to be useful for getting direct access into the server using the root's credentials without going through the RCE exploitation again.
+![image](https://github.com/user-attachments/assets/76989e81-ed00-4c20-9b68-7cc2bce3e6f6)
+
+
+5. 
+    
 
 
 
