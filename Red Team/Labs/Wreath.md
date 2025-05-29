@@ -17,13 +17,27 @@ As with any attack, we first begin with the enumeration phase
 1. Fping: Using the command fping -agq 10.200.73.200/24 , the network was ping to figure out what is in the network
 The reult returned 3 Ip address,
   A. 10.200.73.1 - the gateway
-  B. 10.200.73.200 - Which is the public facing server
+  B. 10.200.73.200 - Which is the public facing server 
   C. 10.200.73.250 - unknown machine
 ![image](https://github.com/user-attachments/assets/1f8ce2fb-c9a3-4f5a-8f7b-7f3a33af18e1)
 
 
-using
-2. Nmap
-using the command   nmap -T4 -sV -A 10.200.73.200  -oN scan.txt 
+
+2. Nmap: This was used to further enumerate the Hosts found in the network
+   A.  10.200.73.250 Host: This was scanned using nmap -T4 -sV -A 10.200.73.250  -oN scan.txt  and the result only showed
+       i.  port 22 is actively running OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+
+   ![image](https://github.com/user-attachments/assets/13b0b801-9bd8-4a18-aeeb-ca6942862a54)
+
+  B. 10.200.73.200 Host: This was scanned using nmap -T4 -sV -p- 15000  -A 10.200.73.200  -oN scan.txt, and it returned the following
+      i. Port 22 runnig OpenSSH 8.0 (protocol 2.0)
+      ii. Port 80 running Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1c)
+      iii.Port  443   Apache/2.4.37 (centos) OpenSSL/1.1.1c
+      iv. Port 9090 which showed closed status but is running zeus-admin
+      v. Port 10000 running      MiniServ 1.890 (Webmin httpd)
+
+
+
+      The operating system is linux
 
 ![image](https://github.com/user-attachments/assets/01be25df-0866-42bd-be16-3791b2237e54)
