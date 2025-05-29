@@ -37,7 +37,7 @@ The reult returned 3 Ip address,
 Going forward with the enumeration, the website was accessed, and was accessible only after adding the domain name resolved on the bowsrr when the IP addressed was input into the browser, into the /etc/hosts file
 ![image](https://github.com/user-attachments/assets/2c468504-6e52-4663-ba16-9dcba2c33952)
       iv. Port 9090 which showed closed status but is running zeus-admin
-      v. Port 10000 running      MiniServ 1.890 (Webmin httpd)
+      v. Port 10000 running      MiniServ 1.890 (Webmin httpd): Further enumeration...
       vi. The operating system is linux CenSOS
 
 
