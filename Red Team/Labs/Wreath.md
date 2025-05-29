@@ -2,7 +2,7 @@
 
 Pivoting
 Working with the Empire C2 (Command and Control) framework
-Simple Anti-Virus evasion techniques
+Simple Anti-Virus Evasion Techniques
 
 
 
@@ -76,8 +76,9 @@ The root's home directory was enumerated, and an SSH key was discovered which is
 The login was initiated using ssh root@10.200.97.200 -i key.txt  and the login was successful
 ![image](https://github.com/user-attachments/assets/2f0382a1-5064-44b3-86c5-e1e31387626b)
 
-5. 
-    
+
+# Pivoting 
+Pivoting is the art of using access obtained over one machine to exploit another machine deeper in the network.     
 
 
 
