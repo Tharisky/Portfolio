@@ -14,7 +14,7 @@ one of them has a webserver that's port forwarded, so that's your way in if you 
 # Enumeration 
 
 As with any attack, we first begin with the enumeration phase
-1. Fping: Using the command fping -agq 10.200.73.200/24 , the network was ping to figure out what is in the network
+1. Fping: Using the command fping -agq 10.200.73.200/24 the network was ping to figure out what is in the network
 The reult returned 3 Ip address,
   A. 10.200.73.1 - the gateway
   B. 10.200.73.200 - Which is the public facing server 
@@ -33,11 +33,11 @@ The reult returned 3 Ip address,
       i. Port 22 runnig OpenSSH 8.0 (protocol 2.0)
       ii. Port 80 running Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1c)
       iii.Port  443   Apache/2.4.37 (centos) OpenSSL/1.1.1c
+      ![image](https://github.com/user-attachments/assets/01be25df-0866-42bd-be16-3791b2237e54)
+Going forward with the enumeration, the website was accessed, and was accessible only after adding the domain name resolved on the bowsrr when the IP addressed was input into the browser, into the /etc/hosts file
+![image](https://github.com/user-attachments/assets/2c468504-6e52-4663-ba16-9dcba2c33952)
       iv. Port 9090 which showed closed status but is running zeus-admin
       v. Port 10000 running      MiniServ 1.890 (Webmin httpd)
+      vi. The operating system is linux CenSOS
 
 
-
-      The operating system is linux
-
-![image](https://github.com/user-attachments/assets/01be25df-0866-42bd-be16-3791b2237e54)
