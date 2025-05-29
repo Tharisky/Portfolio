@@ -62,6 +62,17 @@ Screenshot of the listener getting root shell
 ![image](https://github.com/user-attachments/assets/07b17aab-1e5a-4daf-b85e-a084bffcf05e)
 
 
+2. Password Enumeration
+cat /etc/shadow was used to enumerate the root's password hash, then wreath's password
+![image](https://github.com/user-attachments/assets/3c72cbaf-9513-4c9a-86f9-6550fc9c87ca)
+
+![image](https://github.com/user-attachments/assets/88fd9c34-d863-4a8d-9816-04b9ea6a41f5)
+
+
+4. f
+5.  
+
+
 
 
 
