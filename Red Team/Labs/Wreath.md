@@ -50,6 +50,7 @@ The website was subjcted to directory bruteforcing using  ffuf -w /usr/share/wor
 
 # Exploitation
 
+## exploiting the 10.200.73.200 host 
 From the Enumeratin, it was discovered that the webserver on port 10000 of the  10.200.73.200 Host is running  MiniServ 1.890 (Webmin httpd)
 A closer look at this version showed that it is vulnerable to RCE that gives a root shell CVE-2019–15107 
 ![image](https://github.com/user-attachments/assets/b454cbaf-d8cd-470c-8066-516afbdf71b8)
@@ -77,8 +78,83 @@ The login was initiated using ssh root@10.200.97.200 -i key.txt  and the login w
 ![image](https://github.com/user-attachments/assets/2f0382a1-5064-44b3-86c5-e1e31387626b)
 
 
+## exploiting the 10.200.73.250 host 
+nothing was done here as the only service running on the taret was not foud to be vulnerable 
+
+
+# POST EXPLOITATION
+
+# Enumeration
+
+Since we are now inside the compromised machine using the found SSH keys, the enumeration of the internal network begins.
+The tool needed here incldes fping, and NMAP which are both not available on the machine. This tools wiere firstly delivered onto the machine
+
+1. Delivery of Enumeration tools: The toools can be delivered through various methods but the second method was used here
+  a. using SCP
+  b. starting a webser using python on the attackers machine, then using curl on the compromised machine to download the tool
+
+
+2. Carrying out the enumeration
+   a. Scanning the internal network for hosts: Using the command ./nmap-USERNAME -sn 10.200.73.1-255
+   result showed that four hosts were found, which includes the
+     i. 10.200.73.100 - newly found
+     ii. 10.200.73.150 - newly found. This was not foound during the nmap scan from the external netwwork
+     iii. 10.200.73.200 - Which is the public facing server
+     iv. 10.200.73.250 - unknwown machine running SSH service
+
+   ![image](https://github.com/user-attachments/assets/4bdcf134-7fd7-4361-a516-3afd4b6d88a0)
+
+
+   b. scanning each host for services
+     i. using ./nmap-USERNAME  -sT  10.200.73.200 the response includes
+   PORT      STATE SERVICE  Initially detected
+22/tcp    open  ssh          Yes
+80/tcp    open  http          yes
+443/tcp   open  https          yes
+3306/tcp  open  mysql            no, It was  checked out for default credentials or no password, but none workd
+5355/tcp  open  hostmon          no
+10000/tcp open  ndmp            yes
+
+![image](https://github.com/user-attachments/assets/a992ea3e-51f6-4671-8597-544672ffaa89)
+l
+     ii. using ./nmap-USERNAME  -sT  10.200.73.150 the response includes
+
+Not shown: 6146 filtered ports
+PORT     STATE SERVICE
+80/tcp   open  http
+3389/tcp open  ms-wbt-server
+5357/tcp open  wsdapi
+5985/tcp open  wsman
+MAC Address: 02:18:54:60:E2:BF (Unknown)
+![image](https://github.com/user-attachments/assets/45437171-dbe4-4569-bd36-b96e818cd6e7)
+The port 3389 running RDP shows that this host is a windwos machine.
+
+,
+     iii. using ./nmap-USERNAME  -sT  10.200.73.100 the response returned no serices, so it is assumed that it can not be accessed from the current poition of the attacker
+     ![image](https://github.com/user-attachments/assets/0f0872e5-965f-46e6-9bce-5ff81004fbfd)
+
+
+c. chcking the /etc/passwd file for other users
+    i. twreath:x:1000:1000:Thomas Wreath:/home/twreath:/bin/bash - 
+  twreath:$6$0my5n311RD7EiK3J$zVFV3WAPCm/dBxzz0a7uDwbQenLohKiunjlDonkqx1huhjmFYZe0RmCPsHmW3OnWYwf8RWPdXAdbtYpkJCReg.::0:99999:7:::
+
+
+drwx------.  2 twreath twreath  83 Nov  7  2020 twreath
+
+**
+
+
+
+
+
 # Pivoting 
 Pivoting is the art of using access obtained over one machine to exploit another machine deeper in the network.     
+
+
+
+
+
+  
 
 
 
