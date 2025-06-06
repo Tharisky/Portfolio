@@ -1,4 +1,14 @@
-![image](https://github.com/user-attachments/assets/c7470cde-8c47-48a6-90cb-367623fb33a0)
+Initial access was gotten  by bruteforce
+payload
+![image](https://github.com/user-attachments/assets/65c12cb1-31b4-4608-b10e-c5805848bf40)
+
+
+Result
+![image](https://github.com/user-attachments/assets/544dfc05-48a7-4598-855b-f5a4e01f6ee2)
+
+
+
+![image](https://github.com/user-attachments/assets/a6bc17aa-820c-4b7b-bab8-c0782d394d6d)![image](https://github.com/user-attachments/assets/c7470cde-8c47-48a6-90cb-367623fb33a0)
 
 Exploiting the Command injection VUlnerailites
 
@@ -45,6 +55,18 @@ shell gained
 IDOR
 This works by just changing the value after "record" in http://127.0.0.1:3001/api/health/record/2
 ![image](https://github.com/user-attachments/assets/57a8849d-33de-465d-909e-3c4cd4b224b5)
+
+
+
+
+
+FLAGS
+
+
+navigating to /app/ministires, each ministry has its own directory there, and the command cat service.js | grep FLAG
+should bring out the flags
+![image](https://github.com/user-attachments/assets/7f2a9374-2d78-450e-b30f-a763aa0c1f19)
+
 
 
 or  by changgint the ministry
