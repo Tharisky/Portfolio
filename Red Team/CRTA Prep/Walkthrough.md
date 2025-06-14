@@ -61,10 +61,6 @@ A tool called chisel  in combination with proxychains were used here.
 4. Accessing services on the 10.10.10.21 host: Since this host runs a remote desktop service, the service was tried 
 
 
-![image](https://github.com/user-attachments/assets/571a35c4-fe87-4075-bbe5-c80ec69c8944)
-
-
-
 
 
 ![image](https://github.com/user-attachments/assets/b455f8c4-8379-4db3-9f56-9f7258aa96f2)
