@@ -1,4 +1,4 @@
-Enumeration from a compromised machine into an internal network
+# Enumeration from a compromised machine into an internal network
 1. Arp:
      arp -a
 2. Fping:   
@@ -10,7 +10,14 @@ Enumeration from a compromised machine into an internal network
 
 
 
-Enumeration of a compromised internal machhine from its powershell terminal
+# Enumeration of a compromised internal machhine from its powershell terminal
 
 
 1..10000 | % { $p = $_; if ([System.Net.Sockets.TcpClient]::new().ConnectAsync("127.0.0.1", $p).Wait(1000)) { Write-Host "-----"; Write-Host "Port $p is open, likely $(switch($p){21{'FTP'};53{'DNS'};80{'HTTP'};88{'Kerberos'};135{'RPC'};139{'NetBIOS'};389{'LDAP'};443{'HTTPS'};445{'SMB'};636{'LDAPS'};1433{'MSSQL'};3268{'AD Global Catalog'};3269{'AD Global Catalog Secure'};3389{'RDP'};5985{'WinRM'};5986{'WinRM HTTPS'};8080{'Alt HTTP'};8443{'Alt HTTPS'};default{'Unknown'}})" } } 2>$null
+
+
+
+# Remote desktop connection
+
+This is no joke but i dont know why rdesktop refused to work on my PC all of a sudden. All thanks to the windows Privesc room on tryhackme, i was able to get a functional syntax for xfreedestop
+          `xfreerdp3 /u:username /p:Password /cert:ignore /v:IP`
