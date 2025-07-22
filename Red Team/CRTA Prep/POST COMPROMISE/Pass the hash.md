@@ -16,7 +16,7 @@ screenshot below
    
 The attack progression
 
-## Downloading Mimikatz onto the target
+## Downloading Mimikatz onto the target 
 
 
 ## Utilizing Mimikatz to pass the hash
@@ -28,5 +28,24 @@ The attack progression
 
 3.  From the dumped credentials, choose a particular account and its hash to run the pass the hash attack. `sekurlsa::pth /domain:cyberware.firm /user:app-svc /ntlm:9b241c87d54a761a08a8cae4252f4dca /run:powershell.exe`
 <img width="1032" height="458" alt="image" src="https://github.com/user-attachments/assets/323a58ff-acaf-48b5-9d94-5d79361ef3b8" />
-This should spin up a new PowerShell running on the "COmromised machine" but with the privileges of the account used during the pass the hash attack.
-4.  
+This should spin up a new PowerShell running on the "Compromised machine" but with the privileges of the account used during the pass the hash attack.
+running "whoami" or "systeminfo" would still show the information of the inital credentiials (instead of the account whose hash was passed) used to compromise the machine, and the details of the machine ( since we are yet to pivot to other machines in the network
+
+
+### Pivoting to other machines using the newly spuned powershell 
+1. After the pass the hash attack has been completed  new powersheel is gotten, run ' powershell -ep bypass)
+2. A tool called "Find-wmillocaladminaccess" was used to scan all the machines in the domain,and return the machines where the account whose credentials were passed, holds local admin privielege. This was done because pivoting to other machines would work if the accont being used for the pioting has local admin access on the machine. the script was first initiallized using " . ./Find-WMILocalAdminAccess " and the the command "Find-WMILocalAdminAccess -Verbose" was used.
+<img width="989" height="605" alt="image" src="https://github.com/user-attachments/assets/cdced52a-5958-426a-8913-ae7e2ec1fded" />
+This returned couple of machines where the accout has local admin access. Other accounts could be checked out to see if they also have the needed privilegess.
+
+3.Once it has been confirmed that credentials has enough privileges, a tool called PPSexec can now be used to perform lateral movement to other machines
+Here is the machine's IP, the user and system info just before the lateral movement. 
+<img width="998" height="683" alt="image" src="https://github.com/user-attachments/assets/d487fe84-fc32-4e98-823f-38a0cc9edcb2" />
+
+
+Screenshot showing lateral movement to the 10.10.10.2 machine,  the machine's IP, the app-svc user and the system info
+<img width="998" height="683" alt="image" src="https://github.com/user-attachments/assets/bb00b619-a017-403d-97f5-68b3e52a99b0" />
+
+Screenshot showing lateral movement to the 10.10.10.3 machine,  the machine's IP, the app-svc user and the system info
+![Uploading image.png…]()
+
