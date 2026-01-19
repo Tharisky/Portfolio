@@ -19,8 +19,14 @@ APT groups typically generate distinctive patterns in firewall logs due to their
 
 <img width="1910" height="759" alt="image" src="https://github.com/user-attachments/assets/0f78314d-accf-465d-aeee-b9e85af984ac" />
 
-Filtering uaing the message field, coulple of port numers were discovered
+Filtering uaing the message field, coulple of port numers were discovered, and the messag also contained the word "UFW Block" to sho thatt the UFW blocked the request
 <img width="1910" height="759" alt="image" src="https://github.com/user-attachments/assets/dc21ba0a-57e7-4a6b-9c27-e93d30d09cd5" />
+
+<img width="1910" height="759" alt="image" src="https://github.com/user-attachments/assets/4d674232-9363-4e50-a3fd-135b7ae6554b" />
+
+
+Then i had to add the SRC and DPT filds that were found in thee message, to ensure that all pacekts i am seeing are only in that format
+<img width="1910" height="759" alt="image" src="https://github.com/user-attachments/assets/5254c74a-cb03-4741-9f07-280bf2fd8902" />
 
 
 Enterprise service enumeration detection
