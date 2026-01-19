@@ -14,5 +14,11 @@ checking out the event details, some of the event outcome had success, while oth
 
 
 
+Then i modified my fiter to "event.dataset: apache.access and event.outcome: failure" to see the event that failed
+
+<img width="1581" height="462" alt="image" src="https://github.com/user-attachments/assets/f93d3cce-325a-4e29-b921-9d55d41af2c1" />
+
+
+
 
 
