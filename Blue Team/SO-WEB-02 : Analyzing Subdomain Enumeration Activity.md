@@ -14,7 +14,15 @@ checking out the event details, some of the event outcome had success, while oth
 
 
 
+Then i modified my filter to "event.dataset: apache.access and event.outcome: success"  to see the events that contains valid directories
+The info includes HTTP 200 response code
+
+<img width="1547" height="493" alt="image" src="https://github.com/user-attachments/assets/d922f6c4-f29c-4559-bbb8-a6f509073aa1" />
+
+
 Then i modified my fiter to "event.dataset: apache.access and event.outcome: failure" to see the event that failed
+
+The info includes HTTP 200 response code
 
 <img width="1581" height="462" alt="image" src="https://github.com/user-attachments/assets/f93d3cce-325a-4e29-b921-9d55d41af2c1" />
 
