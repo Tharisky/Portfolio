@@ -12,3 +12,11 @@ Then checking the information contained in each  event, The event.original broug
 
 
 The query contained "http://securecorp.org/database/?value=alice_wonder%27%20union%20select%20concat(username,%22|%22,password,%22|%22,email),2,3%20from%20login%20" which indicates that the Login table is being queried foor usernames,password and email
+
+
+Then, i added a new filter to ensure that all logs with the AQL injection patterns are returned "event.dataset: apache.access and url.query: "UNION" or "SELECT" or "INTO" or "AND" or "OR"
+" 
+
+<img width="1910" height="759" alt="image" src="https://github.com/user-attachments/assets/5eb656d1-bb17-4e6b-b6b2-02042cc148cd" />
+
+
